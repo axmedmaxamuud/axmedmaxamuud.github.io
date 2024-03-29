@@ -1,0 +1,23 @@
+---
+title: "Cleaning Food Security Indicators"
+image: data_cleaning.png
+---
+
+This guide is designed to assist the WFP team in cleaning food security and livelihood data using the cleanR package. Our goal is to streamline the data cleaning process, ensuring consistency with the WFP Survey Designer for standardized variable naming.
+
+## Step 1: Load data
+
+Start by uploading the raw data, typically the version downloaded from the MoDa server. Ensure that the data structure aligns with the WFP Survey Designer for consistent variable naming.
+
+```{r}
+# required packages
+library(tidyverse)
+library(DT)
+library(cleanR)
+
+# load raw data
+moda_data <- cleanR::survey_data %>% # converting HDDS variables to numeric
+  mutate(across(starts_with("HDDS"), as.numeric))
+```
+
+
