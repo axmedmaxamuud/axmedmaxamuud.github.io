@@ -5,4 +5,6 @@ listing:
   type: grid
 ---
 
+I am eager to share my publications related to data science and mapping, which I believe will serve as valuable resources for colleagues in the humanitarian and development field.
+
 

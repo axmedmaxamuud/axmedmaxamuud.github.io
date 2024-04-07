@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Ahmed Mohamoud",
     "section": "",
-    "text": "Experienced GIS/Data professional with seven years in humanitarian roles, proficient in ArcGIS Pro, QGIS, R, Python, Power BI, Tableau, Excel, SPSS, Adobe Suite, and Kobo. Proficient in research design, data collection, analysis, interpretations, and visualization. Consistently deriving actionable insights from complex datasets for enhanced decision-making. Specialized in IPC, CARI, CADRE and FEWSNET."
+    "text": "As an experienced GIS/Data professional with a diverse background in the humanitarian sector, I excel in ArcGIS Pro, QGIS, R, Python, PowerBI, Tableau, MS Excel, SPSS, Adobe Suite, and ODK. My specialization lies in research design, data collection, interpretation, and visualization."
   },
   {
     "objectID": "about.html",
@@ -18,21 +18,21 @@
     "href": "index.html#education",
     "title": "Ahmed Mohamoud",
     "section": "Education",
-    "text": "Education"
+    "text": "Education\nMSc in Research, Statistics & Data Analytics | 2019 - Present Amoud University | Hargeisa, Somaliland\nMBA in Project Planning & Management | 2018 - 2019 Admas University | Hargeisa, Somaliland\nBA. Development Studies | 2013 - 2016 Admas University | Hargeisa, Somaliland"
   },
   {
     "objectID": "index.html#experience",
     "href": "index.html#experience",
     "title": "Ahmed Mohamoud",
     "section": "Experience",
-    "text": "Experience"
+    "text": "Experience\n\nWFP | Programme Associate (Data Management) Nov 2022 - Apr 2024\n\n\nREACH Initiative | GIS & Data Specialist Mar 2022 - Oct 2022\n\n\nREACH Initiative | Senior Database Officer Jan 2019 - Feb 2022\n\n\nSOLNARDO | Monitoring & Evaluation Officer Jan 2014 - Dec 2018"
   },
   {
     "objectID": "publications.html",
     "href": "publications.html",
     "title": "Publications",
     "section": "",
-    "text": "Cleaning Food Security Indicators\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "I am eager to share my publications related to data science and mapping, which I believe will serve as valuable resources for colleagues in the humanitarian and development field.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCleaning Food Security Indicators\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/publications.html",
@@ -53,6 +53,41 @@
     "href": "posts/fsl_cleaning.html#step-1-load-data",
     "title": "Cleaning Food Security Indicators",
     "section": "Step 1: Load data",
-    "text": "Step 1: Load data\nStart by uploading the raw data, typically the version downloaded from the MoDa server. Ensure that the data structure aligns with the WFP Survey Designer for consistent variable naming.\n\n# required packages\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.2     ✔ readr     2.1.4\n✔ forcats   1.0.0     ✔ stringr   1.5.0\n✔ ggplot2   3.4.2     ✔ tibble    3.2.1\n✔ lubridate 1.9.2     ✔ tidyr     1.3.0\n✔ purrr     1.0.1     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nlibrary(DT)\nlibrary(cleanR)\n\n# load raw data\nmoda_data &lt;- cleanR::survey_data %&gt;% # converting HDDS variables to numeric\n  mutate(across(starts_with(\"HDDS\"), as.numeric))"
+    "text": "Step 1: Load data\nStart by uploading the raw data, typically the version downloaded from the MoDa server. Ensure that the data structure aligns with the WFP Survey Designer for consistent variable naming.\n\n# required packages\nlibrary(tidyverse)\nlibrary(DT)\nlibrary(cleanR)\n\n# load raw data\nmoda_data &lt;- cleanR::survey_data %&gt;% # converting HDDS variables to numeric\n  mutate(across(starts_with(\"HDDS\"), as.numeric))"
+  },
+  {
+    "objectID": "index.html#about-me",
+    "href": "index.html#about-me",
+    "title": "Ahmed Mohamoud",
+    "section": "",
+    "text": "As an experienced GIS/Data professional with a diverse background in the humanitarian sector, I excel in ArcGIS Pro, QGIS, R, Python, PowerBI, Tableau, MS Excel, SPSS, Adobe Suite, and ODK. My specialization lies in research design, data collection, interpretation, and visualization."
+  },
+  {
+    "objectID": "index.html#skills",
+    "href": "index.html#skills",
+    "title": "Ahmed Mohamoud",
+    "section": "Skills",
+    "text": "Skills\n\n Advance R user and author\n\n\n ArcGIS Pro\n\n\n Python\n\n\n Tableau"
+  },
+  {
+    "objectID": "posts/fsl_cleaning.html#step-2-format-data",
+    "href": "posts/fsl_cleaning.html#step-2-format-data",
+    "title": "Cleaning Food Security Indicators",
+    "section": "Step 2: Format data",
+    "text": "Step 2: Format data\nThe calculate_fsl_indicators function is a powerful tool for computing essential food security and livelihood (FSL) indicators, including the food consumption score, household dietary diversity, reduced coping strategy, and livelihood coping strategy, from your raw data.\n\nraw_data &lt;- calculate_fsl_indicators(data = moda_data,\n                                 # FCS\n                                 FCSStap = \"FCSStap\", \n                                 FCSPulse = \"FCSPulse\", \n                                 FCSPr = \"FCSPr\", \n                                 FCSVeg = \"FCSVeg\", \n                                 FCSFruit = \"FCSFruit\",\n                                 FCSDairy = \"FCSDairy\", \n                                 FCSFat = \"FCSFat\", \n                                 FCSSugar = \"FCSSugar\", \n                                 cutoff = \"Cat28\", \n                                 # rCSI\n                                 rCSILessQlty = \"rCSILessQlty\", \n                                 rCSIBorrow = \"rCSIBorrow\", \n                                 rCSIMealSize = \"rCSIMealSize\", \n                                 rCSIMealAdult = \"rCSIMealAdult\", \n                                 rCSIMealNb = \"rCSIMealNb\",\n                                 # HHS\n                                 HHhSNoFood_FR = \"HHhSNoFood_FR\", \n                                 HHhSBedHung_FR = \"HHhSBedHung_FR\", \n                                 HHhSNotEat_FR = \"HHhSNotEat_FR\", \n                                 # HDDS\n                                 # HDDSStapCer = \"HDDSStapCer\", \n                                 # HDDSStapRoot = \"HDDSStapRoot\", \n                                 # HDDSVeg = \"HDDSVeg\", \n                                 # HDDSFruit = \"HDDSFruit\", \n                                 # HDDSPrMeat = \"HDDSPrMeat\", \n                                 # HDDSPrEgg = \"HDDSPrEgg\", \n                                 # HDDSPrFish = \"HDDSPrFish\", \n                                 # HDDSPulse = \"HDDSPulse\", \n                                 # HDDSDairy = \"HDDSDairy\", \n                                 # HDDSFat = \"HDDSFat\", \n                                 # HDDSSugar = \"HDDSSugar\", \n                                 # HDDSCond = \"HDDSCond\"\n                                 )\n\nplease note: you’ll only need to provide the variables names of the indicators you want to you in your analysis and its not required to specify all variables at all times (for instance, if you have data for FCS and rCSI only provide the arguments of these two indicators only)."
+  },
+  {
+    "objectID": "posts/fsl_cleaning.html#step-3-use-visualizations",
+    "href": "posts/fsl_cleaning.html#step-3-use-visualizations",
+    "title": "Cleaning Food Security Indicators",
+    "section": "Step 3: Use visualizations",
+    "text": "Step 3: Use visualizations\nBy incorporating ridge charts into your analysis, you can easily identify patterns and variations in FCS and rCSI across different clusters or field monitors.\n\n(plot_ridge_distribution(raw_data, numeric_cols = c(\"FCSStap\", \"FCSPulse\", \"FCSPr\", \"FCSVeg\", \"FCSFruit\", \"FCSDairy\", \"FCSFat\", \"FCSSugar\"),\n                         name_groups = \"Food Groups\", name_units = \"Days\", grouping = \"Area_Office\"))\n\n\n\n\nBy carefully examining and interpreting the ridge chart, you can gain valuable insights into the distributions and flag any inconsistency for validation and review during data collection. in the below chart, we’ll group the reduced coping strategies at area office level.\n\n(plot_ridge_distribution(raw_data, numeric_cols = c(\"rCSILessQlty\", \"rCSIBorrow\", \"rCSIMealSize\", \"rCSIMealAdult\", \"rCSIMealNb\"),\n                         name_groups = \"Food Coping Strategy\", name_units = \"Days\", grouping = \"Area_Office\"))\n\n\n\n\nsimilarly, you can group distributions at field monitor level to gain more insight at the consistency of reported distributions across different monitors.\n\n(plot_ridge_distribution(raw_data, numeric_cols = c(\"rCSILessQlty\", \"rCSIBorrow\", \"rCSIMealSize\", \"rCSIMealAdult\", \"rCSIMealNb\"),\n                         name_groups = \"Food Coping Strategy\", name_units = \"Days\", grouping = \"EnumName\"))"
+  },
+  {
+    "objectID": "posts/fsl_cleaning.html#step-4-generate-cleaning-log-file",
+    "href": "posts/fsl_cleaning.html#step-4-generate-cleaning-log-file",
+    "title": "Cleaning Food Security Indicators",
+    "section": "Step 4: Generate cleaning log file",
+    "text": "Step 4: Generate cleaning log file\nTo facilitate collaboration and feedback collection, generate a cleaning log file. This log file will document flagged issues, providing insights into potential problems and capturing correct values for any identified inconsistencies.\n\nData quality checks - Source: IMPACT Initiative, FSL Data Quality Checks\n\nAll low cereal or oil consumption (&lt;= days), usually its not common to have such low consumption, check also how this low consumption is consistent with consumption of other food groups\nVery high food consumption for meat and dairy (&gt;=6) where there is low food consumption scores for cereals (&lt;=4)\nCheck food consumption module for low and high food consumption of certain food groups\nCheck households with high meat and dairy consumption (&gt;=6) while reporting high coping strategy\nCheck for patterns of data entry like same entry repeated many times (7,7,7,7) or alternating numbers (2,1,2,1,2,1)\n\n\nThe above checks are adopted from IMPACT Initiative FSL data quality checks guide and they are pre-coded with the fsl_cleaning_log function. So, if there are any other checks that you have to apply.\n\nfsl_clog &lt;- fsl_cleaning_log(data = raw_data, uuid = \"uuid\")\n\ndatatable(fsl_clog, list(dom = 't'))\n\n\n\n\n\n\nCongratulations on generating the cleaning log! To proceed, refer to the other documentation for incorporating the corrected cleaning log file into the raw data to generate the clean data."
   }
 ]
