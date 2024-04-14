@@ -32,7 +32,7 @@
     "href": "publications.html",
     "title": "Publications",
     "section": "",
-    "text": "I am eager to share my publications related to data science and mapping, which I believe will serve as valuable resources for colleagues in the humanitarian and development field.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCleaning Food Security Indicators\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Sharing my publications on data science, geospatial analysis, and mapping. Hope they’re valuable for colleagues in humanitarian field.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCleaning Food Security Indicators\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nData Cleaning Process\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/publications.html",
@@ -89,5 +89,19 @@
     "title": "Cleaning Food Security Indicators",
     "section": "Step 4: Generate cleaning log file",
     "text": "Step 4: Generate cleaning log file\nTo facilitate collaboration and feedback collection, generate a cleaning log file. This log file will document flagged issues, providing insights into potential problems and capturing correct values for any identified inconsistencies.\n\nData quality checks - Source: IMPACT Initiative, FSL Data Quality Checks\n\nAll low cereal or oil consumption (&lt;= days), usually its not common to have such low consumption, check also how this low consumption is consistent with consumption of other food groups\nVery high food consumption for meat and dairy (&gt;=6) where there is low food consumption scores for cereals (&lt;=4)\nCheck food consumption module for low and high food consumption of certain food groups\nCheck households with high meat and dairy consumption (&gt;=6) while reporting high coping strategy\nCheck for patterns of data entry like same entry repeated many times (7,7,7,7) or alternating numbers (2,1,2,1,2,1)\n\n\nThe above checks are adopted from IMPACT Initiative FSL data quality checks guide and they are pre-coded with the fsl_cleaning_log function. So, if there are any other checks that you have to apply.\n\nfsl_clog &lt;- fsl_cleaning_log(data = raw_data, uuid = \"uuid\")\n\ndatatable(fsl_clog, list(dom = 't'))\n\n\n\n\n\n\nCongratulations on generating the cleaning log! To proceed, refer to the other documentation for incorporating the corrected cleaning log file into the raw data to generate the clean data."
+  },
+  {
+    "objectID": "posts/data_cleaning_process.html",
+    "href": "posts/data_cleaning_process.html",
+    "title": "Data Cleaning Process",
+    "section": "",
+    "text": "PMLE Somalia country office contributed to the RAM newsletter by sharing insights on the data cleaning process. Read the full article here\nDownload PDF file."
+  },
+  {
+    "objectID": "posts/data_cleaning_process.html#basic-usage",
+    "href": "posts/data_cleaning_process.html#basic-usage",
+    "title": "Untitled",
+    "section": "",
+    "text": "All you really need to give the pdf shortcode is the path to the PDF file you want to embed in your Quarto HTML document.\nDownload PDF file."
   }
 ]

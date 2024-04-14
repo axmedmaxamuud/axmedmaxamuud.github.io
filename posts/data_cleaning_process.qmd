@@ -1,0 +1,9 @@
+---
+title: "Data Cleaning Process"
+image: cleaning_process.png
+---
+
+PMLE Somalia country office contributed to the RAM newsletter by sharing insights on the data cleaning process. Read the full article here
+
+
+{{< pdf Stories_from_the_field.pdf width=900 height=700 >}}
