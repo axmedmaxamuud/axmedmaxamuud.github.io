@@ -3,7 +3,19 @@ title: "Data Cleaning Process"
 image: cleaning_process.png
 ---
 
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-34D8XG2PNV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-34D8XG2PNV');
+</script>
+
+
 PMLE Somalia country office contributed to the RAM newsletter by sharing insights on the data cleaning process. Read the full article here
 
 
 {{< pdf Stories_from_the_field.pdf width=900 height=700 >}}
+
