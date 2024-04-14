@@ -5,15 +5,4 @@ listing:
   type: grid
 ---
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-34D8XG2PNV"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-34D8XG2PNV');
-</script>
-
-
 Sharing my publications on data science, geospatial analysis, and mapping. Hope they're valuable for colleagues in humanitarian field.
