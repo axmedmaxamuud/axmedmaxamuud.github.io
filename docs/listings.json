@@ -3,7 +3,9 @@
     "listing": "/publications.html",
     "items": [
       "/posts/fsl_cleaning.html",
-      "/posts/data_cleaning_process.html"
+      "/posts/data_cleaning_process.html",
+      "/posts/hash_phonenumbers.html",
+      "/posts/tablue_calculations.html"
     ]
   },
   {

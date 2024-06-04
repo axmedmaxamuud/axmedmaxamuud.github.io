@@ -1,0 +1,50 @@
+---
+title: "Hash PhoneNumbers"
+image: hash_cover.png
+---
+
+In this example we'll ecrept or hash phonenumbers so we can avoid exposing such personal identiable data during remote data collection. often in WFP opperations, its common to have benefiairy contact information used for monitoring or verifications surveys. during this time it will be good practice to hash phonenumers in advance and prepare itemset file that you can upload with your MoDa tool. we'll use the hash_phonenumbers() function to acheive this.
+
+### Step 1: Prepare dumpy data
+
+```{r, echo=TRUE, warning=FALSE, message=FALSE, comment=FALSE}
+# required packages
+library(tidyverse)
+library(digest)
+library(cleanR)
+library(DT)
+
+# Function to generate random phone numbers
+generate_phone_number <- function(n) {
+  phone_numbers <- replicate(n, paste0("0", sample(0:5, 5, replace = TRUE), collapse = ""))
+  return(as.vector(phone_numbers))
+}
+
+# Sample data
+n <- 10  # number of rows in the data frame
+list_name <- paste("List", 1:n)
+admin1 <- paste("Admin1_", sample(1:100, n, replace = TRUE))
+admin2 <- paste("Admin2_", sample(1:100, n, replace = TRUE))
+person <- paste("Person_", sample(LETTERS, n, replace = TRUE))
+PhoneNumber <- generate_phone_number(n)
+uuid <- stringi::stri_rand_strings(n, 10)
+name <- paste("List", 1:n)
+
+# Create the data frame
+data <- data.frame(list_name, admin1, admin2, person, PhoneNumber, uuid, name)
+
+```
+
+Now lets see how the orginal data looks like, and phone numbers will appear as their original form, which is not recomended to share it widely during remote data collection that we can't gurentee if the information will be discarded after the data collection
+
+```{r, echo=TRUE, warning=FALSE, message=FALSE, comment=FALSE}
+datatable(data, list(dom = 't'))
+```
+
+okay, lets now encrepth the phone numbers
+
+```{r, echo=TRUE, warning=FALSE, message=FALSE, comment=FALSE}
+hashed_data <- hash_phonenumbers(data, 'PhoneNumber', 'name', debug = FALSE)
+
+datatable(hashed_data, list(dom = 't'))
+```
