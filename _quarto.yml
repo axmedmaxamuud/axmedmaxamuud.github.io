@@ -9,6 +9,9 @@ website:
       - href: index.qmd
         text: About
       - publications.qmd
+    google-analytics:
+    tracking-id: G-34D8XG2PNV
+    anonymize-ip: true
 
 format:
   html:

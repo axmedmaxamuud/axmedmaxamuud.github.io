@@ -118,9 +118,9 @@ To facilitate collaboration and feedback collection, generate a cleaning log fil
 The above checks are adopted from IMPACT Initiative FSL data quality checks guide and they are pre-coded with the **fsl_cleaning_log** function. So, if there are any other checks that you have to apply. 
 
 ```{r}
-fsl_clog <- fsl_cleaning_log(data = raw_data, uuid = "uuid")
+# fsl_clog <- fsl_cleaning_log(data = raw_data, uuid = "uuid")
 
-datatable(fsl_clog, list(dom = 't'))
+# datatable(fsl_clog, list(dom = 't'))
 ```
 
 Congratulations on generating the cleaning log! To proceed, refer to the other documentation for incorporating the corrected cleaning log file into the raw data to generate the clean data. 

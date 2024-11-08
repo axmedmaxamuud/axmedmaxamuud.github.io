@@ -93,16 +93,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-<script src="../site_libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
-<link href="../site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="../site_libs/datatables-binding-0.27/datatables.js"></script>
-<script src="../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<link href="../site_libs/dt-core-1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="../site_libs/dt-core-1.12.1/css/jquery.dataTables.extra.css" rel="stylesheet">
-<script src="../site_libs/dt-core-1.12.1/js/jquery.dataTables.min.js"></script>
-<link href="../site_libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
-<script src="../site_libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
-
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -175,43 +165,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DT)</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to generate random phone numbers</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>generate_phone_number <span class="ot">&lt;-</span> <span class="cf">function</span>(n) {</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  phone_numbers <span class="ot">&lt;-</span> <span class="fu">replicate</span>(n, <span class="fu">paste0</span>(<span class="st">"0"</span>, <span class="fu">sample</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>), <span class="at">collapse =</span> <span class="st">""</span>))</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">as.vector</span>(phone_numbers))</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># generate_phone_number &lt;- function(n) {</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   phone_numbers &lt;- replicate(n, paste0("0", sample(0:5, 5, replace = TRUE), collapse = ""))</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   return(as.vector(phone_numbers))</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># }</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample data</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span>  <span class="co"># number of rows in the data frame</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>list_name <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"List"</span>, <span class="dv">1</span><span class="sc">:</span>n)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>admin1 <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"Admin1_"</span>, <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, n, <span class="at">replace =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>admin2 <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"Admin2_"</span>, <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, n, <span class="at">replace =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>person <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"Person_"</span>, <span class="fu">sample</span>(LETTERS, n, <span class="at">replace =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>PhoneNumber <span class="ot">&lt;-</span> <span class="fu">generate_phone_number</span>(n)</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>uuid <span class="ot">&lt;-</span> stringi<span class="sc">::</span><span class="fu">stri_rand_strings</span>(n, <span class="dv">10</span>)</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>name <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"List"</span>, <span class="dv">1</span><span class="sc">:</span>n)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># # Sample data</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># n &lt;- 10  # number of rows in the data frame</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># list_name &lt;- paste("List", 1:n)</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># admin1 &lt;- paste("Admin1_", sample(1:100, n, replace = TRUE))</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># admin2 &lt;- paste("Admin2_", sample(1:100, n, replace = TRUE))</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co"># person &lt;- paste("Person_", sample(LETTERS, n, replace = TRUE))</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># PhoneNumber &lt;- generate_phone_number(n)</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co"># uuid &lt;- stringi::stri_rand_strings(n, 10)</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co"># name &lt;- paste("List", 1:n)</span></span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the data frame</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(list_name, admin1, admin2, person, PhoneNumber, uuid, name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co"># data &lt;- data.frame(list_name, admin1, admin2, person, PhoneNumber, uuid, name)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now lets see how the orginal data looks like, and phone numbers will appear as their original form, which is not recomended to share it widely during remote data collection that we can’t gurentee if the information will be discarded after the data collection</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">datatable</span>(data, <span class="fu">list</span>(<span class="at">dom =</span> <span class="st">'t'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-d5b4d44e7f8f94b80cf0" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-d5b4d44e7f8f94b80cf0">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10"],["List 1","List 2","List 3","List 4","List 5","List 6","List 7","List 8","List 9","List 10"],["Admin1_ 96","Admin1_ 98","Admin1_ 42","Admin1_ 58","Admin1_ 52","Admin1_ 19","Admin1_ 94","Admin1_ 31","Admin1_ 29","Admin1_ 97"],["Admin2_ 71","Admin2_ 80","Admin2_ 15","Admin2_ 3","Admin2_ 72","Admin2_ 8","Admin2_ 51","Admin2_ 73","Admin2_ 75","Admin2_ 82"],["Person_ C","Person_ H","Person_ K","Person_ N","Person_ D","Person_ K","Person_ M","Person_ S","Person_ S","Person_ L"],["0102050304","0104040305","0103000105","0200030404","0403030001","0103000205","0204000503","0201010202","0005030500","0102030302"],["MoK5Nj3s6P","dAvzasuSgH","7fDUDhcjKB","VTKJlTWA46","LRDONwM9vn","Icy3XDLyEd","XFRbpVcDgl","3siKPxDEa7","CM1oHggewf","PYqIDX9s6b"],["List 1","List 2","List 3","List 4","List 5","List 6","List 7","List 8","List 9","List 10"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>list_name<\/th>\n      <th>admin1<\/th>\n      <th>admin2<\/th>\n      <th>person<\/th>\n      <th>PhoneNumber<\/th>\n      <th>uuid<\/th>\n      <th>name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
-</div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># datatable(data, list(dom = 't'))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>okay, lets now encrepth the phone numbers</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>hashed_data <span class="ot">&lt;-</span> <span class="fu">hash_phonenumbers</span>(data, <span class="st">'PhoneNumber'</span>, <span class="st">'name'</span>, <span class="at">debug =</span> <span class="cn">FALSE</span>)</span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># hashed_data &lt;- hash_phonenumbers(data, 'PhoneNumber', 'name', debug = FALSE)</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">datatable</span>(hashed_data, <span class="fu">list</span>(<span class="at">dom =</span> <span class="st">'t'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-a1ed03a9b69934225b55" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-a1ed03a9b69934225b55">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10"],["List 1","List 2","List 3","List 4","List 5","List 6","List 7","List 8","List 9","List 10"],["Admin1_ 96","Admin1_ 98","Admin1_ 42","Admin1_ 58","Admin1_ 52","Admin1_ 19","Admin1_ 94","Admin1_ 31","Admin1_ 29","Admin1_ 97"],["Admin2_ 71","Admin2_ 80","Admin2_ 15","Admin2_ 3","Admin2_ 72","Admin2_ 8","Admin2_ 51","Admin2_ 73","Admin2_ 75","Admin2_ 82"],["Person_ C","Person_ H","Person_ K","Person_ N","Person_ D","Person_ K","Person_ M","Person_ S","Person_ S","Person_ L"],["0102050304","0104040305","0103000105","0200030404","0403030001","0103000205","0204000503","0201010202","0005030500","0102030302"],["MoK5Nj3s6P","dAvzasuSgH","7fDUDhcjKB","VTKJlTWA46","LRDONwM9vn","Icy3XDLyEd","XFRbpVcDgl","3siKPxDEa7","CM1oHggewf","PYqIDX9s6b"],["w80e47971","wd293cb91","w12dae212","wa96ef32b","we87cd547","w2febd43e","w50a5444d","w96c81eaa","w33f517e4","w6cd41690"],[false,false,false,false,false,false,false,false,false,false]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>list_name<\/th>\n      <th>admin1<\/th>\n      <th>admin2<\/th>\n      <th>person<\/th>\n      <th>PhoneNumber<\/th>\n      <th>uuid<\/th>\n      <th>name<\/th>\n      <th>duplicated<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
-</div>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># datatable(hashed_data, list(dom = 't'))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
