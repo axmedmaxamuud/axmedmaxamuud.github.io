@@ -11,9 +11,6 @@ website:
       - package.qmd
       - publications.qmd
       - books.qmd
-    google-analytics:
-    tracking-id: G-34D8XG2PNV
-    anonymize-ip: true
 
 format:
   html:

@@ -2,10 +2,16 @@
 title: "R Packages"
 listing:
   contents: 
-    - url: https://github.com/axmedmaxamuud/cleanR
+    - site: "https://github.com/axmedmaxamuud/cleanR"
+      image: cleanR_logo.png
       title: "cleanR"
       author: Ahmed Mohamoud
-      description: "Harmonized Appraoch of Cleaning Data in R"
-      date: 2024-10-09
-      categories: [data cleaning, wrangling, R programming]
+      description: "Harmonized Approach of Cleaning Data in R."
+      date: October 2023
+      categories: [Data Cleaning, Wrangling, R Programming]
 ---
+
+
+
+
+

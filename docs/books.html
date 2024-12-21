@@ -70,9 +70,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: [{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-url','listing-image','listing-title','listing-author','listing-description','listing-date','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: [],
+      searchColumns: ["listing-url","listing-image","listing-title","listing-author","listing-description","listing-date","listing-categories"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -173,9 +173,58 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
-<div class="list grid quarto-listing-cols-3">
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="Data Collection,Indicators,Analysis,Visualizations,Reporting" data-listing-date-sort="1740776400000">
+<div class="thumbnail">
+<p><a href=""> <img src="RAM.png" class="thumbnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="">
+<h3 class="no-anchor listing-title">
+RAM Codebook
+</h3>
+<div class="listing-subtitle">
 
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('Data Collection'); return false;">
+Data Collection
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Indicators'); return false;">
+Indicators
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Analysis'); return false;">
+Analysis
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Visualizations'); return false;">
+Visualizations
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Reporting'); return false;">
+Reporting
+</div>
+</div>
+<a href="">
+<div class="listing-description">
+<p>This codebook is a collection of ready-to-use packages and scripts designed to support various tasks, including the development and testing of data collection tools, calculation of corporate indicators, and data analysis. It also features WFP-branded visualizations and tools for effectively communicating results through reports and dashboards.</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="">
+<div class="listing-date">
+Mar 1, 2025
+</div>
+<div class="listing-author">
+Ahmed Mohamoud
+</div>
+<div class="metadata-value listing-url">
+https://github.com/axmedmaxamuud
+</div>
+</a>
+</div>
+</div>
 </div>
 <div class="listing-no-matching d-none">
 No matching items

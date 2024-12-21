@@ -70,9 +70,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-url','listing-title','listing-author','listing-description','listing-date','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-site','listing-image','listing-title','listing-author','listing-description','listing-date','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-url","listing-title","listing-author","listing-description","listing-date","listing-categories"],
+      searchColumns: ["listing-site","listing-image","listing-title","listing-author","listing-description","listing-date","listing-categories"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -175,7 +175,10 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="data cleaning,wrangling,R programming" data-listing-date-sort="1728421200000">
+<div class="quarto-post image-right" data-index="0" data-categories="Data Cleaning,Wrangling,R Programming" data-listing-date-sort="1696107600000">
+<div class="thumbnail">
+<p><a href=""> <img src="cleanR_logo.png" class="thumbnail-image"> </a></p>
+</div>
 <div class="body">
 <a href="">
 <h3 class="no-anchor listing-title">
@@ -186,31 +189,31 @@ cleanR
 </div>
 </a>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('data cleaning'); return false;">
-data cleaning
+<div class="listing-category" onclick="window.quartoListingCategory('Data Cleaning'); return false;">
+Data Cleaning
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('wrangling'); return false;">
-wrangling
+<div class="listing-category" onclick="window.quartoListingCategory('Wrangling'); return false;">
+Wrangling
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('R programming'); return false;">
-R programming
+<div class="listing-category" onclick="window.quartoListingCategory('R Programming'); return false;">
+R Programming
 </div>
 </div>
 <a href="">
 <div class="listing-description">
-<p>Harmonized Appraoch of Cleaning Data in R</p>
+<p>Harmonized Approach of Cleaning Data in R.</p>
 </div>
 </a>
 </div>
 <div class="metadata">
 <a href="">
 <div class="listing-date">
-Oct 9, 2024
+Oct 1, 2023
 </div>
 <div class="listing-author">
 Ahmed Mohamoud
 </div>
-<div class="metadata-value listing-url">
+<div class="metadata-value listing-site">
 https://github.com/axmedmaxamuud/cleanR
 </div>
 </a>
