@@ -3,7 +3,7 @@ title: "Publications"
 listing:
   contents: 
     - url: https://github.com/axmedmaxamuud
-      image: RAM.png
+      image: assets/RAM.png
       title: "RAM Codebook"
       author: Ahmed Mohamoud
       description: "This codebook is a collection of ready-to-use packages and scripts designed to support various tasks, including the development and testing of data collection tools, calculation of corporate indicators, and data analysis. It also features WFP-branded visualizations and tools for effectively communicating results through reports and dashboards."

@@ -1,5 +1,12 @@
 [
   {
+    "objectID": "books.html",
+    "href": "books.html",
+    "title": "Publications",
+    "section": "",
+    "text": "RAM Codebook\n\n\n\n\n\n\n\nData Collection\n\n\nIndicators\n\n\nAnalysis\n\n\nVisualizations\n\n\nReporting\n\n\n\n\nThis codebook is a collection of ready-to-use packages and scripts designed to support various tasks, including the development and testing of data collection tools, calculation of corporate indicators, and data analysis. It also features WFP-branded visualizations and tools for effectively communicating results through reports and dashboards.\n\n\n\n\n\n\nMar 1, 2025\n\n\nAhmed Mohamoud\n\n\nhttps://github.com/axmedmaxamuud\n\n\n\n\n\n\nNo matching items"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Ahmed Mohamoud",
@@ -7,11 +14,11 @@
     "text": "As an experienced GIS/Data professional with a diverse background in the humanitarian sector, I excel in ArcGIS Pro, QGIS, R, Python, PowerBI, Tableau, MS Excel, SPSS, Adobe Suite, and ODK. My specialization lies in research design, data collection, interpretation, and visualization."
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "index.html#about-me",
+    "href": "index.html#about-me",
+    "title": "Ahmed Mohamoud",
     "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
+    "text": "As an experienced GIS/Data professional with a diverse background in the humanitarian sector, I excel in ArcGIS Pro, QGIS, R, Python, PowerBI, Tableau, MS Excel, SPSS, Adobe Suite, and ODK. My specialization lies in research design, data collection, interpretation, and visualization."
   },
   {
     "objectID": "index.html#education",
@@ -28,18 +35,25 @@
     "text": "Experience\n\nWFP | Vulnerability Analysis & Mapping (VAM) Officer May 2024 - Present\n\n\nWFP | Programme Associate (Data Management) Nov 2022 - Apr 2024\n\n\nREACH Initiative | GIS & Data Specialist Mar 2022 - Oct 2022\n\n\nREACH Initiative | Senior Database Officer Jan 2019 - Feb 2022\n\n\nSOLNARDO | Monitoring & Evaluation Officer Jan 2014 - Dec 2018"
   },
   {
-    "objectID": "publications.html",
-    "href": "publications.html",
-    "title": "Tutorials",
-    "section": "",
-    "text": "Hi there! I have some new publications on data science, geospatial analysis, and mapping that could be incredibly useful for anyone working in the humanitarian field. Whether you’re interested in using data to solve complex problems or mapping to understand critical situations, these publications cover a lot and hope they can add value to your work or spark new ideas.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCleaning Food Security Indicators\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nData Cleaning Process\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHash PhoneNumbers\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTableua Calculation Refrence\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+    "objectID": "index.html#cerifications",
+    "href": "index.html#cerifications",
+    "title": "Ahmed Mohamoud",
+    "section": "Cerifications",
+    "text": "Cerifications\nIPC Acute Food Insecurity Level 1 Analyst | November 2024 Cadre Harmonisé (CH) | December 2024"
   },
   {
-    "objectID": "posts/publications.html",
-    "href": "posts/publications.html",
-    "title": "Publications",
+    "objectID": "package.html",
+    "href": "package.html",
+    "title": "R Packages",
     "section": "",
-    "text": "Cleaning Food Security Data\n\n\n\n\n\n\n\n\n\n\n \n\n\n\n\nNo matching items"
+    "text": "cleanR\n\n\n\n\n\n\n\nData Cleaning\n\n\nWrangling\n\n\nR Programming\n\n\n\n\nHarmonized Approach of Cleaning Data in R.\n\n\n\n\n\n\nOct 1, 2023\n\n\nAhmed Mohamoud\n\n\nhttps://github.com/axmedmaxamuud/cleanR\n\n\n\n\n\n\n  \n\n\n\n\nWFPindicators\n\n\n\n\n\n\n\nR Programming\n\n\nIndicator Coding\n\n\nSurvey Coding\n\n\n\n\nWFP CRF Indicators Compendium\n\n\n\n\n\n\nFeb 1, 2025\n\n\nAhmed Mohamoud\n\n\nhttps://github.com/axmedmaxamuud/cleanR\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/data_cleaning_process.html",
+    "href": "posts/data_cleaning_process.html",
+    "title": "Data Cleaning Process",
+    "section": "",
+    "text": "The Planning, Monitoring, Learning, and Evaluation (PMLE) unit has implemented a standardized data cleaning procedure to maintain data quality and consistency. This process ensures that all data from process monitoring and assessments meet the World Food Programme’s quality standards. Similar to accounting practices, every modification or adjustment made to the data is meticulously recorded. This methodical tracking helps in identifying and addressing any discrepancies or errors in the data effectively.\nThis has been an aggregated result of the PMLE team!\nDownload PDF file."
   },
   {
     "objectID": "posts/fsl_cleaning.html",
@@ -54,20 +68,6 @@
     "title": "Cleaning Food Security Indicators",
     "section": "Step 1: Load data",
     "text": "Step 1: Load data\nStart by uploading the raw data, typically the version downloaded from the MoDa server. Ensure that the data structure aligns with the WFP Survey Designer for consistent variable naming.\n\n# required packages\nlibrary(tidyverse)\nlibrary(DT)\nlibrary(cleanR)\n\n# load raw data\nmoda_data &lt;- cleanR::survey_data %&gt;% # converting HDDS variables to numeric\n  mutate(across(starts_with(\"HDDS\"), as.numeric))"
-  },
-  {
-    "objectID": "index.html#about-me",
-    "href": "index.html#about-me",
-    "title": "Ahmed Mohamoud",
-    "section": "",
-    "text": "As an experienced GIS/Data professional with a diverse background in the humanitarian sector, I excel in ArcGIS Pro, QGIS, R, Python, PowerBI, Tableau, MS Excel, SPSS, Adobe Suite, and ODK. My specialization lies in research design, data collection, interpretation, and visualization."
-  },
-  {
-    "objectID": "index.html#skills",
-    "href": "index.html#skills",
-    "title": "Ahmed Mohamoud",
-    "section": "Skills",
-    "text": "Skills\n\n Advance R user and author\n\n\n ArcGIS Pro\n\n\n Python\n\n\n Tableau"
   },
   {
     "objectID": "posts/fsl_cleaning.html#step-2-format-data",
@@ -88,21 +88,7 @@
     "href": "posts/fsl_cleaning.html#step-4-generate-cleaning-log-file",
     "title": "Cleaning Food Security Indicators",
     "section": "Step 4: Generate cleaning log file",
-    "text": "Step 4: Generate cleaning log file\nTo facilitate collaboration and feedback collection, generate a cleaning log file. This log file will document flagged issues, providing insights into potential problems and capturing correct values for any identified inconsistencies.\n\nData quality checks - Source: IMPACT Initiative, FSL Data Quality Checks\n\nAll low cereal or oil consumption (&lt;= days), usually its not common to have such low consumption, check also how this low consumption is consistent with consumption of other food groups\nVery high food consumption for meat and dairy (&gt;=6) where there is low food consumption scores for cereals (&lt;=4)\nCheck food consumption module for low and high food consumption of certain food groups\nCheck households with high meat and dairy consumption (&gt;=6) while reporting high coping strategy\nCheck for patterns of data entry like same entry repeated many times (7,7,7,7) or alternating numbers (2,1,2,1,2,1)\n\n\nThe above checks are adopted from IMPACT Initiative FSL data quality checks guide and they are pre-coded with the fsl_cleaning_log function. So, if there are any other checks that you have to apply.\n\nfsl_clog &lt;- fsl_cleaning_log(data = raw_data, uuid = \"uuid\")\n\ndatatable(fsl_clog, list(dom = 't'))\n\n\n\n\n\n\nCongratulations on generating the cleaning log! To proceed, refer to the other documentation for incorporating the corrected cleaning log file into the raw data to generate the clean data."
-  },
-  {
-    "objectID": "posts/data_cleaning_process.html",
-    "href": "posts/data_cleaning_process.html",
-    "title": "Data Cleaning Process",
-    "section": "",
-    "text": "The Planning, Monitoring, Learning, and Evaluation (PMLE) unit has implemented a standardized data cleaning procedure to maintain data quality and consistency. This process ensures that all data from process monitoring and assessments meet the World Food Programme’s quality standards. Similar to accounting practices, every modification or adjustment made to the data is meticulously recorded. This methodical tracking helps in identifying and addressing any discrepancies or errors in the data effectively.\nThis has been an aggregated result of the PMLE team!\nDownload PDF file."
-  },
-  {
-    "objectID": "posts/data_cleaning_process.html#basic-usage",
-    "href": "posts/data_cleaning_process.html#basic-usage",
-    "title": "Untitled",
-    "section": "",
-    "text": "All you really need to give the pdf shortcode is the path to the PDF file you want to embed in your Quarto HTML document.\nDownload PDF file."
+    "text": "Step 4: Generate cleaning log file\nTo facilitate collaboration and feedback collection, generate a cleaning log file. This log file will document flagged issues, providing insights into potential problems and capturing correct values for any identified inconsistencies.\n\nData quality checks - Source: IMPACT Initiative, FSL Data Quality Checks\n\nAll low cereal or oil consumption (&lt;= days), usually its not common to have such low consumption, check also how this low consumption is consistent with consumption of other food groups\nVery high food consumption for meat and dairy (&gt;=6) where there is low food consumption scores for cereals (&lt;=4)\nCheck food consumption module for low and high food consumption of certain food groups\nCheck households with high meat and dairy consumption (&gt;=6) while reporting high coping strategy\nCheck for patterns of data entry like same entry repeated many times (7,7,7,7) or alternating numbers (2,1,2,1,2,1)\n\n\nThe above checks are adopted from IMPACT Initiative FSL data quality checks guide and they are pre-coded with the fsl_cleaning_log function. So, if there are any other checks that you have to apply.\n\n# fsl_clog &lt;- fsl_cleaning_log(data = raw_data, uuid = \"uuid\")\n\n# datatable(fsl_clog, list(dom = 't'))\n\nCongratulations on generating the cleaning log! To proceed, refer to the other documentation for incorporating the corrected cleaning log file into the raw data to generate the clean data."
   },
   {
     "objectID": "posts/hash_phonenumbers.html",
@@ -112,24 +98,24 @@
     "text": "In this example we’ll ecrept or hash phonenumbers so we can avoid exposing such personal identiable data during remote data collection. often in WFP opperations, its common to have benefiairy contact information used for monitoring or verifications surveys. during this time it will be good practice to hash phonenumers in advance and prepare itemset file that you can upload with your MoDa tool. we’ll use the hash_phonenumbers() function to acheive this.\n\nStep 1: Prepare dumpy data\n\n# required packages\nlibrary(tidyverse)\nlibrary(digest)\nlibrary(cleanR)\nlibrary(DT)\n\n# Function to generate random phone numbers\n# generate_phone_number &lt;- function(n) {\n#   phone_numbers &lt;- replicate(n, paste0(\"0\", sample(0:5, 5, replace = TRUE), collapse = \"\"))\n#   return(as.vector(phone_numbers))\n# }\n\n# # Sample data\n# n &lt;- 10  # number of rows in the data frame\n# list_name &lt;- paste(\"List\", 1:n)\n# admin1 &lt;- paste(\"Admin1_\", sample(1:100, n, replace = TRUE))\n# admin2 &lt;- paste(\"Admin2_\", sample(1:100, n, replace = TRUE))\n# person &lt;- paste(\"Person_\", sample(LETTERS, n, replace = TRUE))\n# PhoneNumber &lt;- generate_phone_number(n)\n# uuid &lt;- stringi::stri_rand_strings(n, 10)\n# name &lt;- paste(\"List\", 1:n)\n\n# Create the data frame\n# data &lt;- data.frame(list_name, admin1, admin2, person, PhoneNumber, uuid, name)\n\nNow lets see how the orginal data looks like, and phone numbers will appear as their original form, which is not recomended to share it widely during remote data collection that we can’t gurentee if the information will be discarded after the data collection\n\n# datatable(data, list(dom = 't'))\n\nokay, lets now encrepth the phone numbers\n\n# hashed_data &lt;- hash_phonenumbers(data, 'PhoneNumber', 'name', debug = FALSE)\n\n# datatable(hashed_data, list(dom = 't'))"
   },
   {
-    "objectID": "package.html",
-    "href": "package.html",
-    "title": "R Packages",
+    "objectID": "posts/spatial_verification.html",
+    "href": "posts/spatial_verification.html",
+    "title": "Survey Spatial Verification",
     "section": "",
-    "text": "cleanR\n\n\n\n\n\n\n\nData Cleaning\n\n\nWrangling\n\n\nR Programming\n\n\n\n\nHarmonized Approach of Cleaning Data in R.\n\n\n\n\n\n\nOct 1, 2023\n\n\nAhmed Mohamoud\n\n\nhttps://github.com/axmedmaxamuud/cleanR\n\n\n\n\n\n\nNo matching items"
+    "text": "Using the leaflet package, we enabled field teams to access survey geospatial data, monitor progress, and address flagged points. The dashboard allows easy navigation and helps identify enumerators working outside the sampled locations.\nDownload PDF file."
   },
   {
-    "objectID": "books.html",
-    "href": "books.html",
-    "title": "Publications",
+    "objectID": "publications.html",
+    "href": "publications.html",
+    "title": "Tutorials",
     "section": "",
-    "text": "RAM Codebook\n\n\n\n\n\n\n\nData Collection\n\n\nIndicators\n\n\nAnalysis\n\n\nVisualizations\n\n\nReporting\n\n\n\n\nThis codebook is a collection of ready-to-use packages and scripts designed to support various tasks, including the development and testing of data collection tools, calculation of corporate indicators, and data analysis. It also features WFP-branded visualizations and tools for effectively communicating results through reports and dashboards.\n\n\n\n\n\n\nMar 1, 2025\n\n\nAhmed Mohamoud\n\n\nhttps://github.com/axmedmaxamuud\n\n\n\n\n\n\nNo matching items"
+    "text": "Hi there, you’ll find publications on data science, geospatial analysis and mapping that could be valuable for anyone working the humanitarian sector.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCleaning Food Security Indicators\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nData Cleaning Process\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHash PhoneNumbers\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSurvey Spatial Verification\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTableua Calculation Refrence\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "index.html#cerifications",
-    "href": "index.html#cerifications",
-    "title": "Ahmed Mohamoud",
-    "section": "Cerifications",
-    "text": "Cerifications\nIPC Acute Food Insecurity Level 1 Analyst | November 2024 Cadre Harmonisé (CH) | December 2024"
+    "objectID": "posts/tablue_calculations.html",
+    "href": "posts/tablue_calculations.html",
+    "title": "Tableua Calculation Refrence",
+    "section": "",
+    "text": "// calculated field for Food Consumption Score (FCS) ([FCS Stap] * 2) + ([FCS Pulse] * 3) + ([FCS Pr] * 4) + ([FCS Dairy] * 4) + ([FCS Veg]) + ([FCS Fruit]) + ([FCS Fat] * 0.5) + ([FCS Sugar] * 0.5)"
   }
 ]

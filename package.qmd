@@ -2,16 +2,19 @@
 title: "R Packages"
 listing:
   contents: 
-    - site: "https://github.com/axmedmaxamuud/cleanR"
-      image: cleanR_logo.png
+    - site: '<a href="https://github.com/axmedmaxamuud/cleanR" target="_blank">https://github.com/axmedmaxamuud/cleanR</a>'
+      image: assets/cleanR_logo.png
       title: "cleanR"
       author: Ahmed Mohamoud
       description: "Harmonized Approach of Cleaning Data in R."
       date: October 2023
       categories: [Data Cleaning, Wrangling, R Programming]
+      
+    - site: '<a href="https://github.com/axmedmaxamuud/cleanR" target="_blank">https://github.com/axmedmaxamuud/cleanR</a>'
+      image: assets/WFPindicators.png
+      title: "WFPindicators"
+      author: Ahmed Mohamoud
+      description: "WFP CRF Indicators Compendium"
+      date: February 2025
+      categories: [R Programming, Indicator Coding, Survey Coding]
 ---
-
-
-
-
-

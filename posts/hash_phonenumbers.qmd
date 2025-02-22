@@ -1,6 +1,6 @@
 ---
 title: "Hash PhoneNumbers"
-image: hash_cover.png
+image: images/hash_cover.png
 ---
 
 In this example we'll ecrept or hash phonenumbers so we can avoid exposing such personal identiable data during remote data collection. often in WFP opperations, its common to have benefiairy contact information used for monitoring or verifications surveys. during this time it will be good practice to hash phonenumers in advance and prepare itemset file that you can upload with your MoDa tool. we'll use the hash_phonenumbers() function to acheive this.

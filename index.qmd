@@ -1,6 +1,6 @@
 ---
 title: "Ahmed Mohamoud"
-image: axmed.jpg
+image: assets/axmed.jpg
 about:
   template: trestles
   image-width: 20em

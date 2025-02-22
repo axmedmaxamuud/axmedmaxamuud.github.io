@@ -1,6 +1,6 @@
 ---
 title: "Cleaning Food Security Indicators"
-image: data_cleaning.png
+image: images/data_cleaning.png
 toc: true
 ---
 

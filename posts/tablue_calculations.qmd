@@ -1,4 +1,12 @@
 ---
 title: "Tableua Calculation Refrence"
-image: tabluea_calculations.png
+image: images/tabluea_calculations.png
 ---
+
+![](images/tablue_fcs_formula.png)
+
+![](images/tablue_fcs_category.png)
+
+
+![](images/tablue_fcs_chart.png)
+

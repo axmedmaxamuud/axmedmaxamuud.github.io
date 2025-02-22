@@ -1,25 +1,20 @@
 [
   {
-    "listing": "/publications.html",
-    "items": [
-      "/posts/fsl_cleaning.html",
-      "/posts/data_cleaning_process.html",
-      "/posts/hash_phonenumbers.html",
-      "/posts/tablue_calculations.html"
-    ]
-  },
-  {
-    "listing": "/posts/publications.html",
-    "items": [
-      "/posts/fsl_cleaning.html"
-    ]
+    "listing": "/books.html",
+    "items": []
   },
   {
     "listing": "/package.html",
     "items": []
   },
   {
-    "listing": "/books.html",
-    "items": []
+    "listing": "/publications.html",
+    "items": [
+      "/posts/fsl_cleaning.html",
+      "/posts/data_cleaning_process.html",
+      "/posts/hash_phonenumbers.html",
+      "/posts/spatial_verification.html",
+      "/posts/tablue_calculations.html"
+    ]
   }
 ]
