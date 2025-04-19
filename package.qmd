@@ -10,7 +10,7 @@ listing:
       date: October 2023
       categories: [Data Cleaning, Wrangling, R Programming]
       
-    - site: '<a href="https://github.com/axmedmaxamuud/cleanR" target="_blank">https://github.com/axmedmaxamuud/cleanR</a>'
+    - path: https://github.com/axmedmaxamuud/
       image: assets/WFPindicators.png
       title: "WFPindicators"
       author: Ahmed Mohamoud

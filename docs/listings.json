@@ -1,13 +1,5 @@
 [
   {
-    "listing": "/books.html",
-    "items": []
-  },
-  {
-    "listing": "/package.html",
-    "items": []
-  },
-  {
     "listing": "/publications.html",
     "items": [
       "/posts/fsl_cleaning.html",
@@ -16,5 +8,13 @@
       "/posts/spatial_verification.html",
       "/posts/tablue_calculations.html"
     ]
+  },
+  {
+    "listing": "/package.html",
+    "items": []
+  },
+  {
+    "listing": "/books.html",
+    "items": []
   }
 ]

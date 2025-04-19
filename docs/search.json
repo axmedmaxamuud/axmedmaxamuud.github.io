@@ -1,10 +1,66 @@
 [
   {
+    "objectID": "publications.html",
+    "href": "publications.html",
+    "title": "Tutorials",
+    "section": "",
+    "text": "Hi there, you’ll find publications on data science, geospatial analysis and mapping that could be valuable for anyone working the humanitarian sector.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCleaning Food Security Indicators\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nData Cleaning Process\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHash PhoneNumbers\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSurvey Spatial Verification\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTableua Calculation Refrence\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/spatial_verification.html",
+    "href": "posts/spatial_verification.html",
+    "title": "Survey Spatial Verification",
+    "section": "",
+    "text": "Using the leaflet package, we enabled field teams to access survey geospatial data, monitor progress, and address flagged points. The dashboard allows easy navigation and helps identify enumerators working outside the sampled locations.\nDownload PDF file."
+  },
+  {
+    "objectID": "posts/fsl_cleaning.html",
+    "href": "posts/fsl_cleaning.html",
+    "title": "Cleaning Food Security Indicators",
+    "section": "",
+    "text": "This guide is designed to assist the WFP team in cleaning food security and livelihood data using the cleanR package. Our goal is to streamline the data cleaning process, ensuring consistency with the WFP Survey Designer for standardized variable naming."
+  },
+  {
+    "objectID": "posts/fsl_cleaning.html#step-1-load-data",
+    "href": "posts/fsl_cleaning.html#step-1-load-data",
+    "title": "Cleaning Food Security Indicators",
+    "section": "Step 1: Load data",
+    "text": "Step 1: Load data\nStart by uploading the raw data, typically the version downloaded from the MoDa server. Ensure that the data structure aligns with the WFP Survey Designer for consistent variable naming.\n\n# required packages\nlibrary(tidyverse)\nlibrary(DT)\nlibrary(cleanR)\n\n# load raw data\nmoda_data &lt;- cleanR::survey_data %&gt;% # converting HDDS variables to numeric\n  mutate(across(starts_with(\"HDDS\"), as.numeric))"
+  },
+  {
+    "objectID": "posts/fsl_cleaning.html#step-2-format-data",
+    "href": "posts/fsl_cleaning.html#step-2-format-data",
+    "title": "Cleaning Food Security Indicators",
+    "section": "Step 2: Format data",
+    "text": "Step 2: Format data\nThe calculate_fsl_indicators function is a powerful tool for computing essential food security and livelihood (FSL) indicators, including the food consumption score, household dietary diversity, reduced coping strategy, and livelihood coping strategy, from your raw data.\n\nraw_data &lt;- calculate_fsl_indicators(data = moda_data,\n                                 # FCS\n                                 FCSStap = \"FCSStap\", \n                                 FCSPulse = \"FCSPulse\", \n                                 FCSPr = \"FCSPr\", \n                                 FCSVeg = \"FCSVeg\", \n                                 FCSFruit = \"FCSFruit\",\n                                 FCSDairy = \"FCSDairy\", \n                                 FCSFat = \"FCSFat\", \n                                 FCSSugar = \"FCSSugar\", \n                                 cutoff = \"Cat28\", \n                                 # rCSI\n                                 rCSILessQlty = \"rCSILessQlty\", \n                                 rCSIBorrow = \"rCSIBorrow\", \n                                 rCSIMealSize = \"rCSIMealSize\", \n                                 rCSIMealAdult = \"rCSIMealAdult\", \n                                 rCSIMealNb = \"rCSIMealNb\",\n                                 # HHS\n                                 HHhSNoFood_FR = \"HHhSNoFood_FR\", \n                                 HHhSBedHung_FR = \"HHhSBedHung_FR\", \n                                 HHhSNotEat_FR = \"HHhSNotEat_FR\", \n                                 # HDDS\n                                 # HDDSStapCer = \"HDDSStapCer\", \n                                 # HDDSStapRoot = \"HDDSStapRoot\", \n                                 # HDDSVeg = \"HDDSVeg\", \n                                 # HDDSFruit = \"HDDSFruit\", \n                                 # HDDSPrMeat = \"HDDSPrMeat\", \n                                 # HDDSPrEgg = \"HDDSPrEgg\", \n                                 # HDDSPrFish = \"HDDSPrFish\", \n                                 # HDDSPulse = \"HDDSPulse\", \n                                 # HDDSDairy = \"HDDSDairy\", \n                                 # HDDSFat = \"HDDSFat\", \n                                 # HDDSSugar = \"HDDSSugar\", \n                                 # HDDSCond = \"HDDSCond\"\n                                 )\n\nplease note: you’ll only need to provide the variables names of the indicators you want to you in your analysis and its not required to specify all variables at all times (for instance, if you have data for FCS and rCSI only provide the arguments of these two indicators only)."
+  },
+  {
+    "objectID": "posts/fsl_cleaning.html#step-3-use-visualizations",
+    "href": "posts/fsl_cleaning.html#step-3-use-visualizations",
+    "title": "Cleaning Food Security Indicators",
+    "section": "Step 3: Use visualizations",
+    "text": "Step 3: Use visualizations\nBy incorporating ridge charts into your analysis, you can easily identify patterns and variations in FCS and rCSI across different clusters or field monitors.\n\n(plot_ridge_distribution(raw_data, numeric_cols = c(\"FCSStap\", \"FCSPulse\", \"FCSPr\", \"FCSVeg\", \"FCSFruit\", \"FCSDairy\", \"FCSFat\", \"FCSSugar\"),\n                         name_groups = \"Food Groups\", name_units = \"Days\", grouping = \"Area_Office\"))\n\n\n\n\n\n\n\n\nBy carefully examining and interpreting the ridge chart, you can gain valuable insights into the distributions and flag any inconsistency for validation and review during data collection. in the below chart, we’ll group the reduced coping strategies at area office level.\n\n(plot_ridge_distribution(raw_data, numeric_cols = c(\"rCSILessQlty\", \"rCSIBorrow\", \"rCSIMealSize\", \"rCSIMealAdult\", \"rCSIMealNb\"),\n                         name_groups = \"Food Coping Strategy\", name_units = \"Days\", grouping = \"Area_Office\"))\n\n\n\n\n\n\n\n\nsimilarly, you can group distributions at field monitor level to gain more insight at the consistency of reported distributions across different monitors.\n\n(plot_ridge_distribution(raw_data, numeric_cols = c(\"rCSILessQlty\", \"rCSIBorrow\", \"rCSIMealSize\", \"rCSIMealAdult\", \"rCSIMealNb\"),\n                         name_groups = \"Food Coping Strategy\", name_units = \"Days\", grouping = \"EnumName\"))"
+  },
+  {
+    "objectID": "posts/fsl_cleaning.html#step-4-generate-cleaning-log-file",
+    "href": "posts/fsl_cleaning.html#step-4-generate-cleaning-log-file",
+    "title": "Cleaning Food Security Indicators",
+    "section": "Step 4: Generate cleaning log file",
+    "text": "Step 4: Generate cleaning log file\nTo facilitate collaboration and feedback collection, generate a cleaning log file. This log file will document flagged issues, providing insights into potential problems and capturing correct values for any identified inconsistencies.\n\nData quality checks - Source: IMPACT Initiative, FSL Data Quality Checks\n\nAll low cereal or oil consumption (&lt;= days), usually its not common to have such low consumption, check also how this low consumption is consistent with consumption of other food groups\nVery high food consumption for meat and dairy (&gt;=6) where there is low food consumption scores for cereals (&lt;=4)\nCheck food consumption module for low and high food consumption of certain food groups\nCheck households with high meat and dairy consumption (&gt;=6) while reporting high coping strategy\nCheck for patterns of data entry like same entry repeated many times (7,7,7,7) or alternating numbers (2,1,2,1,2,1)\n\n\nThe above checks are adopted from IMPACT Initiative FSL data quality checks guide and they are pre-coded with the fsl_cleaning_log function. So, if there are any other checks that you have to apply.\n\n# fsl_clog &lt;- fsl_cleaning_log(data = raw_data, uuid = \"uuid\")\n\n# datatable(fsl_clog, list(dom = 't'))\n\nCongratulations on generating the cleaning log! To proceed, refer to the other documentation for incorporating the corrected cleaning log file into the raw data to generate the clean data."
+  },
+  {
+    "objectID": "package.html",
+    "href": "package.html",
+    "title": "R Packages",
+    "section": "",
+    "text": "cleanR\n\n\n\n\n\n\nData Cleaning\n\n\nWrangling\n\n\nR Programming\n\n\n\nHarmonized Approach of Cleaning Data in R.\n\n\n\n\n\nOct 1, 2023\n\n\nAhmed Mohamoud\n\n\nhttps://github.com/axmedmaxamuud/cleanR\n\n\n\n\n\n\n\n\n\n\n\n\nWFPindicators\n\n\n\n\n\n\nR Programming\n\n\nIndicator Coding\n\n\nSurvey Coding\n\n\n\nWFP CRF Indicators Compendium\n\n\n\n\n\nFeb 1, 2025\n\n\nAhmed Mohamoud\n\n\n\n\n\n\nNo matching items"
+  },
+  {
     "objectID": "books.html",
     "href": "books.html",
     "title": "Publications",
     "section": "",
-    "text": "RAM Codebook\n\n\n\n\n\n\n\nData Collection\n\n\nIndicators\n\n\nAnalysis\n\n\nVisualizations\n\n\nReporting\n\n\n\n\nThis codebook is a collection of ready-to-use packages and scripts designed to support various tasks, including the development and testing of data collection tools, calculation of corporate indicators, and data analysis. It also features WFP-branded visualizations and tools for effectively communicating results through reports and dashboards.\n\n\n\n\n\n\nMar 1, 2025\n\n\nAhmed Mohamoud\n\n\nhttps://github.com/axmedmaxamuud\n\n\n\n\n\n\nNo matching items"
+    "text": "RAM Codebook\n\n\n\n\n\n\nData Collection\n\n\nIndicators\n\n\nAnalysis\n\n\nVisualizations\n\n\nReporting\n\n\n\nThis codebook is a collection of ready-to-use packages and scripts designed to support various tasks, including the development and testing of data collection tools, calculation of corporate indicators, and data analysis. It also features WFP-branded visualizations and tools for effectively communicating results through reports and dashboards.\n\n\n\n\n\nMar 1, 2025\n\n\nAhmed Mohamoud\n\n\nhttps://github.com/axmedmaxamuud\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
@@ -42,13 +98,6 @@
     "text": "Cerifications\nIPC Acute Food Insecurity Level 1 Analyst | November 2024 Cadre Harmonisé (CH) | December 2024"
   },
   {
-    "objectID": "package.html",
-    "href": "package.html",
-    "title": "R Packages",
-    "section": "",
-    "text": "cleanR\n\n\n\n\n\n\n\nData Cleaning\n\n\nWrangling\n\n\nR Programming\n\n\n\n\nHarmonized Approach of Cleaning Data in R.\n\n\n\n\n\n\nOct 1, 2023\n\n\nAhmed Mohamoud\n\n\nhttps://github.com/axmedmaxamuud/cleanR\n\n\n\n\n\n\n  \n\n\n\n\nWFPindicators\n\n\n\n\n\n\n\nR Programming\n\n\nIndicator Coding\n\n\nSurvey Coding\n\n\n\n\nWFP CRF Indicators Compendium\n\n\n\n\n\n\nFeb 1, 2025\n\n\nAhmed Mohamoud\n\n\nhttps://github.com/axmedmaxamuud/cleanR\n\n\n\n\n\n\nNo matching items"
-  },
-  {
     "objectID": "posts/data_cleaning_process.html",
     "href": "posts/data_cleaning_process.html",
     "title": "Data Cleaning Process",
@@ -56,66 +105,10 @@
     "text": "The Planning, Monitoring, Learning, and Evaluation (PMLE) unit has implemented a standardized data cleaning procedure to maintain data quality and consistency. This process ensures that all data from process monitoring and assessments meet the World Food Programme’s quality standards. Similar to accounting practices, every modification or adjustment made to the data is meticulously recorded. This methodical tracking helps in identifying and addressing any discrepancies or errors in the data effectively.\nThis has been an aggregated result of the PMLE team!\nDownload PDF file."
   },
   {
-    "objectID": "posts/fsl_cleaning.html",
-    "href": "posts/fsl_cleaning.html",
-    "title": "Cleaning Food Security Indicators",
-    "section": "",
-    "text": "This guide is designed to assist the WFP team in cleaning food security and livelihood data using the cleanR package. Our goal is to streamline the data cleaning process, ensuring consistency with the WFP Survey Designer for standardized variable naming."
-  },
-  {
-    "objectID": "posts/fsl_cleaning.html#step-1-load-data",
-    "href": "posts/fsl_cleaning.html#step-1-load-data",
-    "title": "Cleaning Food Security Indicators",
-    "section": "Step 1: Load data",
-    "text": "Step 1: Load data\nStart by uploading the raw data, typically the version downloaded from the MoDa server. Ensure that the data structure aligns with the WFP Survey Designer for consistent variable naming.\n\n# required packages\nlibrary(tidyverse)\nlibrary(DT)\nlibrary(cleanR)\n\n# load raw data\nmoda_data &lt;- cleanR::survey_data %&gt;% # converting HDDS variables to numeric\n  mutate(across(starts_with(\"HDDS\"), as.numeric))"
-  },
-  {
-    "objectID": "posts/fsl_cleaning.html#step-2-format-data",
-    "href": "posts/fsl_cleaning.html#step-2-format-data",
-    "title": "Cleaning Food Security Indicators",
-    "section": "Step 2: Format data",
-    "text": "Step 2: Format data\nThe calculate_fsl_indicators function is a powerful tool for computing essential food security and livelihood (FSL) indicators, including the food consumption score, household dietary diversity, reduced coping strategy, and livelihood coping strategy, from your raw data.\n\nraw_data &lt;- calculate_fsl_indicators(data = moda_data,\n                                 # FCS\n                                 FCSStap = \"FCSStap\", \n                                 FCSPulse = \"FCSPulse\", \n                                 FCSPr = \"FCSPr\", \n                                 FCSVeg = \"FCSVeg\", \n                                 FCSFruit = \"FCSFruit\",\n                                 FCSDairy = \"FCSDairy\", \n                                 FCSFat = \"FCSFat\", \n                                 FCSSugar = \"FCSSugar\", \n                                 cutoff = \"Cat28\", \n                                 # rCSI\n                                 rCSILessQlty = \"rCSILessQlty\", \n                                 rCSIBorrow = \"rCSIBorrow\", \n                                 rCSIMealSize = \"rCSIMealSize\", \n                                 rCSIMealAdult = \"rCSIMealAdult\", \n                                 rCSIMealNb = \"rCSIMealNb\",\n                                 # HHS\n                                 HHhSNoFood_FR = \"HHhSNoFood_FR\", \n                                 HHhSBedHung_FR = \"HHhSBedHung_FR\", \n                                 HHhSNotEat_FR = \"HHhSNotEat_FR\", \n                                 # HDDS\n                                 # HDDSStapCer = \"HDDSStapCer\", \n                                 # HDDSStapRoot = \"HDDSStapRoot\", \n                                 # HDDSVeg = \"HDDSVeg\", \n                                 # HDDSFruit = \"HDDSFruit\", \n                                 # HDDSPrMeat = \"HDDSPrMeat\", \n                                 # HDDSPrEgg = \"HDDSPrEgg\", \n                                 # HDDSPrFish = \"HDDSPrFish\", \n                                 # HDDSPulse = \"HDDSPulse\", \n                                 # HDDSDairy = \"HDDSDairy\", \n                                 # HDDSFat = \"HDDSFat\", \n                                 # HDDSSugar = \"HDDSSugar\", \n                                 # HDDSCond = \"HDDSCond\"\n                                 )\n\nplease note: you’ll only need to provide the variables names of the indicators you want to you in your analysis and its not required to specify all variables at all times (for instance, if you have data for FCS and rCSI only provide the arguments of these two indicators only)."
-  },
-  {
-    "objectID": "posts/fsl_cleaning.html#step-3-use-visualizations",
-    "href": "posts/fsl_cleaning.html#step-3-use-visualizations",
-    "title": "Cleaning Food Security Indicators",
-    "section": "Step 3: Use visualizations",
-    "text": "Step 3: Use visualizations\nBy incorporating ridge charts into your analysis, you can easily identify patterns and variations in FCS and rCSI across different clusters or field monitors.\n\n(plot_ridge_distribution(raw_data, numeric_cols = c(\"FCSStap\", \"FCSPulse\", \"FCSPr\", \"FCSVeg\", \"FCSFruit\", \"FCSDairy\", \"FCSFat\", \"FCSSugar\"),\n                         name_groups = \"Food Groups\", name_units = \"Days\", grouping = \"Area_Office\"))\n\n\n\n\nBy carefully examining and interpreting the ridge chart, you can gain valuable insights into the distributions and flag any inconsistency for validation and review during data collection. in the below chart, we’ll group the reduced coping strategies at area office level.\n\n(plot_ridge_distribution(raw_data, numeric_cols = c(\"rCSILessQlty\", \"rCSIBorrow\", \"rCSIMealSize\", \"rCSIMealAdult\", \"rCSIMealNb\"),\n                         name_groups = \"Food Coping Strategy\", name_units = \"Days\", grouping = \"Area_Office\"))\n\n\n\n\nsimilarly, you can group distributions at field monitor level to gain more insight at the consistency of reported distributions across different monitors.\n\n(plot_ridge_distribution(raw_data, numeric_cols = c(\"rCSILessQlty\", \"rCSIBorrow\", \"rCSIMealSize\", \"rCSIMealAdult\", \"rCSIMealNb\"),\n                         name_groups = \"Food Coping Strategy\", name_units = \"Days\", grouping = \"EnumName\"))"
-  },
-  {
-    "objectID": "posts/fsl_cleaning.html#step-4-generate-cleaning-log-file",
-    "href": "posts/fsl_cleaning.html#step-4-generate-cleaning-log-file",
-    "title": "Cleaning Food Security Indicators",
-    "section": "Step 4: Generate cleaning log file",
-    "text": "Step 4: Generate cleaning log file\nTo facilitate collaboration and feedback collection, generate a cleaning log file. This log file will document flagged issues, providing insights into potential problems and capturing correct values for any identified inconsistencies.\n\nData quality checks - Source: IMPACT Initiative, FSL Data Quality Checks\n\nAll low cereal or oil consumption (&lt;= days), usually its not common to have such low consumption, check also how this low consumption is consistent with consumption of other food groups\nVery high food consumption for meat and dairy (&gt;=6) where there is low food consumption scores for cereals (&lt;=4)\nCheck food consumption module for low and high food consumption of certain food groups\nCheck households with high meat and dairy consumption (&gt;=6) while reporting high coping strategy\nCheck for patterns of data entry like same entry repeated many times (7,7,7,7) or alternating numbers (2,1,2,1,2,1)\n\n\nThe above checks are adopted from IMPACT Initiative FSL data quality checks guide and they are pre-coded with the fsl_cleaning_log function. So, if there are any other checks that you have to apply.\n\n# fsl_clog &lt;- fsl_cleaning_log(data = raw_data, uuid = \"uuid\")\n\n# datatable(fsl_clog, list(dom = 't'))\n\nCongratulations on generating the cleaning log! To proceed, refer to the other documentation for incorporating the corrected cleaning log file into the raw data to generate the clean data."
-  },
-  {
     "objectID": "posts/hash_phonenumbers.html",
     "href": "posts/hash_phonenumbers.html",
     "title": "Hash PhoneNumbers",
     "section": "",
     "text": "In this example we’ll ecrept or hash phonenumbers so we can avoid exposing such personal identiable data during remote data collection. often in WFP opperations, its common to have benefiairy contact information used for monitoring or verifications surveys. during this time it will be good practice to hash phonenumers in advance and prepare itemset file that you can upload with your MoDa tool. we’ll use the hash_phonenumbers() function to acheive this.\n\nStep 1: Prepare dumpy data\n\n# required packages\nlibrary(tidyverse)\nlibrary(digest)\nlibrary(cleanR)\nlibrary(DT)\n\n# Function to generate random phone numbers\n# generate_phone_number &lt;- function(n) {\n#   phone_numbers &lt;- replicate(n, paste0(\"0\", sample(0:5, 5, replace = TRUE), collapse = \"\"))\n#   return(as.vector(phone_numbers))\n# }\n\n# # Sample data\n# n &lt;- 10  # number of rows in the data frame\n# list_name &lt;- paste(\"List\", 1:n)\n# admin1 &lt;- paste(\"Admin1_\", sample(1:100, n, replace = TRUE))\n# admin2 &lt;- paste(\"Admin2_\", sample(1:100, n, replace = TRUE))\n# person &lt;- paste(\"Person_\", sample(LETTERS, n, replace = TRUE))\n# PhoneNumber &lt;- generate_phone_number(n)\n# uuid &lt;- stringi::stri_rand_strings(n, 10)\n# name &lt;- paste(\"List\", 1:n)\n\n# Create the data frame\n# data &lt;- data.frame(list_name, admin1, admin2, person, PhoneNumber, uuid, name)\n\nNow lets see how the orginal data looks like, and phone numbers will appear as their original form, which is not recomended to share it widely during remote data collection that we can’t gurentee if the information will be discarded after the data collection\n\n# datatable(data, list(dom = 't'))\n\nokay, lets now encrepth the phone numbers\n\n# hashed_data &lt;- hash_phonenumbers(data, 'PhoneNumber', 'name', debug = FALSE)\n\n# datatable(hashed_data, list(dom = 't'))"
-  },
-  {
-    "objectID": "posts/spatial_verification.html",
-    "href": "posts/spatial_verification.html",
-    "title": "Survey Spatial Verification",
-    "section": "",
-    "text": "Using the leaflet package, we enabled field teams to access survey geospatial data, monitor progress, and address flagged points. The dashboard allows easy navigation and helps identify enumerators working outside the sampled locations.\nDownload PDF file."
-  },
-  {
-    "objectID": "publications.html",
-    "href": "publications.html",
-    "title": "Tutorials",
-    "section": "",
-    "text": "Hi there, you’ll find publications on data science, geospatial analysis and mapping that could be valuable for anyone working the humanitarian sector.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCleaning Food Security Indicators\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nData Cleaning Process\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHash PhoneNumbers\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSurvey Spatial Verification\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTableua Calculation Refrence\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "posts/tablue_calculations.html",
-    "href": "posts/tablue_calculations.html",
-    "title": "Tableua Calculation Refrence",
-    "section": "",
-    "text": "// calculated field for Food Consumption Score (FCS) ([FCS Stap] * 2) + ([FCS Pulse] * 3) + ([FCS Pr] * 4) + ([FCS Dairy] * 4) + ([FCS Veg]) + ([FCS Fruit]) + ([FCS Fat] * 0.5) + ([FCS Sugar] * 0.5)"
   }
 ]
