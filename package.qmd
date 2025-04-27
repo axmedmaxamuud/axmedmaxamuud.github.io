@@ -2,7 +2,7 @@
 title: "R Packages"
 listing:
   contents: 
-    - site: '<a href="https://github.com/axmedmaxamuud/cleanR" target="_blank">https://github.com/axmedmaxamuud/cleanR</a>'
+    - path: https://github.com/axmedmaxamuud/cleanR/
       image: assets/cleanR_logo.png
       title: "cleanR"
       author: Ahmed Mohamoud
@@ -10,11 +10,12 @@ listing:
       date: October 2023
       categories: [Data Cleaning, Wrangling, R Programming]
       
-    - path: https://github.com/axmedmaxamuud/
+    - path: https://github.com/axmedmaxamuud/WFPindicators/
       image: assets/WFPindicators.png
       title: "WFPindicators"
       author: Ahmed Mohamoud
       description: "WFP CRF Indicators Compendium"
-      date: February 2025
+      date: April 2025
       categories: [R Programming, Indicator Coding, Survey Coding]
 ---
+
