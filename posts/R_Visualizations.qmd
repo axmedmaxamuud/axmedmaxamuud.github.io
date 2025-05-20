@@ -6,6 +6,8 @@ toc: true
 
 This are some learning stuff for data visualization.
 
+
+
 ```{r, echo=TRUE, warning=FALSE, message=FALSE, comment=FALSE}
 # required packages
 library(tidyverse)
@@ -81,7 +83,5 @@ ggplot(average_days, aes(x = food_group_clean, y = average_days, fill = food_gro
   )
 
 ```
-
-
 
 

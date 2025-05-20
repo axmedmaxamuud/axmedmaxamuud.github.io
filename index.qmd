@@ -1,5 +1,6 @@
 ---
 title: "Ahmed Mohamoud"
+subtitle: "GIS & Humanitarian Data Expert"
 image: assets/axmed.jpg
 about:
   template: trestles
