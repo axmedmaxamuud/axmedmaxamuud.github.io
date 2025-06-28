@@ -2,6 +2,7 @@
 title: "Cleaning Food Security Indicators"
 image: images/data_cleaning.png
 toc: true
+categories: [R programming, Data Cleaning]
 ---
 
 ```{r, include = FALSE}

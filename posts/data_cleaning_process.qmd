@@ -1,6 +1,7 @@
 ---
 title: "Data Cleaning Process"
 image: images/cleaning_process.png
+categories: [R programming, Data Cleaning]
 ---
 
 The Planning, Monitoring, Learning, and Evaluation (PMLE) unit has implemented a standardized data cleaning procedure to maintain data quality and consistency. This process ensures that all data from process monitoring and assessments meet the World Food Programme's quality standards. Similar to accounting practices, every modification or adjustment made to the data is meticulously recorded. This methodical tracking helps in identifying and addressing any discrepancies or errors in the data effectively.

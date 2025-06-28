@@ -1,6 +1,7 @@
 ---
 title: "Survey Spatial Verification"
 image: images/spatial_verification.png
+categories: [Spatial Verification, GIS]
 ---
 
 Using the leaflet package, we enabled field teams to access survey geospatial data, monitor progress, and address flagged points. The dashboard allows easy navigation and helps identify enumerators working outside the sampled locations.

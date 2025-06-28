@@ -1,6 +1,7 @@
 ---
 title: "Hash PhoneNumbers"
 image: images/hash_cover.png
+categories: [R programming, Data Processing]
 ---
 
 In this example, we'll encrypt or hash phone numbers to avoid exposing personal identifiable data during remote data collection. Often in WFP operations, it's common to use beneficiary contact information for monitoring or verification purposes.  During this time, it is good practice to hash phone numbers in advance and prepare an itemset file that you can upload with your MoDa tool. We'll use the **hash_phonenumbers()** function to achieve this.

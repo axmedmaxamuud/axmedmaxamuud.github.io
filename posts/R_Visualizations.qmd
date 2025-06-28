@@ -2,6 +2,7 @@
 title: "R Visualizations"
 image: images/RCharts.png
 toc: true
+categories: [R programming, Visualizations, ggplot2]
 ---
 
 This are some learning stuff for data visualization.

@@ -1,6 +1,7 @@
 ---
 title: "Tableua Calculation Refrence"
 image: images/tabluea_calculations.png
+categories: [Tableau, Food Security]
 ---
 
 ![](images/tablue_fcs_formula.png)

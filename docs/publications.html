@@ -78,9 +78,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-title','listing-author','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-title","listing-author","listing-image","listing-description"],
+      searchColumns: ["listing-title","listing-author","listing-image","listing-description","listing-categories"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -146,7 +146,7 @@ window.Quarto = {
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -190,7 +190,8 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(6)</span></div><div class="category" data-category="RGF0YSUyMENsZWFuaW5n">Data Cleaning <span class="quarto-category-count">(2)</span></div><div class="category" data-category="RGF0YSUyMFByb2Nlc3Npbmc=">Data Processing <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Rm9vZCUyMFNlY3VyaXR5">Food Security <span class="quarto-category-count">(1)</span></div><div class="category" data-category="R0lT">GIS <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UiUyMHByb2dyYW1taW5n">R programming <span class="quarto-category-count">(4)</span></div><div class="category" data-category="U3BhdGlhbCUyMFZlcmlmaWNhdGlvbg==">Spatial Verification <span class="quarto-category-count">(1)</span></div><div class="category" data-category="VGFibGVhdQ==">Tableau <span class="quarto-category-count">(1)</span></div><div class="category" data-category="VmlzdWFsaXphdGlvbnM=">Visualizations <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Z2dwbG90Mg==">ggplot2 <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -220,7 +221,7 @@ window.Quarto = {
 
 <div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
 <div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-listing-file-modified-sort="1745174746833" data-listing-reading-time-sort="10" data-listing-word-count-sort="1886">
+<div class="g-col-1" data-index="0" data-categories="UiUyMHByb2dyYW1taW5nJTJDRGF0YSUyMENsZWFuaW5n" data-listing-file-modified-sort="1751115105534" data-listing-reading-time-sort="10" data-listing-word-count-sort="1886">
 <a href="./posts/fsl_cleaning.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -230,6 +231,14 @@ window.Quarto = {
 <h5 class="no-anchor card-title listing-title">
 Cleaning Food Security Indicators
 </h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('UiUyMHByb2dyYW1taW5n'); return false;">
+R programming
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('RGF0YSUyMENsZWFuaW5n'); return false;">
+Data Cleaning
+</div>
+</div>
 <div class="card-text listing-description">
 This guide is designed to assist the WFP team in cleaning food security and livelihood data using the cleanR package. Our goal is to streamline the data cleaning process…
 </div>
@@ -242,7 +251,7 @@ This guide is designed to assist the WFP team in cleaning food security and live
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="1" data-listing-file-modified-sort="1745174744936" data-listing-reading-time-sort="1" data-listing-word-count-sort="84">
+<div class="g-col-1" data-index="1" data-categories="UiUyMHByb2dyYW1taW5nJTJDRGF0YSUyMENsZWFuaW5n" data-listing-file-modified-sort="1751115033854" data-listing-reading-time-sort="1" data-listing-word-count-sort="84">
 <a href="./posts/data_cleaning_process.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -252,6 +261,14 @@ This guide is designed to assist the WFP team in cleaning food security and live
 <h5 class="no-anchor card-title listing-title">
 Data Cleaning Process
 </h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('UiUyMHByb2dyYW1taW5n'); return false;">
+R programming
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('RGF0YSUyMENsZWFuaW5n'); return false;">
+Data Cleaning
+</div>
+</div>
 <div class="card-text listing-description">
 The Planning, Monitoring, Learning, and Evaluation (PMLE) unit has implemented a standardized data cleaning procedure to maintain data quality and consistency. This process…
 </div>
@@ -264,7 +281,7 @@ The Planning, Monitoring, Learning, and Evaluation (PMLE) unit has implemented a
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="2" data-listing-file-modified-sort="1745174706046" data-listing-reading-time-sort="2" data-listing-word-count-sort="266">
+<div class="g-col-1" data-index="2" data-categories="UiUyMHByb2dyYW1taW5nJTJDRGF0YSUyMFByb2Nlc3Npbmc=" data-listing-file-modified-sort="1751115143933" data-listing-reading-time-sort="2" data-listing-word-count-sort="266">
 <a href="./posts/hash_phonenumbers.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -274,6 +291,14 @@ The Planning, Monitoring, Learning, and Evaluation (PMLE) unit has implemented a
 <h5 class="no-anchor card-title listing-title">
 Hash PhoneNumbers
 </h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('UiUyMHByb2dyYW1taW5n'); return false;">
+R programming
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('RGF0YSUyMFByb2Nlc3Npbmc='); return false;">
+Data Processing
+</div>
+</div>
 <div class="card-text listing-description">
 In this example, we’ll encrypt or hash phone numbers to avoid exposing personal identifiable data during remote data collection. Often in WFP operations, it’s common to use…<strong></strong>
 </div>
@@ -286,7 +311,7 @@ In this example, we’ll encrypt or hash phone numbers to avoid exposing persona
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="3" data-listing-file-modified-sort="1747759644655" data-listing-reading-time-sort="3" data-listing-word-count-sort="573">
+<div class="g-col-1" data-index="3" data-categories="UiUyMHByb2dyYW1taW5nJTJDVmlzdWFsaXphdGlvbnMlMkNnZ3Bsb3Qy" data-listing-file-modified-sort="1751115063775" data-listing-reading-time-sort="3" data-listing-word-count-sort="573">
 <a href="./posts/R_Visualizations.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -296,6 +321,17 @@ In this example, we’ll encrypt or hash phone numbers to avoid exposing persona
 <h5 class="no-anchor card-title listing-title">
 R Visualizations
 </h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('UiUyMHByb2dyYW1taW5n'); return false;">
+R programming
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('VmlzdWFsaXphdGlvbnM='); return false;">
+Visualizations
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Z2dwbG90Mg=='); return false;">
+ggplot2
+</div>
+</div>
 <div class="card-text listing-description">
 This are some learning stuff for data visualization.
 </div>
@@ -308,7 +344,7 @@ This are some learning stuff for data visualization.
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="4" data-listing-file-modified-sort="1745174749984" data-listing-reading-time-sort="1" data-listing-word-count-sort="38">
+<div class="g-col-1" data-index="4" data-categories="U3BhdGlhbCUyMFZlcmlmaWNhdGlvbiUyQ0dJUw==" data-listing-file-modified-sort="1751115223081" data-listing-reading-time-sort="1" data-listing-word-count-sort="38">
 <a href="./posts/spatial_verification.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -318,6 +354,14 @@ This are some learning stuff for data visualization.
 <h5 class="no-anchor card-title listing-title">
 Survey Spatial Verification
 </h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('U3BhdGlhbCUyMFZlcmlmaWNhdGlvbg=='); return false;">
+Spatial Verification
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('R0lT'); return false;">
+GIS
+</div>
+</div>
 <div class="card-text listing-description">
 Using the leaflet package, we enabled field teams to access survey geospatial data, monitor progress, and address flagged points. The dashboard allows easy navigation and…
 </div>
@@ -330,7 +374,7 @@ Using the leaflet package, we enabled field teams to access survey geospatial da
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="5" data-listing-file-modified-sort="1745174748192" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<div class="g-col-1" data-index="5" data-categories="VGFibGVhdSUyQ0Zvb2QlMjBTZWN1cml0eQ==" data-listing-file-modified-sort="1751115176866" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
 <a href="./posts/tablue_calculations.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -340,6 +384,14 @@ Using the leaflet package, we enabled field teams to access survey geospatial da
 <h5 class="no-anchor card-title listing-title">
 Tableua Calculation Refrence
 </h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('VGFibGVhdQ=='); return false;">
+Tableau
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Rm9vZCUyMFNlY3VyaXR5'); return false;">
+Food Security
+</div>
+</div>
 <div class="card-text listing-description">
 
 </div>

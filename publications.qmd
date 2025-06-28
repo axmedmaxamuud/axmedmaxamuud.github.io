@@ -3,6 +3,7 @@ title: "Tutorials"
 listing:
   contents: posts
   type: grid
+  categories: true
 ---
 
 Hi there, you'll find publications on data science, geospatial analysis and mapping that could be valuable for anyone working the humanitarian sector.
