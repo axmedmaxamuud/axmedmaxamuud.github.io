@@ -8,9 +8,9 @@ website:
     left:
       - href: index.qmd
         text: About
-      - package.qmd
+      - packages.qmd
+      - tutorials.qmd
       - publications.qmd
-      - books.qmd
 
 format:
   html:

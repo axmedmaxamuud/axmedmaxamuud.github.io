@@ -1,6 +1,6 @@
 [
   {
-    "listing": "/publications.html",
+    "listing": "/tutorials.html",
     "items": [
       "/posts/fsl_cleaning.html",
       "/posts/data_cleaning_process.html",
@@ -11,11 +11,11 @@
     ]
   },
   {
-    "listing": "/books.html",
+    "listing": "/packages.html",
     "items": []
   },
   {
-    "listing": "/package.html",
+    "listing": "/publications.html",
     "items": []
   }
 ]
