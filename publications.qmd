@@ -11,4 +11,5 @@ listing:
       categories: [Data Collection, Indicators, Analysis, Visualizations, Reporting]
 ---
 
-This section showcases my publications and studies focusing on humanitarian information management, reproducible analysis and reporting workflows, and research insights for humanitarian contexts.
+Selected publications on humanitarian information management and reproducible analysis
+

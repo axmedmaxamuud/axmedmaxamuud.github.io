@@ -67,7 +67,7 @@
     "href": "packages.html",
     "title": "R Packages",
     "section": "",
-    "text": "Here you’ll find some of the packages I have developed or contributed to, supporting humanitarian information management by streamlining processes and promoting reproducible workflows. Each package is built with a particular emphasis on helping analysts work more efficiently and effectively.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncleanR\n\n\n\n\n\n\nData Cleaning\n\n\nWrangling\n\n\nR Programming\n\n\n\nHarmonized Approach of Cleaning Data in R.\n\n\n\n\n\nOct 1, 2023\n\n\nAhmed Mohamoud\n\n\n\n\n\n\n\n\n\n\n\n\nWFPindicators\n\n\n\n\n\n\nR Programming\n\n\nIndicator Coding\n\n\nSurvey Coding\n\n\n\nWFP CRF Indicators Compendium\n\n\n\n\n\nApr 1, 2025\n\n\nAhmed Mohamoud\n\n\n\n\n\n\nNo matching items"
+    "text": "Here you’ll find packages I built or contributed to support humanitarian IM and reproducible analysis.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncleanR\n\n\n\n\n\n\nData Cleaning\n\n\nWrangling\n\n\nR Programming\n\n\n\nHarmonized Approach of Cleaning Data in R.\n\n\n\n\n\nOct 1, 2023\n\n\nAhmed Mohamoud\n\n\n\n\n\n\n\n\n\n\n\n\nWFPindicators\n\n\n\n\n\n\nR Programming\n\n\nIndicator Coding\n\n\nSurvey Coding\n\n\n\nWFP CRF Indicators Compendium\n\n\n\n\n\nApr 1, 2025\n\n\nAhmed Mohamoud\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
@@ -130,6 +130,6 @@
     "href": "publications.html",
     "title": "Publications",
     "section": "",
-    "text": "This section showcases my publications and studies focusing on humanitarian information management, reproducible analysis and reporting workflows, and research insights for humanitarian contexts.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRAM Codebook\n\n\n\n\n\n\nData Collection\n\n\nIndicators\n\n\nAnalysis\n\n\nVisualizations\n\n\nReporting\n\n\n\nThis codebook is a compilation of ready-to-use packages and scripts designed to support a range of tasks, including the development and testing of data collection tools, data cleaning and processing, calculation of corporate indicators, and data analysis. It also includes WFP-branded visualizations and tools to effectively communicate results through reports and dashboards.\n\n\n\n\n\nAug 1, 2025\n\n\nAhmed Mohamoud\n\n\n\n\n\n\nNo matching items"
+    "text": "Selected publications on humanitarian information management and reproducible analysis\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRAM Codebook\n\n\n\n\n\n\nData Collection\n\n\nIndicators\n\n\nAnalysis\n\n\nVisualizations\n\n\nReporting\n\n\n\nThis codebook is a compilation of ready-to-use packages and scripts designed to support a range of tasks, including the development and testing of data collection tools, data cleaning and processing, calculation of corporate indicators, and data analysis. It also includes WFP-branded visualizations and tools to effectively communicate results through reports and dashboards.\n\n\n\n\n\nAug 1, 2025\n\n\nAhmed Mohamoud\n\n\n\n\n\n\nNo matching items"
   }
 ]

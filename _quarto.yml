@@ -11,11 +11,16 @@ website:
       - packages.qmd
       - tutorials.qmd
       - publications.qmd
-
+  page-footer: 
+    left: "@ Ahmed Mohamoud 2025"
+    right: "Built with Quarto"
+  
 format:
   html:
     include-in-header: _analytics.html
-    theme: cosmo
+    theme:
+      light: cosmo
+      dark: cyborg
     css: styles.css
     toc: false
     page-layout: article

@@ -19,3 +19,5 @@ listing:
       categories: [R Programming, Indicator Coding, Survey Coding]
 ---
 
+Here you’ll find packages I built or contributed to support humanitarian IM and reproducible analysis.
+
