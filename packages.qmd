@@ -17,6 +17,14 @@ listing:
       description: "WFP CRF Indicators Compendium"
       date: April 2025
       categories: [R Programming, Indicator Coding, Survey Coding]
+      
+    - path: https://github.com/axmedmaxamuud/wfpdown/
+      image: assets/wfpdown.png
+      title: "wfpdown"
+      author: Ahmed Mohamoud
+      description: "WFP branded templates for R Markdown documents"
+      date: September 2025
+      categories: [R Programming, Markdown, Reporting]
 ---
 
 Here you’ll find packages I built or contributed to support humanitarian IM and reproducible analysis.

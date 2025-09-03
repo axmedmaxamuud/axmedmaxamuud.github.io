@@ -67,7 +67,7 @@
     "href": "packages.html",
     "title": "R Packages",
     "section": "",
-    "text": "Here you’ll find packages I built or contributed to support humanitarian IM and reproducible analysis.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncleanR\n\n\n\n\n\n\nData Cleaning\n\n\nWrangling\n\n\nR Programming\n\n\n\nHarmonized Approach of Cleaning Data in R.\n\n\n\n\n\nOct 1, 2023\n\n\nAhmed Mohamoud\n\n\n\n\n\n\n\n\n\n\n\n\nWFPindicators\n\n\n\n\n\n\nR Programming\n\n\nIndicator Coding\n\n\nSurvey Coding\n\n\n\nWFP CRF Indicators Compendium\n\n\n\n\n\nApr 1, 2025\n\n\nAhmed Mohamoud\n\n\n\n\n\n\nNo matching items"
+    "text": "Here you’ll find packages I built or contributed to support humanitarian IM and reproducible analysis.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncleanR\n\n\n\n\n\n\nData Cleaning\n\n\nWrangling\n\n\nR Programming\n\n\n\nHarmonized Approach of Cleaning Data in R.\n\n\n\n\n\nOct 1, 2023\n\n\nAhmed Mohamoud\n\n\n\n\n\n\n\n\n\n\n\n\nWFPindicators\n\n\n\n\n\n\nR Programming\n\n\nIndicator Coding\n\n\nSurvey Coding\n\n\n\nWFP CRF Indicators Compendium\n\n\n\n\n\nApr 1, 2025\n\n\nAhmed Mohamoud\n\n\n\n\n\n\n\n\n\n\n\n\nwfpdown\n\n\n\n\n\n\nR Programming\n\n\nMarkdown\n\n\nReporting\n\n\n\nWFP branded templates for R Markdown documents\n\n\n\n\n\nSep 1, 2025\n\n\nAhmed Mohamoud\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
@@ -131,12 +131,5 @@
     "title": "Publications",
     "section": "",
     "text": "Selected publications on humanitarian information management and reproducible analysis\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRAM Codebook\n\n\n\n\n\n\nData Collection\n\n\nIndicators\n\n\nAnalysis\n\n\nVisualizations\n\n\nReporting\n\n\n\nThis codebook is a compilation of ready-to-use packages and scripts designed to support a range of tasks, including the development and testing of data collection tools, data cleaning and processing, calculation of corporate indicators, and data analysis. It also includes WFP-branded visualizations and tools to effectively communicate results through reports and dashboards.\n\n\n\n\n\nAug 1, 2025\n\n\nAhmed Mohamoud\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "index.html#experience-1",
-    "href": "index.html#experience-1",
-    "title": "Ahmed Mohamoud",
-    "section": "Experience",
-    "text": "Experience\n\nWorld Food Programme (WFP)\nMogadishu, Somalia · May 2024 – Present\nVulnerability Analysis & Mapping (VAM) Officer\nShort description: Lead geospatial and analytical workflows for food security decisions.\n\n\nView full description\n\n\nDesigned vulnerability-based targeting scorecards and QA checks (FCS/HDDS/rCSI).\n\nAutomated data cleaning and reporting (R, Quarto, GitHub Pages).\n\nProduced WFP-branded outputs and interactive maps (ArcGIS Pro/QGIS).\n\n\n\nProgramme Associate — Data Management\nNov 2022 – Apr 2024\nShort description: Built monitoring repositories and integrated SCOPE & targeting databases.\n\n\nView full description\n\n\nDefined SOPs for process monitoring and community feedback integration.\n\nSet up deduplication checks and beneficiary rotation dashboards.\n\nTrained field teams and partners on survey quality and high-frequency checks.\n\n\n\n\n\nREACH Initiative\nSomalia · Jan 2019 – Oct 2022\nGIS & Data Specialist\nShort description: Delivered geospatial analyses and IM products.\n\n\nView full description\n\n\nCreated admin2 maps, hotspot layers, and flood risk visuals.\n\nOptimized data pipelines from Kobo to analysis-ready tables.\n\n\nSenior Database Officer\nJan 2019 – Feb 2022\nShort description: Managed databases and standardized schemas.\n\n\nView full description\n\n\nBuilt QA scripts and harmonized codebooks across projects.\n\nSupported dashboarding and reporting for senior stakeholders."
   }
 ]
