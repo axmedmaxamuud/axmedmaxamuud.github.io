@@ -1,6 +1,6 @@
 ---
 title: "Ahmed Mohamoud"
-subtitle: "GIS & Humanitarian Data Expert"
+subtitle: "GIS & Data Analyst"
 image: assets/axmed.jpg
 about:
   template: trestles
@@ -20,7 +20,7 @@ about:
 
 ## About Me
 
-As an experienced GIS/Data professional with a diverse background in the humanitarian sector, I excel in ArcGIS Pro, QGIS, R, Python, PowerBI, Tableau, MS Excel, SPSS, Adobe Suite, and ODK. My specialization lies in research design, data collection, interpretation, and visualization.
+As an experienced GIS/Data professional with a diverse background in the humanitarian sector, I excel in ArcGIS Pro, QGIS, R, Python, PowerBI, Tableau, MS Excel, SPSS, Adobe Suite, and ODK. My specialization lies in research design, data collection, interpretation, and visualization and applying machine learning techniques to generate actionable insights from complex datasets.
 
 ## Education
 

@@ -4,7 +4,7 @@
     "href": "tutorials.html",
     "title": "Tutorials",
     "section": "",
-    "text": "Hi there, you’ll find publications on data science, geospatial analysis, and mapping that could be valuable for anyone working in the humanitarian sector.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCleaning Food Security Indicators\n\n\n\nR programming\n\n\nData Cleaning\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nData Cleaning Process\n\n\n\nR programming\n\n\nData Cleaning\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHash PhoneNumbers\n\n\n\nR programming\n\n\nData Processing\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nR Visualizations\n\n\n\nR programming\n\n\nVisualizations\n\n\nggplot2\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSurvey Spatial Verification\n\n\n\nSpatial Verification\n\n\nGIS\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTableua Calculation Refrence\n\n\n\nTableau\n\n\nFood Security\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Hi there, you’ll find publications on data science, geospatial analysis, and mapping that could be valuable for anyone working in the humanitarian sector.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCleaning Food Security Indicators\n\n\n\nR programming\n\nData Cleaning\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nData Cleaning Process\n\n\n\nR programming\n\nData Cleaning\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHash PhoneNumbers\n\n\n\nR programming\n\nData Processing\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nR Visualizations\n\n\n\nR programming\n\nVisualizations\n\nggplot2\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSurvey Spatial Verification\n\n\n\nSpatial Verification\n\nGIS\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTableua Calculation Refrence\n\n\n\nTableau\n\nFood Security\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/R_Visualizations.html",
@@ -67,21 +67,21 @@
     "href": "packages.html",
     "title": "R Packages",
     "section": "",
-    "text": "Here you’ll find packages I built or contributed to support humanitarian IM and reproducible analysis.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncleanR\n\n\n\n\n\n\nData Cleaning\n\n\nWrangling\n\n\nR Programming\n\n\n\nHarmonized Approach of Cleaning Data in R.\n\n\n\n\n\nOct 1, 2023\n\n\nAhmed Mohamoud\n\n\n\n\n\n\n\n\n\n\n\n\nWFPindicators\n\n\n\n\n\n\nR Programming\n\n\nIndicator Coding\n\n\nSurvey Coding\n\n\n\nWFP CRF Indicators Compendium\n\n\n\n\n\nApr 1, 2025\n\n\nAhmed Mohamoud\n\n\n\n\n\n\n\n\n\n\n\n\nwfpdown\n\n\n\n\n\n\nR Programming\n\n\nMarkdown\n\n\nReporting\n\n\n\nWFP branded templates for R Markdown documents\n\n\n\n\n\nSep 1, 2025\n\n\nAhmed Mohamoud\n\n\n\n\n\n\nNo matching items"
+    "text": "Here you’ll find packages I built or contributed to support humanitarian IM and reproducible analysis.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncleanR\n\n\n\nData Cleaning\n\nWrangling\n\nR Programming\n\n\n\nHarmonized Approach of Cleaning Data in R.\n\n\n\n\n\nOct 1, 2023\n\n\nAhmed Mohamoud\n\n\n\n\n\n\n\n\n\n\n\n\nWFPindicators\n\n\n\nR Programming\n\nIndicator Coding\n\nSurvey Coding\n\n\n\nWFP CRF Indicators Compendium\n\n\n\n\n\nApr 1, 2025\n\n\nAhmed Mohamoud\n\n\n\n\n\n\n\n\n\n\n\n\nwfpdown\n\n\n\nR Programming\n\nMarkdown\n\nReporting\n\n\n\nWFP branded templates for R Markdown documents\n\n\n\n\n\nSep 1, 2025\n\n\nAhmed Mohamoud\n\n\n\n\n\n\n\n\n\n\n\n\ngeosom\n\n\n\nGIS\n\nDatabase\n\n\n\nSomalia geospatial database for retriving administrative boundaries and sector datasets\n\n\n\n\n\nNov 1, 2025\n\n\nAhmed Mohamoud\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Ahmed Mohamoud",
     "section": "",
-    "text": "As an experienced GIS/Data professional with a diverse background in the humanitarian sector, I excel in ArcGIS Pro, QGIS, R, Python, PowerBI, Tableau, MS Excel, SPSS, Adobe Suite, and ODK. My specialization lies in research design, data collection, interpretation, and visualization."
+    "text": "As an experienced GIS/Data professional with a diverse background in the humanitarian sector, I excel in ArcGIS Pro, QGIS, R, Python, PowerBI, Tableau, MS Excel, SPSS, Adobe Suite, and ODK. My specialization lies in research design, data collection, interpretation, and visualization and applying machine learning techniques to generate actionable insights from complex datasets."
   },
   {
     "objectID": "index.html#about-me",
     "href": "index.html#about-me",
     "title": "Ahmed Mohamoud",
     "section": "",
-    "text": "As an experienced GIS/Data professional with a diverse background in the humanitarian sector, I excel in ArcGIS Pro, QGIS, R, Python, PowerBI, Tableau, MS Excel, SPSS, Adobe Suite, and ODK. My specialization lies in research design, data collection, interpretation, and visualization."
+    "text": "As an experienced GIS/Data professional with a diverse background in the humanitarian sector, I excel in ArcGIS Pro, QGIS, R, Python, PowerBI, Tableau, MS Excel, SPSS, Adobe Suite, and ODK. My specialization lies in research design, data collection, interpretation, and visualization and applying machine learning techniques to generate actionable insights from complex datasets."
   },
   {
     "objectID": "index.html#education",
@@ -130,6 +130,6 @@
     "href": "publications.html",
     "title": "Publications",
     "section": "",
-    "text": "Selected publications on humanitarian information management and reproducible analysis\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRAM Codebook\n\n\n\n\n\n\nData Collection\n\n\nIndicators\n\n\nAnalysis\n\n\nVisualizations\n\n\nReporting\n\n\n\nThis codebook is a compilation of ready-to-use packages and scripts designed to support a range of tasks, including the development and testing of data collection tools, data cleaning and processing, calculation of corporate indicators, and data analysis. It also includes WFP-branded visualizations and tools to effectively communicate results through reports and dashboards.\n\n\n\n\n\nAug 1, 2025\n\n\nAhmed Mohamoud\n\n\n\n\n\n\nNo matching items"
+    "text": "Selected publications on humanitarian information management and reproducible analysis\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRAM Codebook\n\n\n\nData Collection\n\nIndicators\n\nAnalysis\n\nVisualizations\n\nReporting\n\n\n\nThis codebook is a compilation of ready-to-use packages and scripts designed to support a range of tasks, including the development and testing of data collection tools, data cleaning and processing, calculation of corporate indicators, and data analysis. It also includes WFP-branded visualizations and tools to effectively communicate results through reports and dashboards.\n\n\n\n\n\nAug 1, 2025\n\n\nAhmed Mohamoud\n\n\n\n\n\nNo matching items"
   }
 ]

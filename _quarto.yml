@@ -12,7 +12,7 @@ website:
       - tutorials.qmd
       - publications.qmd
   page-footer: 
-    left: "@ Ahmed Mohamoud 2025"
+    center: "@ Ahmed Mohamoud 2026"
     right: "Built with Quarto"
   
 format:

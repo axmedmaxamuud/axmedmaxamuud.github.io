@@ -25,6 +25,14 @@ listing:
       description: "WFP branded templates for R Markdown documents"
       date: September 2025
       categories: [R Programming, Markdown, Reporting]
+      
+    - path: https://github.com/axmedmaxamuud/geosom
+      image: assets/geosom.png
+      title: "geosom"
+      author: Ahmed Mohamoud
+      description: "Somalia geospatial database for retriving administrative boundaries and sector datasets"
+      date: November 2025
+      categories: [GIS, Database]
 ---
 
 Here you’ll find packages I built or contributed to support humanitarian IM and reproducible analysis.
