@@ -12,11 +12,13 @@ knitr::opts_chunk$set(
 )
 ```
 
-This guide is designed to assist the WFP team in cleaning food security and livelihood data using the cleanR package. Our goal is to streamline the data cleaning process, ensuring consistency with the WFP Survey Designer for standardized variable naming.
+This guide is designed to assist food security analyst in cleaning food security and livelihood outcome indicators using the cleanR package. our goal is to streamline the data cleaning process by going beyond the standard checks and understand hidden data patterns and identify any anomalies that need to checked prior the analysis. WFP SurveyDesigner codebook format is used for the documentation. 
 
 ## Step 1: Load data
 
-Start by uploading the raw data, typically the version downloaded from the MoDa server. Ensure that the data structure aligns with the WFP Survey Designer for consistent variable naming.
+The first step is to prepare the data by downloading the raw version from the server [^1]. remember that the documentation is using WFP codebook therefore consider to adopt the codebook if you're at the planning stage of your assessment. otherwise if you already have data and want to follow the guide try to reshape your data to match the codebook variable naming. 
+
+[^1]: https://moda.wfp.org/
 
 ```{r, echo=TRUE, warning=FALSE, message=FALSE, comment=FALSE}
 # required packages
@@ -31,8 +33,7 @@ moda_data <- cleanR::survey_data %>% # converting HDDS variables to numeric
 
 ## Step 2: Format data
 
-The calculate_fsl_indicators function is a powerful tool for computing essential food security and livelihood (FSL) indicators, including the food consumption score, household dietary diversity, reduced coping strategy, and livelihood coping strategy, from your raw data.
-
+Now we have prepared the raw data, so we'll use the calculate_fsl_indicators function to compute the food security and livelihood outcome indicators. the function will take arguments of raw data, food consumption score (FSC), reduced coping strategies (rCSI), household hunger scale (HHS), household dietary diversity (HDDS) and the livelhood coping strategeis (LCS-FS) variables.
 
 ```{r}
 raw_data <- calculate_fsl_indicators(data = moda_data,
@@ -72,27 +73,46 @@ raw_data <- calculate_fsl_indicators(data = moda_data,
                                  )
 ```
 
-please note: you'll only need to provide the variables names of the indicators you want to you in your analysis and its not required to specify all variables at all times (for instance, if you have data for FCS and rCSI only provide the arguments of these two indicators only).
+::: {.callout-note appearance="simple"}
 
-## Step 3: Use visualizations
+## Please Note
+you'll only need to provide the variables names of the indicators you want to you in your analysis and its not required to specify all variables at all times (for instance, if you have data for FCS and rCSI only provide the arguments of these two indicators only).
 
-By incorporating ridge charts into your analysis, you can easily identify patterns and variations in FCS and rCSI across different clusters or field monitors. 
+:::
+
+## Step 3: Data Checks
+
+Assuming at this stage that you already run the standard high frequency checks on the data like survey time taken, sample and quota verification and overall survey and operator productivity checks. in this section we'll go beyond the general checks and perform in-dept data checks.
+
+Lets first use the **fsl_cleaning_log** function to flag major inconsistency and anomalies in the data. the function will take data and uuid as input and then return cleaning log file with all issues found in the data. this function is now considering critical indicators validation measures.
+
+```{r}
+fsl_clog <- fsl_cleaning_log(data = raw_data, uuid = "uuid")
+
+DT::datatable(head(fsl_clog, 5), options = list(dom = 't'))
+```
+key checks included in the **fsl_cleaning_log** function will go as below
+
+
+| Check | Description | Threshold / Pattern | Purpose |
+|------|-------------|--------------------|--------|
+| Low staple consumption | Identifies households reporting very low consumption of staple foods such as cereals or oil. | Cereals or oil ≤ 2 days | Staple foods are usually consumed frequently, so very low values may indicate unusual responses or recording errors. |
+| High meat/dairy with low staples | Flags households reporting frequent consumption of meat or dairy while staple consumption is low. | Meat or dairy ≥ 6 days and cereals ≤ 4 days | This pattern is uncommon in most contexts and may suggest inconsistencies in the food consumption module. |
+| Extreme food group consumption | Reviews food groups with unusually low or high reported consumption frequencies. | Very low (0–1 days) or very high (6–7 days) consumption | Helps identify irregular reporting patterns that may influence the Food Consumption Score. |
+| High animal-source foods with high coping | Flags households reporting frequent meat or dairy consumption while also reporting high coping strategies. | Meat or dairy ≥ 6 days and high rCSI | These patterns may be inconsistent since high animal-source food consumption usually reflects better food access. |
+| Repeated response patterns | Detects repeated or structured response patterns across food groups. | Examples: 7,7,7,7 or alternating values such as 2,1,2,1 | These patterns may indicate enumerator shortcuts or incorrect data entry during interviews. |
+
+## Step 4: Using Visualizations
+
+By incorporating ridge charts into your analysis, you can easily identify patterns and variations in FCS and rCSI across different clusters or operators. 
 
 ```{r, warning=FALSE, fig.width=8, fig.height=5, message=FALSE}
 (plot_ridge_distribution(raw_data, numeric_cols = c("FCSStap", "FCSPulse", "FCSPr", "FCSVeg", "FCSFruit", "FCSDairy", "FCSFat", "FCSSugar"),
-                         name_groups = "Food Groups", name_units = "Days", grouping = "Area_Office"))
+                         name_groups = "Food Groups", name_units = "Days", grouping = "EnumName"))
 
 ```
 
-By carefully examining and interpreting the ridge chart, you can gain valuable insights into the distributions and flag any inconsistency for validation and review during data collection. in the below chart, we'll group the reduced coping strategies at area office level.
-
-```{r, warning=FALSE, fig.width=8, fig.height=5, message=FALSE}
-(plot_ridge_distribution(raw_data, numeric_cols = c("rCSILessQlty", "rCSIBorrow", "rCSIMealSize", "rCSIMealAdult", "rCSIMealNb"),
-                         name_groups = "Food Coping Strategy", name_units = "Days", grouping = "Area_Office"))
-
-```
-
-similarly, you can group distributions at field monitor level to gain more insight at the consistency of reported distributions across different monitors.
+above chart will show the frequency distribution of food groups reported by operator. this visual will help us to identify any anomalies made by the operators. e.g if one operator reports major zero consumption of oil/cereal or sweets it could make alert that there is something need to check from that operators records and debrief them.
 
 ```{r, warning=FALSE, fig.width=8, fig.height=5, message=FALSE}
 (plot_ridge_distribution(raw_data, numeric_cols = c("rCSILessQlty", "rCSIBorrow", "rCSIMealSize", "rCSIMealAdult", "rCSIMealNb"),
@@ -100,29 +120,46 @@ similarly, you can group distributions at field monitor level to gain more insig
 
 ```
 
-## Step 4: Generate cleaning log file
+Frequency of reduced coping strategies reported by operator can be found below. similarly this visual will help us to detect if there is inconsistency or anomalies at the operator level. 
 
-To facilitate collaboration and feedback collection, generate a cleaning log file. This log file will document flagged issues, providing insights into potential problems and capturing correct values for any identified inconsistencies.
+## Step 5: Statistical Checks
 
-* Data quality checks - Source: IMPACT Initiative, FSL Data Quality Checks
+As food consumption improves, households tend to use fewer negative coping strategies. This means there is a negative correlation between food consumption and coping strategies. The analysis below shows this correlation overall, and also breaks it down by operator.
 
-  + All low cereal or oil consumption (<= days), usually its not common to have such low consumption, check also how this low consumption is         consistent with consumption of other food groups
-  
-  + Very high food consumption for meat and dairy (>=6) where there is low food consumption scores for cereals (<=4)
-  
-  + Check food consumption module for low and high food consumption of certain food groups
-  
-  + Check households with high meat and dairy consumption (>=6) while reporting high coping strategy
-  
-  + Check for patterns of data entry like same entry repeated many times (7,7,7,7) or alternating numbers (2,1,2,1,2,1)
-  
-The above checks are adopted from IMPACT Initiative FSL data quality checks guide and they are pre-coded with the **fsl_cleaning_log** function. So, if there are any other checks that you have to apply. 
+Since both food consumption and coping strategies are measured over the same recall period, households that eat a variety of food groups are less likely to skip meals, reduce portion sizes, or borrow food. Based on this relationship, we use the correlation coefficient to identify operators where this trend is weaker or stronger.
 
 ```{r}
-# fsl_clog <- fsl_cleaning_log(data = raw_data, uuid = "uuid")
 
-# datatable(fsl_clog, list(dom = 't'))
+correlation <- cor(raw_data$FCS, raw_data$rCSI, use = "complete.obs", method = "pearson")
+
+
+ggplot(raw_data, aes(x = FCS, y = rCSI)) +
+  geom_point(alpha = 0.6, color = "steelblue") +
+  geom_smooth(method = "lm", se = TRUE, color = "darkred") +
+  labs(
+    title = "Relationship between Food Consumption Score and rCSI",
+    x = "Food Consumption Score (FCS)",
+    y = "Reduced Coping Strategy Index (rCSI)"
+  ) +
+  theme_minimal() + facet_wrap(~ EnumName)
+
 ```
 
-Congratulations on generating the cleaning log! To proceed, refer to the other documentation for incorporating the corrected cleaning log file into the raw data to generate the clean data. 
+::: {.callout-note appearance="simple"}
+
+## Please Note
+Now that we have explored the data patterns and have some questions, lets see how the data alings with the seasonal calender. for instance Milk availability is hight during the rainy seasons (in the context of Somalia - April - June and October - December). so during these period we should also anticipate higher consumption of dairy and dairy products. so we need to see how our data is aligning with the seasonal calendar and try to understand deeper for any variances spotted.
+
+:::
+
+
+```{r, echo=FALSE}
+knitr::include_graphics(
+  "https://raw.githubusercontent.com/axmedmaxamuud/test_datasets/main/media/seasonal_calander.png"
+)
+```
+
+
+
+
 

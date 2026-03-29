@@ -16,6 +16,9 @@ about:
     - icon: envelope
       text: Email
       href: mailto://ahmed.mohamoud@wfp.org
+    - icon: circle
+      text: Hugging Face
+      href: https://huggingface.co/axmedmaxamuud
 ---
 
 ## About Me
@@ -24,44 +27,46 @@ As an experienced GIS/Data professional with a diverse background in the humanit
 
 ## Education
 
-MSc in Research, Statistics & Data Analytics | 2019 - 2022
-Amoud University | Hargeisa, Somaliland
+**MSc in Research, Statistics & Data Analytics**  
+2019 – 2022  
+Amoud University | Hargeisa, Somaliland  
 
-MBA in Project Planning & Management | 2018 - 2019
-Admas University | Hargeisa, Somaliland
+**MBA in Project Planning & Management**  
+2018 – 2019  
+Admas University | Hargeisa, Somaliland  
 
-BA. Development Studies | 2013 - 2016
+**BA. Development Studies**  
+2013 – 2016  
 Admas University | Hargeisa, Somaliland
 
 ## Experience
 
-<div class="experience">
-  <span class="company">WFP</span> | <span class="job-title">Vulnerability Analysis & Mapping (VAM) Officer</span> 
-  <span class="date">May 2024 - Present</span>
-</div>
+::: {.experience}
+<span class="company">WFP</span> | <span class="job-title">Vulnerability Analysis & Mapping (VAM) Officer</span>  
+<span class="date">May 2024 - Present</span>
+:::
 
-<div class="experience">
-  <span class="company">WFP</span> | <span class="job-title">Programme Associate (Data Management)</span> 
-  <span class="date">Nov 2022 - Apr 2024</span>
-</div>
+::: {.experience}
+<span class="company">WFP</span> | <span class="job-title">Programme Associate (Data Management)</span>  
+<span class="date">Nov 2022 - Apr 2024</span>
+:::
 
-<div class="experience">
-  <span class="company">REACH Initiative</span> | <span class="job-title">GIS & Data Specialist</span> 
-  <span class="date">Mar 2022 - Oct 2022</span>
-</div>
+::: {.experience}
+<span class="company">REACH Initiative</span> | <span class="job-title">GIS & Data Specialist</span>  
+<span class="date">Mar 2022 - Oct 2022</span>
+:::
 
-<div class="experience">
-  <span class="company">REACH Initiative</span> | <span class="job-title">Senior Database Officer</span> 
-  <span class="date">Jan 2019 - Feb 2022</span>
-</div>
+::: {.experience}
+<span class="company">REACH Initiative</span> | <span class="job-title">Senior Database Officer</span>  
+<span class="date">Jan 2019 - Feb 2022</span>
+:::
 
-<div class="experience">
-  <span class="company">SOLNARDO</span> | <span class="job-title">Monitoring & Evaluation Officer</span> 
-  <span class="date">Jan 2014 - Dec 2018</span>
-</div>
+::: {.experience}
+<span class="company">SOLNARDO</span> | <span class="job-title">Monitoring & Evaluation Officer</span>  
+<span class="date">Jan 2014 - Dec 2018</span>
+:::
 
 ## Certifications
 
 IPC Acute Food Insecurity Level 1 Analyst | November 2024 
 Cadre Harmonisé (CH) | December 2024
-

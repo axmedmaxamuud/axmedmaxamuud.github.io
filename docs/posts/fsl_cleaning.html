@@ -122,6 +122,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   gtag('config', 'G-34D8XG2PNV');
 
 </script>
+<link href="../site_libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
+
+<script src="../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+
+<link href="../site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+
+<script src="../site_libs/datatables-binding-0.34.0/datatables.js"></script>
+
+<script src="../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+
+<link href="../site_libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+
+<link href="../site_libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
+
+<script src="../site_libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+
+<link href="../site_libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+
+<script src="../site_libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
+
 
 
 <link rel="stylesheet" href="../styles.css">
@@ -341,8 +361,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#step-1-load-data" id="toc-step-1-load-data" class="nav-link active" data-scroll-target="#step-1-load-data">Step 1: Load data</a></li>
   <li><a href="#step-2-format-data" id="toc-step-2-format-data" class="nav-link" data-scroll-target="#step-2-format-data">Step 2: Format data</a></li>
-  <li><a href="#step-3-use-visualizations" id="toc-step-3-use-visualizations" class="nav-link" data-scroll-target="#step-3-use-visualizations">Step 3: Use visualizations</a></li>
-  <li><a href="#step-4-generate-cleaning-log-file" id="toc-step-4-generate-cleaning-log-file" class="nav-link" data-scroll-target="#step-4-generate-cleaning-log-file">Step 4: Generate cleaning log file</a></li>
+  <li><a href="#step-3-data-checks" id="toc-step-3-data-checks" class="nav-link" data-scroll-target="#step-3-data-checks">Step 3: Data Checks</a></li>
+  <li><a href="#step-4-using-visualizations" id="toc-step-4-using-visualizations" class="nav-link" data-scroll-target="#step-4-using-visualizations">Step 4: Using Visualizations</a></li>
+  <li><a href="#step-5-statistical-checks" id="toc-step-5-statistical-checks" class="nav-link" data-scroll-target="#step-5-statistical-checks">Step 5: Statistical Checks</a></li>
   </ul>
 </nav>
     </div>
@@ -373,10 +394,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>This guide is designed to assist the WFP team in cleaning food security and livelihood data using the cleanR package. Our goal is to streamline the data cleaning process, ensuring consistency with the WFP Survey Designer for standardized variable naming.</p>
+<p>This guide is designed to assist food security analyst in cleaning food security and livelihood outcome indicators using the cleanR package. our goal is to streamline the data cleaning process by going beyond the standard checks and understand hidden data patterns and identify any anomalies that need to checked prior the analysis. WFP SurveyDesigner codebook format is used for the documentation.</p>
 <section id="step-1-load-data" class="level2">
 <h2 class="anchored" data-anchor-id="step-1-load-data">Step 1: Load data</h2>
-<p>Start by uploading the raw data, typically the version downloaded from the MoDa server. Ensure that the data structure aligns with the WFP Survey Designer for consistent variable naming.</p>
+<p>The first step is to prepare the data by downloading the raw version from the server <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. remember that the documentation is using WFP codebook therefore consider to adopt the codebook if you’re at the planning stage of your assessment. otherwise if you already have data and want to follow the guide try to reshape your data to match the codebook variable naming.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># required packages</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
@@ -390,7 +411,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="step-2-format-data" class="level2">
 <h2 class="anchored" data-anchor-id="step-2-format-data">Step 2: Format data</h2>
-<p>The calculate_fsl_indicators function is a powerful tool for computing essential food security and livelihood (FSL) indicators, including the food consumption score, household dietary diversity, reduced coping strategy, and livelihood coping strategy, from your raw data.</p>
+<p>Now we have prepared the raw data, so we’ll use the calculate_fsl_indicators function to compute the food security and livelihood outcome indicators. the function will take arguments of raw data, food consumption score (FSC), reduced coping strategies (rCSI), household hunger scale (HHS), household dietary diversity (HDDS) and the livelhood coping strategeis (LCS-FS) variables.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>raw_data <span class="ot">&lt;-</span> <span class="fu">calculate_fsl_indicators</span>(<span class="at">data =</span> moda_data,</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                                 <span class="co"># FCS</span></span>
@@ -428,26 +449,89 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>                                 <span class="co"># HDDSCond = "HDDSCond"</span></span>
 <span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>                                 )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>please note: you’ll only need to provide the variables names of the indicators you want to you in your analysis and its not required to specify all variables at all times (for instance, if you have data for FCS and rCSI only provide the arguments of these two indicators only).</p>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Please Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>you’ll only need to provide the variables names of the indicators you want to you in your analysis and its not required to specify all variables at all times (for instance, if you have data for FCS and rCSI only provide the arguments of these two indicators only).</p>
+</div>
+</div>
 </section>
-<section id="step-3-use-visualizations" class="level2">
-<h2 class="anchored" data-anchor-id="step-3-use-visualizations">Step 3: Use visualizations</h2>
-<p>By incorporating ridge charts into your analysis, you can easily identify patterns and variations in FCS and rCSI across different clusters or field monitors.</p>
+<section id="step-3-data-checks" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-data-checks">Step 3: Data Checks</h2>
+<p>Assuming at this stage that you already run the standard high frequency checks on the data like survey time taken, sample and quota verification and overall survey and operator productivity checks. in this section we’ll go beyond the general checks and perform in-dept data checks.</p>
+<p>Lets first use the <strong>fsl_cleaning_log</strong> function to flag major inconsistency and anomalies in the data. the function will take data and uuid as input and then return cleaning log file with all issues found in the data. this function is now considering critical indicators validation measures.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>(<span class="fu">plot_ridge_distribution</span>(raw_data, <span class="at">numeric_cols =</span> <span class="fu">c</span>(<span class="st">"FCSStap"</span>, <span class="st">"FCSPulse"</span>, <span class="st">"FCSPr"</span>, <span class="st">"FCSVeg"</span>, <span class="st">"FCSFruit"</span>, <span class="st">"FCSDairy"</span>, <span class="st">"FCSFat"</span>, <span class="st">"FCSSugar"</span>),</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">name_groups =</span> <span class="st">"Food Groups"</span>, <span class="at">name_units =</span> <span class="st">"Days"</span>, <span class="at">grouping =</span> <span class="st">"Area_Office"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fsl_clog <span class="ot">&lt;-</span> <span class="fu">fsl_cleaning_log</span>(<span class="at">data =</span> raw_data, <span class="at">uuid =</span> <span class="st">"uuid"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>DT<span class="sc">::</span><span class="fu">datatable</span>(<span class="fu">head</span>(fsl_clog, <span class="dv">5</span>), <span class="at">options =</span> <span class="fu">list</span>(<span class="at">dom =</span> <span class="st">'t'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="fsl_cleaning_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="768"></p>
-</figure>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-f3bf9562eb0e0d1de716" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-f3bf9562eb0e0d1de716">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5"],["b102934e-e87d-464443-b4b9b8-08c2dbef65a1","d65b8e27-cb5d-4e4842-a5a4aa-1238c7d54b96","9a1f60ce-4678-4a4448-909e93-5ce180674dab","083c567d-4270-41474b-b2b1b0-d71356cab489","ed9bc4f3-8ed4-4f404e-aca8a4-fc8d20314a67"],["FCS","FCS","FCS","FCS","FCS"],["Household food consumption score is too high (&gt;60).","Household food consumption score is too high (&gt;60).","Household food consumption score is too high (&gt;60).","Household food consumption score is too high (&gt;60).","Household food consumption score is too high (&gt;60)."],["","","","",""],["check","check","check","check","check"],["68.5","64","63","61","71.5"],["","","","",""]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>uuid<\/th>\n      <th>question.name<\/th>\n      <th>issue<\/th>\n      <th>feedback<\/th>\n      <th>action<\/th>\n      <th>old.value<\/th>\n      <th>new.value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","columnDefs":[{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"uuid","targets":1},{"name":"question.name","targets":2},{"name":"issue","targets":3},{"name":"feedback","targets":4},{"name":"action","targets":5},{"name":"old.value","targets":6},{"name":"new.value","targets":7}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
-</div>
-<p>By carefully examining and interpreting the ridge chart, you can gain valuable insights into the distributions and flag any inconsistency for validation and review during data collection. in the below chart, we’ll group the reduced coping strategies at area office level.</p>
+<p>key checks included in the <strong>fsl_cleaning_log</strong> function will go as below</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 27%">
+<col style="width: 42%">
+<col style="width: 17%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Check</th>
+<th>Description</th>
+<th>Threshold / Pattern</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Low staple consumption</td>
+<td>Identifies households reporting very low consumption of staple foods such as cereals or oil.</td>
+<td>Cereals or oil ≤ 2 days</td>
+<td>Staple foods are usually consumed frequently, so very low values may indicate unusual responses or recording errors.</td>
+</tr>
+<tr class="even">
+<td>High meat/dairy with low staples</td>
+<td>Flags households reporting frequent consumption of meat or dairy while staple consumption is low.</td>
+<td>Meat or dairy ≥ 6 days and cereals ≤ 4 days</td>
+<td>This pattern is uncommon in most contexts and may suggest inconsistencies in the food consumption module.</td>
+</tr>
+<tr class="odd">
+<td>Extreme food group consumption</td>
+<td>Reviews food groups with unusually low or high reported consumption frequencies.</td>
+<td>Very low (0–1 days) or very high (6–7 days) consumption</td>
+<td>Helps identify irregular reporting patterns that may influence the Food Consumption Score.</td>
+</tr>
+<tr class="even">
+<td>High animal-source foods with high coping</td>
+<td>Flags households reporting frequent meat or dairy consumption while also reporting high coping strategies.</td>
+<td>Meat or dairy ≥ 6 days and high rCSI</td>
+<td>These patterns may be inconsistent since high animal-source food consumption usually reflects better food access.</td>
+</tr>
+<tr class="odd">
+<td>Repeated response patterns</td>
+<td>Detects repeated or structured response patterns across food groups.</td>
+<td>Examples: 7,7,7,7 or alternating values such as 2,1,2,1</td>
+<td>These patterns may indicate enumerator shortcuts or incorrect data entry during interviews.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="step-4-using-visualizations" class="level2">
+<h2 class="anchored" data-anchor-id="step-4-using-visualizations">Step 4: Using Visualizations</h2>
+<p>By incorporating ridge charts into your analysis, you can easily identify patterns and variations in FCS and rCSI across different clusters or operators.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>(<span class="fu">plot_ridge_distribution</span>(raw_data, <span class="at">numeric_cols =</span> <span class="fu">c</span>(<span class="st">"rCSILessQlty"</span>, <span class="st">"rCSIBorrow"</span>, <span class="st">"rCSIMealSize"</span>, <span class="st">"rCSIMealAdult"</span>, <span class="st">"rCSIMealNb"</span>),</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">name_groups =</span> <span class="st">"Food Coping Strategy"</span>, <span class="at">name_units =</span> <span class="st">"Days"</span>, <span class="at">grouping =</span> <span class="st">"Area_Office"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>(<span class="fu">plot_ridge_distribution</span>(raw_data, <span class="at">numeric_cols =</span> <span class="fu">c</span>(<span class="st">"FCSStap"</span>, <span class="st">"FCSPulse"</span>, <span class="st">"FCSPr"</span>, <span class="st">"FCSVeg"</span>, <span class="st">"FCSFruit"</span>, <span class="st">"FCSDairy"</span>, <span class="st">"FCSFat"</span>, <span class="st">"FCSSugar"</span>),</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">name_groups =</span> <span class="st">"Food Groups"</span>, <span class="at">name_units =</span> <span class="st">"Days"</span>, <span class="at">grouping =</span> <span class="st">"EnumName"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -456,7 +540,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>similarly, you can group distributions at field monitor level to gain more insight at the consistency of reported distributions across different monitors.</p>
+<p>above chart will show the frequency distribution of food groups reported by operator. this visual will help us to identify any anomalies made by the operators. e.g if one operator reports major zero consumption of oil/cereal or sweets it could make alert that there is something need to check from that operators records and debrief them.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>(<span class="fu">plot_ridge_distribution</span>(raw_data, <span class="at">numeric_cols =</span> <span class="fu">c</span>(<span class="st">"rCSILessQlty"</span>, <span class="st">"rCSIBorrow"</span>, <span class="st">"rCSIMealSize"</span>, <span class="st">"rCSIMealAdult"</span>, <span class="st">"rCSIMealNb"</span>),</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">name_groups =</span> <span class="st">"Food Coping Strategy"</span>, <span class="at">name_units =</span> <span class="st">"Days"</span>, <span class="at">grouping =</span> <span class="st">"EnumName"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -468,32 +552,68 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<p>Frequency of reduced coping strategies reported by operator can be found below. similarly this visual will help us to detect if there is inconsistency or anomalies at the operator level.</p>
 </section>
-<section id="step-4-generate-cleaning-log-file" class="level2">
-<h2 class="anchored" data-anchor-id="step-4-generate-cleaning-log-file">Step 4: Generate cleaning log file</h2>
-<p>To facilitate collaboration and feedback collection, generate a cleaning log file. This log file will document flagged issues, providing insights into potential problems and capturing correct values for any identified inconsistencies.</p>
-<ul>
-<li><p>Data quality checks - Source: IMPACT Initiative, FSL Data Quality Checks</p>
-<ul>
-<li><p>All low cereal or oil consumption (&lt;= days), usually its not common to have such low consumption, check also how this low consumption is consistent with consumption of other food groups</p></li>
-<li><p>Very high food consumption for meat and dairy (&gt;=6) where there is low food consumption scores for cereals (&lt;=4)</p></li>
-<li><p>Check food consumption module for low and high food consumption of certain food groups</p></li>
-<li><p>Check households with high meat and dairy consumption (&gt;=6) while reporting high coping strategy</p></li>
-<li><p>Check for patterns of data entry like same entry repeated many times (7,7,7,7) or alternating numbers (2,1,2,1,2,1)</p></li>
-</ul></li>
-</ul>
-<p>The above checks are adopted from IMPACT Initiative FSL data quality checks guide and they are pre-coded with the <strong>fsl_cleaning_log</strong> function. So, if there are any other checks that you have to apply.</p>
+<section id="step-5-statistical-checks" class="level2">
+<h2 class="anchored" data-anchor-id="step-5-statistical-checks">Step 5: Statistical Checks</h2>
+<p>As food consumption improves, households tend to use fewer negative coping strategies. This means there is a negative correlation between food consumption and coping strategies. The analysis below shows this correlation overall, and also breaks it down by operator.</p>
+<p>Since both food consumption and coping strategies are measured over the same recall period, households that eat a variety of food groups are less likely to skip meals, reduce portion sizes, or borrow food. Based on this relationship, we use the correlation coefficient to identify operators where this trend is weaker or stronger.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fsl_clog &lt;- fsl_cleaning_log(data = raw_data, uuid = "uuid")</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># datatable(fsl_clog, list(dom = 't'))</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>correlation <span class="ot">&lt;-</span> <span class="fu">cor</span>(raw_data<span class="sc">$</span>FCS, raw_data<span class="sc">$</span>rCSI, <span class="at">use =</span> <span class="st">"complete.obs"</span>, <span class="at">method =</span> <span class="st">"pearson"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(raw_data, <span class="fu">aes</span>(<span class="at">x =</span> FCS, <span class="at">y =</span> rCSI)) <span class="sc">+</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>, <span class="at">color =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>, <span class="at">color =</span> <span class="st">"darkred"</span>) <span class="sc">+</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Relationship between Food Consumption Score and rCSI"</span>,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Food Consumption Score (FCS)"</span>,</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Reduced Coping Strategy Index (rCSI)"</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span> EnumName)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; `geom_smooth()` using formula = 'y ~ x'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="fsl_cleaning_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
-<p>Congratulations on generating the cleaning log! To proceed, refer to the other documentation for incorporating the corrected cleaning log file into the raw data to generate the clean data.</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Please Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Now that we have explored the data patterns and have some questions, lets see how the data alings with the seasonal calender. for instance Milk availability is hight during the rainy seasons (in the context of Somalia - April - June and October - December). so during these period we should also anticipate higher consumption of dairy and dairy products. so we need to see how our data is aligning with the seasonal calendar and try to understand deeper for any variances spotted.</p>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://raw.githubusercontent.com/axmedmaxamuud/test_datasets/main/media/seasonal_calander.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
 </section>
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>https://moda.wfp.org/<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
@@ -911,11 +1031,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-      &nbsp;
-    </div>   
-    <div class="nav-footer-center">
 <p>@ Ahmed Mohamoud 2026</p>
-</div>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
     <div class="nav-footer-right">
 <p>Built with Quarto</p>
 </div>
