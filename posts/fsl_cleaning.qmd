@@ -12,7 +12,9 @@ knitr::opts_chunk$set(
 )
 ```
 
-This guide is designed to assist food security analyst in cleaning food security and livelihood outcome indicators using the cleanR package. our goal is to streamline the data cleaning process by going beyond the standard checks and understand hidden data patterns and identify any anomalies that need to checked prior the analysis. WFP SurveyDesigner codebook format is used for the documentation. 
+This guide shows how to clean food security and livelihood data using the cleanR package. we will go through step-by-step from raw data to clean dataset by applying standard checks, reviewing flagged records and preparing clean data ready for analysis. WFP SurveyDesigner codebook is adopted for variable naming and format. 
+
+The data cleaning process follows four steps of running checks, reviewing flagged records, apply corrections and export clean dataset at the end.
 
 ## Step 1: Load data
 
@@ -30,6 +32,8 @@ library(cleanR)
 moda_data <- cleanR::survey_data %>% # converting HDDS variables to numeric
   mutate(across(starts_with("HDDS"), as.numeric))
 ```
+
+Now that we have the dataset ready, the next step is to calculate indicators.
 
 ## Step 2: Format data
 
@@ -76,21 +80,64 @@ raw_data <- calculate_fsl_indicators(data = moda_data,
 ::: {.callout-note appearance="simple"}
 
 ## Please Note
-you'll only need to provide the variables names of the indicators you want to you in your analysis and its not required to specify all variables at all times (for instance, if you have data for FCS and rCSI only provide the arguments of these two indicators only).
+you'll only need to provide the variable names of the indicators you want to include in your checks and its not required to specify all variables at all times (for instance, if you have data for FCS and rCSI only provide the arguments of these two indicators only).
 
 :::
 
 ## Step 3: Data Checks
 
-Assuming at this stage that you already run the standard high frequency checks on the data like survey time taken, sample and quota verification and overall survey and operator productivity checks. in this section we'll go beyond the general checks and perform in-dept data checks.
-
-Lets first use the **fsl_cleaning_log** function to flag major inconsistency and anomalies in the data. the function will take data and uuid as input and then return cleaning log file with all issues found in the data. this function is now considering critical indicators validation measures.
+In this step we run the **fsl_cleaning_log** function to flag all records that may need review. 
 
 ```{r}
 fsl_clog <- fsl_cleaning_log(data = raw_data, uuid = "uuid")
 
 DT::datatable(head(fsl_clog, 5), options = list(dom = 't'))
 ```
+
+After runing the checks, the dataset will include flags that highlight records needing review. these flags do not mean the data is wrong but rather they show where we should closer look.
+
+### Basic Checks
+
+These checks help us identify general issues with the dataset. survey duration, other responses and missing/incomplete values are part of the general basic data checks. 
+
+### Food Consumption Checks
+
+These checks will focus on how often the different food groups are consumed.
+
+- very low cereal or oil consumption (<= 3 days)
+- very high meat and dairy consumption (>= 6 days)
+- unusual patterns across food groups
+
+> For example, cereals are usually consumed frequently. if cereals are very low while other foods are high this may need to be checked.
+
+### Consistency checks
+
+These checks compare related indicators to see if they are aligning. 
+
+- high meat/dairy consumption with low cereals
+- high food consumption with high coping strategies
+- mismatch between food consumption and other reduced coping strategies
+
+> This situation may indicate inconsistent responses.
+
+### Pattern checks
+
+These checks help identify repeated or unusual response patterns.
+
+- same values repeated (7,7,7,7,7)
+- altering values (2,1,2,1,2,1,2)
+
+> These patterns may suggest rushed or non-careful data entry which is data falsification.
+
+
+
+
+
+Assuming at this stage that you already run the standard high frequency checks on the data like survey time taken, sample and quota verification and overall survey and operator productivity checks. in this section we'll go beyond the general checks and perform in-dept data checks.
+
+Lets first use the **fsl_cleaning_log** function to flag major inconsistency and anomalies in the data. the function will take data and uuid as input and then return cleaning log file with all issues found in the data. this function is now considering critical indicators validation measures.
+
+
 key checks included in the **fsl_cleaning_log** function will go as below
 
 

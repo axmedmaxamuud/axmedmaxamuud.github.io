@@ -1,6 +1,6 @@
 ---
 title: "Ahmed Mohamoud"
-subtitle: "GIS & Data Analyst"
+subtitle: "VAM, Data Science and Geospatial Analysis"
 image: assets/axmed.jpg
 about:
   template: trestles

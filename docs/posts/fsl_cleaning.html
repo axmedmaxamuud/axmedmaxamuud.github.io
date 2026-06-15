@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.27">
+<meta name="generator" content="quarto-1.9.36">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>Cleaning Food Security Indicators – Ahmed Mohamoud</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -67,19 +70,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="../">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-4d9afe2b8d18ee9fa5d0d57b5ed4214d.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-f418161beb48e0141c760e455f12af2c.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-e31584831b205ffbb2d98406f31c2a5b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-3c87bd97f2d3ed8302ed67633272be33.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-e31584831b205ffbb2d98406f31c2a5b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-a0f9fd0d421825b736dc1bbcbcba2219.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-6f157ed924bc3ef39b17ae587b4cc858.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-a0f9fd0d421825b736dc1bbcbcba2219.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -361,7 +363,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#step-1-load-data" id="toc-step-1-load-data" class="nav-link active" data-scroll-target="#step-1-load-data">Step 1: Load data</a></li>
   <li><a href="#step-2-format-data" id="toc-step-2-format-data" class="nav-link" data-scroll-target="#step-2-format-data">Step 2: Format data</a></li>
-  <li><a href="#step-3-data-checks" id="toc-step-3-data-checks" class="nav-link" data-scroll-target="#step-3-data-checks">Step 3: Data Checks</a></li>
+  <li><a href="#step-3-data-checks" id="toc-step-3-data-checks" class="nav-link" data-scroll-target="#step-3-data-checks">Step 3: Data Checks</a>
+  <ul class="collapse">
+  <li><a href="#basic-checks" id="toc-basic-checks" class="nav-link" data-scroll-target="#basic-checks">Basic Checks</a></li>
+  <li><a href="#food-consumption-checks" id="toc-food-consumption-checks" class="nav-link" data-scroll-target="#food-consumption-checks">Food Consumption Checks</a></li>
+  <li><a href="#consistency-checks" id="toc-consistency-checks" class="nav-link" data-scroll-target="#consistency-checks">Consistency checks</a></li>
+  <li><a href="#pattern-checks" id="toc-pattern-checks" class="nav-link" data-scroll-target="#pattern-checks">Pattern checks</a></li>
+  </ul></li>
   <li><a href="#step-4-using-visualizations" id="toc-step-4-using-visualizations" class="nav-link" data-scroll-target="#step-4-using-visualizations">Step 4: Using Visualizations</a></li>
   <li><a href="#step-5-statistical-checks" id="toc-step-5-statistical-checks" class="nav-link" data-scroll-target="#step-5-statistical-checks">Step 5: Statistical Checks</a></li>
   </ul>
@@ -394,7 +402,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>This guide is designed to assist food security analyst in cleaning food security and livelihood outcome indicators using the cleanR package. our goal is to streamline the data cleaning process by going beyond the standard checks and understand hidden data patterns and identify any anomalies that need to checked prior the analysis. WFP SurveyDesigner codebook format is used for the documentation.</p>
+<p>This guide shows how to clean food security and livelihood data using the cleanR package. we will go through step-by-step from raw data to clean dataset by applying standard checks, reviewing flagged records and preparing clean data ready for analysis. WFP SurveyDesigner codebook is adopted for variable naming and format.</p>
+<p>The data cleaning process follows four steps of running checks, reviewing flagged records, apply corrections and export clean dataset at the end.</p>
 <section id="step-1-load-data" class="level2">
 <h2 class="anchored" data-anchor-id="step-1-load-data">Step 1: Load data</h2>
 <p>The first step is to prepare the data by downloading the raw version from the server <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. remember that the documentation is using WFP codebook therefore consider to adopt the codebook if you’re at the planning stage of your assessment. otherwise if you already have data and want to follow the guide try to reshape your data to match the codebook variable naming.</p>
@@ -408,6 +417,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>moda_data <span class="ot">&lt;-</span> cleanR<span class="sc">::</span>survey_data <span class="sc">%&gt;%</span> <span class="co"># converting HDDS variables to numeric</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">starts_with</span>(<span class="st">"HDDS"</span>), as.numeric))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<p>Now that we have the dataset ready, the next step is to calculate indicators.</p>
 </section>
 <section id="step-2-format-data" class="level2">
 <h2 class="anchored" data-anchor-id="step-2-format-data">Step 2: Format data</h2>
@@ -459,23 +469,63 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>you’ll only need to provide the variables names of the indicators you want to you in your analysis and its not required to specify all variables at all times (for instance, if you have data for FCS and rCSI only provide the arguments of these two indicators only).</p>
+<p>you’ll only need to provide the variable names of the indicators you want to include in your checks and its not required to specify all variables at all times (for instance, if you have data for FCS and rCSI only provide the arguments of these two indicators only).</p>
 </div>
 </div>
 </section>
 <section id="step-3-data-checks" class="level2">
 <h2 class="anchored" data-anchor-id="step-3-data-checks">Step 3: Data Checks</h2>
-<p>Assuming at this stage that you already run the standard high frequency checks on the data like survey time taken, sample and quota verification and overall survey and operator productivity checks. in this section we’ll go beyond the general checks and perform in-dept data checks.</p>
-<p>Lets first use the <strong>fsl_cleaning_log</strong> function to flag major inconsistency and anomalies in the data. the function will take data and uuid as input and then return cleaning log file with all issues found in the data. this function is now considering critical indicators validation measures.</p>
+<p>In this step we run the <strong>fsl_cleaning_log</strong> function to flag all records that may need review.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fsl_clog <span class="ot">&lt;-</span> <span class="fu">fsl_cleaning_log</span>(<span class="at">data =</span> raw_data, <span class="at">uuid =</span> <span class="st">"uuid"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>DT<span class="sc">::</span><span class="fu">datatable</span>(<span class="fu">head</span>(fsl_clog, <span class="dv">5</span>), <span class="at">options =</span> <span class="fu">list</span>(<span class="at">dom =</span> <span class="st">'t'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-f3bf9562eb0e0d1de716" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-f3bf9562eb0e0d1de716">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5"],["b102934e-e87d-464443-b4b9b8-08c2dbef65a1","d65b8e27-cb5d-4e4842-a5a4aa-1238c7d54b96","9a1f60ce-4678-4a4448-909e93-5ce180674dab","083c567d-4270-41474b-b2b1b0-d71356cab489","ed9bc4f3-8ed4-4f404e-aca8a4-fc8d20314a67"],["FCS","FCS","FCS","FCS","FCS"],["Household food consumption score is too high (&gt;60).","Household food consumption score is too high (&gt;60).","Household food consumption score is too high (&gt;60).","Household food consumption score is too high (&gt;60).","Household food consumption score is too high (&gt;60)."],["","","","",""],["check","check","check","check","check"],["68.5","64","63","61","71.5"],["","","","",""]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>uuid<\/th>\n      <th>question.name<\/th>\n      <th>issue<\/th>\n      <th>feedback<\/th>\n      <th>action<\/th>\n      <th>old.value<\/th>\n      <th>new.value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","columnDefs":[{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"uuid","targets":1},{"name":"question.name","targets":2},{"name":"issue","targets":3},{"name":"feedback","targets":4},{"name":"action","targets":5},{"name":"old.value","targets":6},{"name":"new.value","targets":7}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-2fe148163c63bc45752c" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-2fe148163c63bc45752c">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5"],["b102934e-e87d-464443-b4b9b8-08c2dbef65a1","d65b8e27-cb5d-4e4842-a5a4aa-1238c7d54b96","9a1f60ce-4678-4a4448-909e93-5ce180674dab","083c567d-4270-41474b-b2b1b0-d71356cab489","ed9bc4f3-8ed4-4f404e-aca8a4-fc8d20314a67"],["FCS","FCS","FCS","FCS","FCS"],["Household food consumption score is too high (&gt;60).","Household food consumption score is too high (&gt;60).","Household food consumption score is too high (&gt;60).","Household food consumption score is too high (&gt;60).","Household food consumption score is too high (&gt;60)."],["","","","",""],["check","check","check","check","check"],["68.5","64","63","61","71.5"],["","","","",""]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>uuid<\/th>\n      <th>question.name<\/th>\n      <th>issue<\/th>\n      <th>feedback<\/th>\n      <th>action<\/th>\n      <th>old.value<\/th>\n      <th>new.value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","columnDefs":[{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"uuid","targets":1},{"name":"question.name","targets":2},{"name":"issue","targets":3},{"name":"feedback","targets":4},{"name":"action","targets":5},{"name":"old.value","targets":6},{"name":"new.value","targets":7}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
+<p>After runing the checks, the dataset will include flags that highlight records needing review. these flags do not mean the data is wrong but rather they show where we should closer look.</p>
+<section id="basic-checks" class="level3">
+<h3 class="anchored" data-anchor-id="basic-checks">Basic Checks</h3>
+<p>These checks help us identify general issues with the dataset. survey duration, other responses and missing/incomplete values are part of the general basic data checks.</p>
+</section>
+<section id="food-consumption-checks" class="level3">
+<h3 class="anchored" data-anchor-id="food-consumption-checks">Food Consumption Checks</h3>
+<p>These checks will focus on how often the different food groups are consumed.</p>
+<ul>
+<li>very low cereal or oil consumption (&lt;= 3 days)</li>
+<li>very high meat and dairy consumption (&gt;= 6 days)</li>
+<li>unusual patterns across food groups</li>
+</ul>
+<blockquote class="blockquote">
+<p>For example, cereals are usually consumed frequently. if cereals are very low while other foods are high this may need to be checked.</p>
+</blockquote>
+</section>
+<section id="consistency-checks" class="level3">
+<h3 class="anchored" data-anchor-id="consistency-checks">Consistency checks</h3>
+<p>These checks compare related indicators to see if they are aligning.</p>
+<ul>
+<li>high meat/dairy consumption with low cereals</li>
+<li>high food consumption with high coping strategies</li>
+<li>mismatch between food consumption and other reduced coping strategies</li>
+</ul>
+<blockquote class="blockquote">
+<p>This situation may indicate inconsistent responses.</p>
+</blockquote>
+</section>
+<section id="pattern-checks" class="level3">
+<h3 class="anchored" data-anchor-id="pattern-checks">Pattern checks</h3>
+<p>These checks help identify repeated or unusual response patterns.</p>
+<ul>
+<li>same values repeated (7,7,7,7,7)</li>
+<li>altering values (2,1,2,1,2,1,2)</li>
+</ul>
+<blockquote class="blockquote">
+<p>These patterns may suggest rushed or non-careful data entry which is data falsification.</p>
+</blockquote>
+<p>Assuming at this stage that you already run the standard high frequency checks on the data like survey time taken, sample and quota verification and overall survey and operator productivity checks. in this section we’ll go beyond the general checks and perform in-dept data checks.</p>
+<p>Lets first use the <strong>fsl_cleaning_log</strong> function to flag major inconsistency and anomalies in the data. the function will take data and uuid as input and then return cleaning log file with all issues found in the data. this function is now considering critical indicators validation measures.</p>
 <p>key checks included in the <strong>fsl_cleaning_log</strong> function will go as below</p>
 <table class="caption-top table">
 <colgroup>
@@ -525,6 +575,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
+</section>
 </section>
 <section id="step-4-using-visualizations" class="level2">
 <h2 class="anchored" data-anchor-id="step-4-using-visualizations">Step 4: Using Visualizations</h2>

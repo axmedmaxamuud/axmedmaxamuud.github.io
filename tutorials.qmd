@@ -6,6 +6,6 @@ listing:
   categories: true
 ---
 
-Hi there, you’ll find publications on data science, geospatial analysis, and mapping that could be valuable for anyone working in the humanitarian sector.
+This page includes practical tutorials, examples, and reusable workflows on data cleaning, R programming, spatial analysis, food security indicators, and humanitarian data visualization.
 
 
