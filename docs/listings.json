@@ -2,6 +2,7 @@
   {
     "listing": "/tutorials.html",
     "items": [
+      "/posts/ArcGISPro_Guide.html",
       "/posts/fsl_cleaning.html",
       "/posts/data_cleaning_process.html",
       "/posts/hash_phonenumbers.html",

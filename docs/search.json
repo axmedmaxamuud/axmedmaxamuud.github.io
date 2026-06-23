@@ -4,7 +4,7 @@
     "href": "tutorials.html",
     "title": "Tutorials",
     "section": "",
-    "text": "This page includes practical tutorials, examples, and reusable workflows on data cleaning, R programming, spatial analysis, food security indicators, and humanitarian data visualization.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCleaning Food Security Indicators\n\n\n\nR programming\n\nData Cleaning\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nData Cleaning Process\n\n\n\nR programming\n\nData Cleaning\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHash PhoneNumbers\n\n\n\nR programming\n\nData Processing\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nR Visualizations\n\n\n\nR programming\n\nVisualizations\n\nggplot2\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSurvey Spatial Verification\n\n\n\nSpatial Verification\n\nGIS\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTableua Calculation Refrence\n\n\n\nTableau\n\nFood Security\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "This page includes practical tutorials, examples, and reusable workflows on data cleaning, R programming, spatial analysis, food security indicators, and humanitarian data visualization.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nArcGIS Pro Guide\n\n\n\nGIS\n\nEsri ArcGIS\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCleaning Food Security Indicators\n\n\n\nR programming\n\nData Cleaning\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nData Cleaning Process\n\n\n\nR programming\n\nData Cleaning\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHash PhoneNumbers\n\n\n\nR programming\n\nData Processing\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nR Visualizations\n\n\n\nR programming\n\nVisualizations\n\nggplot2\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSurvey Spatial Verification\n\n\n\nSpatial Verification\n\nGIS\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTableua Calculation Refrence\n\n\n\nTableau\n\nFood Security\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/R_Visualizations.html",
@@ -77,11 +77,18 @@
     "text": "Footnotes\n\n\nhttps://moda.wfp.org/↩︎"
   },
   {
-    "objectID": "packages.html",
-    "href": "packages.html",
-    "title": "R Packages",
+    "objectID": "posts/ArcGISPro_Guide.html",
+    "href": "posts/ArcGISPro_Guide.html",
+    "title": "ArcGIS Pro Guide",
     "section": "",
-    "text": "Here you’ll find packages I built or contributed to support humanitarian IM and reproducible analysis.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncleanR\n\n\n\nData Cleaning\n\nWrangling\n\nR Programming\n\n\n\nHarmonized Approach of Cleaning Data in R.\n\n\n\n\n\nOct 1, 2023\n\n\nAhmed Mohamoud\n\n\n\n\n\n\n\n\n\n\n\n\nWFPindicators\n\n\n\nR Programming\n\nIndicator Coding\n\nSurvey Coding\n\n\n\nWFP CRF Indicators Compendium\n\n\n\n\n\nApr 1, 2025\n\n\nAhmed Mohamoud\n\n\n\n\n\n\n\n\n\n\n\n\nwfpdown\n\n\n\nR Programming\n\nMarkdown\n\nReporting\n\n\n\nWFP branded templates for R Markdown documents\n\n\n\n\n\nSep 1, 2025\n\n\nAhmed Mohamoud\n\n\n\n\n\n\n\n\n\n\n\n\ngeosom\n\n\n\nGIS\n\nDatabase\n\n\n\nSomalia geospatial database for retriving administrative boundaries and sector datasets\n\n\n\n\n\nNov 1, 2025\n\n\nAhmed Mohamoud\n\n\n\n\n\nNo matching items"
+    "text": "ArcGIS Pro is designed to have an intuitive, easy-to-use interface and a file structure that allows you to access all the data associated with your project. The ArcGIS Pro application is web-connected to take advantage of some of the functionality available on ArcGIS Online (or Portal for ArcGIS). ArcGIS Pro has a user-based license model that allows you to use the software on any computer if you sign in using an ArcGIS Online organizational account that has been provisioned with an ArcGIS Pro license. Single and Concurrent Use licenses are also available.\n\n\nThe native structure for ArcGIS Pro is called a project. A project consists of a main file with an APRX file name extension and an entire folder structure designed to contain the project data. These folders contain maps, layouts, tasks, toolboxes, styles, and connections to databases and folders.\n\n\n\n\n\n\n\n\n\nWhen you start ArcGIS Pro, you are prompted to create a project or open an existing project. When you create a project, you are immediately prompted to name the project. The project is created in a folder with the name that you provided."
+  },
+  {
+    "objectID": "posts/ArcGISPro_Guide.html#project-structure",
+    "href": "posts/ArcGISPro_Guide.html#project-structure",
+    "title": "ArcGIS Pro Guide",
+    "section": "",
+    "text": "The native structure for ArcGIS Pro is called a project. A project consists of a main file with an APRX file name extension and an entire folder structure designed to contain the project data. These folders contain maps, layouts, tasks, toolboxes, styles, and connections to databases and folders.\n\n\n\n\n\n\n\n\n\nWhen you start ArcGIS Pro, you are prompted to create a project or open an existing project. When you create a project, you are immediately prompted to name the project. The project is created in a folder with the name that you provided."
   },
   {
     "objectID": "index.html",
@@ -117,6 +124,13 @@
     "title": "Ahmed Mohamoud",
     "section": "Certifications",
     "text": "Certifications\nIPC Acute Food Insecurity Level 1 Analyst | November 2024 Cadre Harmonisé (CH) | December 2024"
+  },
+  {
+    "objectID": "packages.html",
+    "href": "packages.html",
+    "title": "R Packages",
+    "section": "",
+    "text": "Here you’ll find packages I built or contributed to support humanitarian IM and reproducible analysis.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncleanR\n\n\n\nData Cleaning\n\nWrangling\n\nR Programming\n\n\n\nHarmonized Approach of Cleaning Data in R.\n\n\n\n\n\nOct 1, 2023\n\n\nAhmed Mohamoud\n\n\n\n\n\n\n\n\n\n\n\n\nWFPindicators\n\n\n\nR Programming\n\nIndicator Coding\n\nSurvey Coding\n\n\n\nWFP CRF Indicators Compendium\n\n\n\n\n\nApr 1, 2025\n\n\nAhmed Mohamoud\n\n\n\n\n\n\n\n\n\n\n\n\nwfpdown\n\n\n\nR Programming\n\nMarkdown\n\nReporting\n\n\n\nWFP branded templates for R Markdown documents\n\n\n\n\n\nSep 1, 2025\n\n\nAhmed Mohamoud\n\n\n\n\n\n\n\n\n\n\n\n\ngeosom\n\n\n\nGIS\n\nDatabase\n\n\n\nSomalia geospatial database for retriving administrative boundaries and sector datasets\n\n\n\n\n\nNov 1, 2025\n\n\nAhmed Mohamoud\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/data_cleaning_process.html",

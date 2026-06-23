@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Hash PhoneNumbers – Ahmed Mohamoud</title>
+<title>ArcGIS Pro Guide – Ahmed Mohamoud</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -22,41 +22,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -124,32 +89,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   gtag('config', 'G-34D8XG2PNV');
 
 </script>
-<link href="../site_libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
-
-<script src="../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
-
-<link href="../site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-
-<script src="../site_libs/datatables-binding-0.34.0/datatables.js"></script>
-
-<script src="../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-
-<link href="../site_libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
-
-<link href="../site_libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
-
-<script src="../site_libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
-
-<link href="../site_libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
-
-<script src="../site_libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
-
 
 
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-fixed fullcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -356,17 +301,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#arcgis-pro-interface" id="toc-arcgis-pro-interface" class="nav-link active" data-scroll-target="#arcgis-pro-interface">ArcGIS Pro Interface</a>
+  <ul class="collapse">
+  <li><a href="#project-structure" id="toc-project-structure" class="nav-link" data-scroll-target="#project-structure">Project Structure</a></li>
+  </ul></li>
+  <li><a href="#map-views" id="toc-map-views" class="nav-link" data-scroll-target="#map-views">Map Views</a></li>
+  <li><a href="#editing-data" id="toc-editing-data" class="nav-link" data-scroll-target="#editing-data">Editing Data</a></li>
+  <li><a href="#analysis" id="toc-analysis" class="nav-link" data-scroll-target="#analysis">Analysis</a></li>
+  <li><a href="#map-layout" id="toc-map-layout" class="nav-link" data-scroll-target="#map-layout">Map Layout</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Hash PhoneNumbers</h1>
+<h1 class="title">ArcGIS Pro Guide</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">R programming</div>
-    <div class="quarto-category">Data Processing</div>
+    <div class="quarto-category">GIS</div>
+    <div class="quarto-category">Esri ArcGIS</div>
   </div>
   </div>
 
@@ -384,58 +344,68 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>In this example, we’ll encrypt or hash phone numbers to avoid exposing personal identifiable data during remote data collection. Often in WFP operations, it’s common to use beneficiary contact information for monitoring or verification purposes. During this time, it is good practice to hash phone numbers in advance and prepare an itemset file that you can upload with your MoDa tool. We’ll use the <strong>hash_phonenumbers()</strong> function to achieve this.</p>
-<section id="step-1-prepare-dumpy-data" class="level3">
-<h3 class="anchored" data-anchor-id="step-1-prepare-dumpy-data">Step 1: Prepare dumpy data</h3>
+<section id="arcgis-pro-interface" class="level1">
+<h1>ArcGIS Pro Interface</h1>
+<p>ArcGIS Pro is designed to have an intuitive, easy-to-use interface and a file structure that allows you to access all the data associated with your project. The ArcGIS Pro application is web-connected to take advantage of some of the functionality available on ArcGIS Online (or Portal for ArcGIS). ArcGIS Pro has a user-based license model that allows you to use the software on any computer if you sign in using an ArcGIS Online organizational account that has been provisioned with an ArcGIS Pro license. Single and Concurrent Use licenses are also available.</p>
+<section id="project-structure" class="level2">
+<h2 class="anchored" data-anchor-id="project-structure">Project Structure</h2>
+<p>The native structure for ArcGIS Pro is called a project. A project consists of a main file with an APRX file name extension and an entire folder structure designed to contain the project data. These folders contain maps, layouts, tasks, toolboxes, styles, and connections to databases and folders.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># required packages</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(digest)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cleanR)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DT)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to generate random phone numbers</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>generate_phone_number <span class="ot">&lt;-</span> <span class="cf">function</span>(n) {</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  phone_numbers <span class="ot">&lt;-</span> <span class="fu">replicate</span>(n, <span class="fu">paste0</span>(<span class="st">"0"</span>, <span class="fu">sample</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>), <span class="at">collapse =</span> <span class="st">""</span>))</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">as.vector</span>(phone_numbers))</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># # Sample data</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span>  <span class="co"># number of rows in the data frame</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>list_name <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"List"</span>, <span class="dv">1</span><span class="sc">:</span>n)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>person <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"Person_"</span>, <span class="fu">sample</span>(LETTERS, n, <span class="at">replace =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>PhoneNumber <span class="ot">&lt;-</span> <span class="fu">generate_phone_number</span>(n)</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>uuid <span class="ot">&lt;-</span> stringi<span class="sc">::</span><span class="fu">stri_rand_strings</span>(n, <span class="dv">10</span>)</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>name <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"List"</span>, <span class="dv">1</span><span class="sc">:</span>n)</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the data frame</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(list_name, person, PhoneNumber, uuid, name)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Now lets see how the orginal data looks like, and phone numbers will appear as their original form, which is not recomended to share it widely during remote data collection that we can’t gurentee if the information will be discarded after the data collection</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">datatable</span>(data, <span class="fu">list</span>(<span class="at">dom =</span> <span class="st">'t'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-e72ed967293758f23694" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-e72ed967293758f23694">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10"],["List 1","List 2","List 3","List 4","List 5","List 6","List 7","List 8","List 9","List 10"],["Person_ I","Person_ I","Person_ W","Person_ Q","Person_ R","Person_ R","Person_ B","Person_ B","Person_ U","Person_ H"],["0203020001","0000040205","0101000103","0005030003","0000010201","0504000302","0003030105","0003000503","0105000303","0502020401"],["TPx0xSp5Yw","ELkLkpJl86","pMxw7ttcTE","wGyVPVVGc5","AuR115sIZT","FIpZ4VSdLb","oxEad5FHo0","XtvEqbvhGQ","janbN7OXvN","LDPdWftw1R"],["List 1","List 2","List 3","List 4","List 5","List 6","List 7","List 8","List 9","List 10"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>list_name<\/th>\n      <th>person<\/th>\n      <th>PhoneNumber<\/th>\n      <th>uuid<\/th>\n      <th>name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","columnDefs":[{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"list_name","targets":1},{"name":"person","targets":2},{"name":"PhoneNumber","targets":3},{"name":"uuid","targets":4},{"name":"name","targets":5}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div>
+<figure class="figure">
+<p><img src="https://raw.githubusercontent.com/axmedmaxamuud/test_datasets/main/media/ArcGISPro/image_2.png" class="img-fluid figure-img"></p>
+</figure>
 </div>
 </div>
+</div>
+<p>When you start ArcGIS Pro, you are prompted to create a project or open an existing project. When you create a project, you are immediately prompted to name the project. The project is created in a folder with the name that you provided.</p>
 </section>
-<section id="step-2-generate-hashcode" class="level3">
-<h3 class="anchored" data-anchor-id="step-2-generate-hashcode">Step 2: Generate Hashcode</h3>
-<p>okay, lets now encrepth the phone numbers and generate the hashcode.</p>
+</section>
+<section id="map-views" class="level1">
+<h1>Map Views</h1>
+<p>An ArcGIS Pro project can contain multiple views of the geometry of the data. Views are similar to different lenses on a camera: If you take two photographs of the same subject and use a different lens for each photograph, the two images will look different even though the subject and basic composition are similar. When you use multiple views of your map, the underlying data and symbology are the same but the angle or zoom might be different. Therefore, different aspects of the map become more apparent.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>hashed_data <span class="ot">&lt;-</span> <span class="fu">hash_phonenumbers</span>(data, <span class="st">'PhoneNumber'</span>, <span class="st">'name'</span>, <span class="at">debug =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">datatable</span>(hashed_data, <span class="fu">list</span>(<span class="at">dom =</span> <span class="st">'t'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-11a409636fb3a1c98be9" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-11a409636fb3a1c98be9">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10"],["List 1","List 2","List 3","List 4","List 5","List 6","List 7","List 8","List 9","List 10"],["Person_ I","Person_ I","Person_ W","Person_ Q","Person_ R","Person_ R","Person_ B","Person_ B","Person_ U","Person_ H"],["0203020001","0000040205","0101000103","0005030003","0000010201","0504000302","0003030105","0003000503","0105000303","0502020401"],["TPx0xSp5Yw","ELkLkpJl86","pMxw7ttcTE","wGyVPVVGc5","AuR115sIZT","FIpZ4VSdLb","oxEad5FHo0","XtvEqbvhGQ","janbN7OXvN","LDPdWftw1R"],["wf808c5ea","wb397ebc3","w79a89b6c","wd55bd093","w6c810166","w97ddcf95","w8440e978","wc8991879","wef36f31d","w49ec6bfe"],[false,false,false,false,false,false,false,false,false,false]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>list_name<\/th>\n      <th>person<\/th>\n      <th>PhoneNumber<\/th>\n      <th>uuid<\/th>\n      <th>name<\/th>\n      <th>duplicated<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","columnDefs":[{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"list_name","targets":1},{"name":"person","targets":2},{"name":"PhoneNumber","targets":3},{"name":"uuid","targets":4},{"name":"name","targets":5},{"name":"duplicated","targets":6}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div>
+<figure class="figure">
+<p><img src="https://raw.githubusercontent.com/axmedmaxamuud/test_datasets/main/media/ArcGISPro/image_3.png" class="img-fluid figure-img"></p>
+</figure>
 </div>
 </div>
+</div>
+<p>Your project can also contain several different maps. If multiple maps that use the same data are required to perform a specific task, you might want to keep all the maps in the same project. This capability is useful if you want to symbolize layers differently or turn certain layers on and off.</p>
 </section>
-<section id="step-3-include-output-in-your-xlsform" class="level3">
-<h3 class="anchored" data-anchor-id="step-3-include-output-in-your-xlsform">Step 3: Include output in your XLSForm</h3>
-<p>Now you can export the encryped dataframe and include it in your XLSForm choices sheet. personally I don’t prefer to include such data as external itemset. so that is why its better to include it in the choices sheet.</p>
+<section id="editing-data" class="level1">
+<h1>Editing Data</h1>
+<p>The core of a good GIS is its data. Good data is accurate and up to date; as the real world changes, the data should be revised to reflect those changes. As you work with your projects, you might need to update old information or add new geometries to your data. ArcGIS Pro allows you to add new data or update features quickly and efficiently.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://raw.githubusercontent.com/axmedmaxamuud/test_datasets/main/media/ArcGISPro/image_4.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The workflow for editing in ArcGIS Pro is simple whether you are creating features or modifying existing ones.</p>
+</section>
+<section id="analysis" class="level1">
+<h1>Analysis</h1>
+<p>The purpose of creating and maintaining a GIS is to use your data to solve spatial problems. For example, you may need to determine whether one phenomenon is related to another, the shortest route between two locations, or the location of a group of features that meet any number of specific criteria. Using a GIS can help you answer your spatial questions. Depending on the question and the requirements of the project, this analysis can use geoprocessing tools or can be the result of a visual inspection of the data. The analysis can even be a combination of the two methods. In ArcGIS Pro, performing analysis is intuitive, with a simple interface for geoprocessing and visualization tools.</p>
+</section>
+<section id="map-layout" class="level1">
+<h1>Map Layout</h1>
+<p>The most traditional way to share a project is as a printed map. In ArcGIS Pro, you can create a map layout for export or distribution using multiple maps, scenes, and views. You can also create more than one map layout and store it in a project.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://raw.githubusercontent.com/axmedmaxamuud/test_datasets/main/media/ArcGISPro/image_7.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
 </section>
