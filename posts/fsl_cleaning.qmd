@@ -12,15 +12,17 @@ knitr::opts_chunk$set(
 )
 ```
 
-This guide shows how to clean food security and livelihood data using the cleanR package. we will go through step-by-step from raw data to clean dataset by applying standard checks, reviewing flagged records and preparing clean data ready for analysis. WFP SurveyDesigner codebook is adopted for variable naming and format. 
+This guide shows how to clean food security and livelihood data using the cleanR package. we will go through step-by-step from raw data to clean dataset by applying standard checks, reviewing flagged records and preparing clean data ready for analysis. WFP SurveyDesigner [^1] codebook is adopted for variable naming and format. 
 
 The data cleaning process follows four steps of running checks, reviewing flagged records, apply corrections and export clean dataset at the end.
 
 ## Step 1: Load data
 
-The first step is to prepare the data by downloading the raw version from the server [^1]. remember that the documentation is using WFP codebook therefore consider to adopt the codebook if you're at the planning stage of your assessment. otherwise if you already have data and want to follow the guide try to reshape your data to match the codebook variable naming. 
+The first step is to prepare the data by downloading the raw version from the server [^2]. remember that the documentation is using WFP codebook therefore consider to adopt the codebook if you're at the planning stage of your assessment. otherwise if you already have data and want to follow the guide try to reshape your data to match the codebook variable naming. 
 
-[^1]: https://moda.wfp.org/
+[^1]: https://www.surveydesigner.vam.wfp.org/
+[^2]: https://moda.wfp.org/
+[^3]: https://vamresources.manuals.wfp.org/docs/food-security
 
 ```{r, echo=TRUE, warning=FALSE, message=FALSE, comment=FALSE}
 # required packages
@@ -37,7 +39,7 @@ Now that we have the dataset ready, the next step is to calculate indicators.
 
 ## Step 2: Format data
 
-Now we have prepared the raw data, so we'll use the calculate_fsl_indicators function to compute the food security and livelihood outcome indicators. the function will take arguments of raw data, food consumption score (FSC), reduced coping strategies (rCSI), household hunger scale (HHS), household dietary diversity (HDDS) and the livelhood coping strategeis (LCS-FS) variables.
+Now we have prepared the raw data, so we'll use the **calculate_fsl_indicators** function to compute the food security and livelihood outcome indicators [^3]. the function will take arguments of raw data, food consumption score (FSC), reduced coping strategies (rCSI), household hunger scale (HHS), household dietary diversity (HDDS) and the livelhood coping strategeis (LCS-FS) variables.
 
 ```{r}
 raw_data <- calculate_fsl_indicators(data = moda_data,
@@ -62,18 +64,18 @@ raw_data <- calculate_fsl_indicators(data = moda_data,
                                  HHhSBedHung_FR = "HHhSBedHung_FR", 
                                  HHhSNotEat_FR = "HHhSNotEat_FR", 
                                  # HDDS
-                                 # HDDSStapCer = "HDDSStapCer", 
-                                 # HDDSStapRoot = "HDDSStapRoot", 
-                                 # HDDSVeg = "HDDSVeg", 
-                                 # HDDSFruit = "HDDSFruit", 
-                                 # HDDSPrMeat = "HDDSPrMeat", 
-                                 # HDDSPrEgg = "HDDSPrEgg", 
-                                 # HDDSPrFish = "HDDSPrFish", 
-                                 # HDDSPulse = "HDDSPulse", 
-                                 # HDDSDairy = "HDDSDairy", 
-                                 # HDDSFat = "HDDSFat", 
-                                 # HDDSSugar = "HDDSSugar", 
-                                 # HDDSCond = "HDDSCond"
+                                 HDDSStapCer = "HDDSStapCer",
+                                 HDDSStapRoot = "HDDSStapRoot",
+                                 HDDSVeg = "HDDSVegGre",
+                                 HDDSFruit = "HDDSFruitOrg",
+                                 HDDSPrMeat = "HDDSPrMeatF",
+                                 HDDSPrEgg = "HDDSPrEgg",
+                                 HDDSPrFish = "HDDSPrFish",
+                                 HDDSPulse = "HDDSPulse",
+                                 HDDSDairy = "HDDSDairy",
+                                 HDDSFat = "HDDSFat",
+                                 HDDSSugar = "HDDSSugar",
+                                 HDDSCond = "HDDSCond"
                                  )
 ```
 
@@ -130,9 +132,6 @@ These checks help identify repeated or unusual response patterns.
 > These patterns may suggest rushed or non-careful data entry which is data falsification.
 
 
-
-
-
 Assuming at this stage that you already run the standard high frequency checks on the data like survey time taken, sample and quota verification and overall survey and operator productivity checks. in this section we'll go beyond the general checks and perform in-dept data checks.
 
 Lets first use the **fsl_cleaning_log** function to flag major inconsistency and anomalies in the data. the function will take data and uuid as input and then return cleaning log file with all issues found in the data. this function is now considering critical indicators validation measures.
@@ -140,14 +139,23 @@ Lets first use the **fsl_cleaning_log** function to flag major inconsistency and
 
 key checks included in the **fsl_cleaning_log** function will go as below
 
-
-| Check | Description | Threshold / Pattern | Purpose |
-|------|-------------|--------------------|--------|
-| Low staple consumption | Identifies households reporting very low consumption of staple foods such as cereals or oil. | Cereals or oil ≤ 2 days | Staple foods are usually consumed frequently, so very low values may indicate unusual responses or recording errors. |
-| High meat/dairy with low staples | Flags households reporting frequent consumption of meat or dairy while staple consumption is low. | Meat or dairy ≥ 6 days and cereals ≤ 4 days | This pattern is uncommon in most contexts and may suggest inconsistencies in the food consumption module. |
-| Extreme food group consumption | Reviews food groups with unusually low or high reported consumption frequencies. | Very low (0–1 days) or very high (6–7 days) consumption | Helps identify irregular reporting patterns that may influence the Food Consumption Score. |
-| High animal-source foods with high coping | Flags households reporting frequent meat or dairy consumption while also reporting high coping strategies. | Meat or dairy ≥ 6 days and high rCSI | These patterns may be inconsistent since high animal-source food consumption usually reflects better food access. |
-| Repeated response patterns | Detects repeated or structured response patterns across food groups. | Examples: 7,7,7,7 or alternating values such as 2,1,2,1 | These patterns may indicate enumerator shortcuts or incorrect data entry during interviews. |
+| Check                                                                                      | Description                                                                                                                                                                                                                                                             |
+| ------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Low staple consumption                                                                     | Flags households reporting very low consumption of staple foods such as cereals or oil, for example cereals or oil consumed for 2 days or less. Since staple foods are usually consumed frequently, very low values may indicate unusual responses or recording errors. |
+                                                                           |
+| All FCS food groups are reported as 7 days                                                 | Flags households where all food groups are reported as consumed every day. This may indicate straight-line responses or poor-quality data entry and should be verified.                                                                                                 |
+| Extreme food group consumption                                                             | Reviews food groups with unusually low or high reported consumption frequencies, such as 0–1 days or 6–7 days. This helps identify irregular reporting patterns that may influence the Food Consumption Score.                                                          |
+| Low cereal or staple consumption while other food groups are reported high                 | Flags households reporting low cereal or staple consumption while other food groups are consumed frequently. This is an unusual pattern and should be reviewed, especially where cereals or staples are normally the main food source.                                  |
+| High meat or dairy consumption with low staples                                            | Flags households reporting frequent consumption of meat or dairy while staple consumption is low, for example meat or dairy consumed 6 days or more while cereals are consumed 4 days or less. This pattern may suggest inconsistency in the food consumption module.   |
+| High animal-source foods with high coping                                                  | Flags households reporting frequent meat or dairy consumption while also reporting high rCSI. This may be inconsistent since high animal-source food consumption usually reflects better food access, while high rCSI reflects stress in accessing food.                |
+| Acceptable FCS with high rCSI or severe hunger                                             | Flags households with acceptable food consumption but high coping or severe hunger. This may show a contradiction between consumption, coping, and hunger indicators and should be reviewed.                                                                            |
+| High rCSI with very high FCS                                                               | Flags households reporting very high food consumption together with high rCSI. This pattern needs validation because high consumption and high coping may not always align.                                                                                             |
+| Poor or borderline FCS with all rCSI coping strategies reported as zero                    | Flags households with poor or borderline food consumption but no reported coping strategies. This may indicate under-reporting of coping strategies or weak probing during the interview.                                                                               |
+| All rCSI coping strategies are reported as 7 days                                          | Flags households where all reduced coping strategies are reported as used every day. This may indicate straight-line responses or poor-quality data entry and should be verified.                                                                                       |
+| Adult meal reduction is high, but no reduction in meal size or number of meals is reported | Flags households reporting high adult meal reduction while reporting no reduction in meal size or number of meals. This may indicate inconsistency within the coping strategy responses.                                                                                |
+| Severe hunger scale with acceptable FCS and low rCSI                                       | Flags households reporting severe hunger while also reporting acceptable FCS and low rCSI. This is a possible contradiction between hunger, consumption, and coping indicators and should be reviewed.                                                                  |
+| Repeated response patterns across food groups or coping strategies                         | Detects repeated or structured response patterns, such as all values reported as 7, or alternating values such as 2,1,2,1. These patterns may indicate enumerator shortcuts, weak probing, or incorrect data entry.                                                     |
+| Same response pattern repeated across many households by one enumerator                    | Flags cases where many households interviewed by the same enumerator have identical or very similar food consumption or coping patterns. This may indicate enumerator bias, repeated entry, or field-level data quality issues.                                         |
 
 ## Step 4: Using Visualizations
 
@@ -174,6 +182,7 @@ Frequency of reduced coping strategies reported by operator can be found below. 
 As food consumption improves, households tend to use fewer negative coping strategies. This means there is a negative correlation between food consumption and coping strategies. The analysis below shows this correlation overall, and also breaks it down by operator.
 
 Since both food consumption and coping strategies are measured over the same recall period, households that eat a variety of food groups are less likely to skip meals, reduce portion sizes, or borrow food. Based on this relationship, we use the correlation coefficient to identify operators where this trend is weaker or stronger.
+
 
 ```{r}
 
@@ -205,8 +214,4 @@ knitr::include_graphics(
   "https://raw.githubusercontent.com/axmedmaxamuud/test_datasets/main/media/seasonal_calander.png"
 )
 ```
-
-
-
-
 

@@ -2,7 +2,7 @@
 title: "Publications"
 listing:
   contents: 
-    - path: https://axmedmaxamuud.github.io/RAM_Codebook/
+    - path: https://github.com/axmedmaxamuud/RAM_Codebook
       image: assets/RAM.png
       title: "RAM Codebook"
       author: Ahmed Mohamoud

@@ -402,11 +402,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>This guide shows how to clean food security and livelihood data using the cleanR package. we will go through step-by-step from raw data to clean dataset by applying standard checks, reviewing flagged records and preparing clean data ready for analysis. WFP SurveyDesigner codebook is adopted for variable naming and format.</p>
+<p>This guide shows how to clean food security and livelihood data using the cleanR package. we will go through step-by-step from raw data to clean dataset by applying standard checks, reviewing flagged records and preparing clean data ready for analysis. WFP SurveyDesigner <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> codebook is adopted for variable naming and format.</p>
 <p>The data cleaning process follows four steps of running checks, reviewing flagged records, apply corrections and export clean dataset at the end.</p>
 <section id="step-1-load-data" class="level2">
 <h2 class="anchored" data-anchor-id="step-1-load-data">Step 1: Load data</h2>
-<p>The first step is to prepare the data by downloading the raw version from the server <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. remember that the documentation is using WFP codebook therefore consider to adopt the codebook if you’re at the planning stage of your assessment. otherwise if you already have data and want to follow the guide try to reshape your data to match the codebook variable naming.</p>
+<p>The first step is to prepare the data by downloading the raw version from the server <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. remember that the documentation is using WFP codebook therefore consider to adopt the codebook if you’re at the planning stage of your assessment. otherwise if you already have data and want to follow the guide try to reshape your data to match the codebook variable naming.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># required packages</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
@@ -421,7 +421,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="step-2-format-data" class="level2">
 <h2 class="anchored" data-anchor-id="step-2-format-data">Step 2: Format data</h2>
-<p>Now we have prepared the raw data, so we’ll use the calculate_fsl_indicators function to compute the food security and livelihood outcome indicators. the function will take arguments of raw data, food consumption score (FSC), reduced coping strategies (rCSI), household hunger scale (HHS), household dietary diversity (HDDS) and the livelhood coping strategeis (LCS-FS) variables.</p>
+<p>Now we have prepared the raw data, so we’ll use the <strong>calculate_fsl_indicators</strong> function to compute the food security and livelihood outcome indicators <a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. the function will take arguments of raw data, food consumption score (FSC), reduced coping strategies (rCSI), household hunger scale (HHS), household dietary diversity (HDDS) and the livelhood coping strategeis (LCS-FS) variables.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>raw_data <span class="ot">&lt;-</span> <span class="fu">calculate_fsl_indicators</span>(<span class="at">data =</span> moda_data,</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                                 <span class="co"># FCS</span></span>
@@ -445,18 +445,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">HHhSBedHung_FR =</span> <span class="st">"HHhSBedHung_FR"</span>, </span>
 <span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">HHhSNotEat_FR =</span> <span class="st">"HHhSNotEat_FR"</span>, </span>
 <span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>                                 <span class="co"># HDDS</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>                                 <span class="co"># HDDSStapCer = "HDDSStapCer", </span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>                                 <span class="co"># HDDSStapRoot = "HDDSStapRoot", </span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>                                 <span class="co"># HDDSVeg = "HDDSVeg", </span></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>                                 <span class="co"># HDDSFruit = "HDDSFruit", </span></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>                                 <span class="co"># HDDSPrMeat = "HDDSPrMeat", </span></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>                                 <span class="co"># HDDSPrEgg = "HDDSPrEgg", </span></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>                                 <span class="co"># HDDSPrFish = "HDDSPrFish", </span></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>                                 <span class="co"># HDDSPulse = "HDDSPulse", </span></span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>                                 <span class="co"># HDDSDairy = "HDDSDairy", </span></span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>                                 <span class="co"># HDDSFat = "HDDSFat", </span></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>                                 <span class="co"># HDDSSugar = "HDDSSugar", </span></span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>                                 <span class="co"># HDDSCond = "HDDSCond"</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">HDDSStapCer =</span> <span class="st">"HDDSStapCer"</span>,</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">HDDSStapRoot =</span> <span class="st">"HDDSStapRoot"</span>,</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">HDDSVeg =</span> <span class="st">"HDDSVegGre"</span>,</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">HDDSFruit =</span> <span class="st">"HDDSFruitOrg"</span>,</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">HDDSPrMeat =</span> <span class="st">"HDDSPrMeatF"</span>,</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">HDDSPrEgg =</span> <span class="st">"HDDSPrEgg"</span>,</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">HDDSPrFish =</span> <span class="st">"HDDSPrFish"</span>,</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">HDDSPulse =</span> <span class="st">"HDDSPulse"</span>,</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">HDDSDairy =</span> <span class="st">"HDDSDairy"</span>,</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">HDDSFat =</span> <span class="st">"HDDSFat"</span>,</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">HDDSSugar =</span> <span class="st">"HDDSSugar"</span>,</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">HDDSCond =</span> <span class="st">"HDDSCond"</span></span>
 <span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>                                 )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="callout callout-style-simple callout-note callout-titled">
@@ -481,8 +481,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>DT<span class="sc">::</span><span class="fu">datatable</span>(<span class="fu">head</span>(fsl_clog, <span class="dv">5</span>), <span class="at">options =</span> <span class="fu">list</span>(<span class="at">dom =</span> <span class="st">'t'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-bce201bb35c80e6a13ce" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-bce201bb35c80e6a13ce">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5"],["b102934e-e87d-464443-b4b9b8-08c2dbef65a1","d65b8e27-cb5d-4e4842-a5a4aa-1238c7d54b96","9a1f60ce-4678-4a4448-909e93-5ce180674dab","083c567d-4270-41474b-b2b1b0-d71356cab489","ed9bc4f3-8ed4-4f404e-aca8a4-fc8d20314a67"],["FCS","FCS","FCS","FCS","FCS"],["Household food consumption score is too high (&gt;60).","Household food consumption score is too high (&gt;60).","Household food consumption score is too high (&gt;60).","Household food consumption score is too high (&gt;60).","Household food consumption score is too high (&gt;60)."],["","","","",""],["check","check","check","check","check"],["68.5","64","63","61","71.5"],["","","","",""]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>uuid<\/th>\n      <th>question.name<\/th>\n      <th>issue<\/th>\n      <th>feedback<\/th>\n      <th>action<\/th>\n      <th>old.value<\/th>\n      <th>new.value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","columnDefs":[{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"uuid","targets":1},{"name":"question.name","targets":2},{"name":"issue","targets":3},{"name":"feedback","targets":4},{"name":"action","targets":5},{"name":"old.value","targets":6},{"name":"new.value","targets":7}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-a3e242149a37e2c8139a" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-a3e242149a37e2c8139a">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5"],["b102934e-e87d-464443-b4b9b8-08c2dbef65a1","d65b8e27-cb5d-4e4842-a5a4aa-1238c7d54b96","9a1f60ce-4678-4a4448-909e93-5ce180674dab","083c567d-4270-41474b-b2b1b0-d71356cab489","ed9bc4f3-8ed4-4f404e-aca8a4-fc8d20314a67"],["FCS","FCS","FCS","FCS","FCS"],["Household food consumption score is too high (&gt;60).","Household food consumption score is too high (&gt;60).","Household food consumption score is too high (&gt;60).","Household food consumption score is too high (&gt;60).","Household food consumption score is too high (&gt;60)."],["","","","",""],["check","check","check","check","check"],["68.5","64","63","61","71.5"],["","","","",""]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>uuid<\/th>\n      <th>question.name<\/th>\n      <th>issue<\/th>\n      <th>feedback<\/th>\n      <th>action<\/th>\n      <th>old.value<\/th>\n      <th>new.value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","columnDefs":[{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"uuid","targets":1},{"name":"question.name","targets":2},{"name":"issue","targets":3},{"name":"feedback","targets":4},{"name":"action","targets":5},{"name":"old.value","targets":6},{"name":"new.value","targets":7}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p>After runing the checks, the dataset will include flags that highlight records needing review. these flags do not mean the data is wrong but rather they show where we should closer look.</p>
@@ -529,49 +529,75 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>key checks included in the <strong>fsl_cleaning_log</strong> function will go as below</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 12%">
-<col style="width: 27%">
-<col style="width: 42%">
-<col style="width: 17%">
+<col style="width: 25%">
+<col style="width: 74%">
 </colgroup>
 <thead>
 <tr class="header">
 <th>Check</th>
 <th>Description</th>
-<th>Threshold / Pattern</th>
-<th>Purpose</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>Low staple consumption</td>
-<td>Identifies households reporting very low consumption of staple foods such as cereals or oil.</td>
-<td>Cereals or oil ≤ 2 days</td>
-<td>Staple foods are usually consumed frequently, so very low values may indicate unusual responses or recording errors.</td>
+<td>Flags households reporting very low consumption of staple foods such as cereals or oil, for example cereals or oil consumed for 2 days or less. Since staple foods are usually consumed frequently, very low values may indicate unusual responses or recording errors.</td>
 </tr>
 <tr class="even">
-<td>High meat/dairy with low staples</td>
-<td>Flags households reporting frequent consumption of meat or dairy while staple consumption is low.</td>
-<td>Meat or dairy ≥ 6 days and cereals ≤ 4 days</td>
-<td>This pattern is uncommon in most contexts and may suggest inconsistencies in the food consumption module.</td>
+<td></td>
+<td></td>
 </tr>
 <tr class="odd">
+<td>All FCS food groups are reported as 7 days</td>
+<td>Flags households where all food groups are reported as consumed every day. This may indicate straight-line responses or poor-quality data entry and should be verified.</td>
+</tr>
+<tr class="even">
 <td>Extreme food group consumption</td>
-<td>Reviews food groups with unusually low or high reported consumption frequencies.</td>
-<td>Very low (0–1 days) or very high (6–7 days) consumption</td>
-<td>Helps identify irregular reporting patterns that may influence the Food Consumption Score.</td>
-</tr>
-<tr class="even">
-<td>High animal-source foods with high coping</td>
-<td>Flags households reporting frequent meat or dairy consumption while also reporting high coping strategies.</td>
-<td>Meat or dairy ≥ 6 days and high rCSI</td>
-<td>These patterns may be inconsistent since high animal-source food consumption usually reflects better food access.</td>
+<td>Reviews food groups with unusually low or high reported consumption frequencies, such as 0–1 days or 6–7 days. This helps identify irregular reporting patterns that may influence the Food Consumption Score.</td>
 </tr>
 <tr class="odd">
-<td>Repeated response patterns</td>
-<td>Detects repeated or structured response patterns across food groups.</td>
-<td>Examples: 7,7,7,7 or alternating values such as 2,1,2,1</td>
-<td>These patterns may indicate enumerator shortcuts or incorrect data entry during interviews.</td>
+<td>Low cereal or staple consumption while other food groups are reported high</td>
+<td>Flags households reporting low cereal or staple consumption while other food groups are consumed frequently. This is an unusual pattern and should be reviewed, especially where cereals or staples are normally the main food source.</td>
+</tr>
+<tr class="even">
+<td>High meat or dairy consumption with low staples</td>
+<td>Flags households reporting frequent consumption of meat or dairy while staple consumption is low, for example meat or dairy consumed 6 days or more while cereals are consumed 4 days or less. This pattern may suggest inconsistency in the food consumption module.</td>
+</tr>
+<tr class="odd">
+<td>High animal-source foods with high coping</td>
+<td>Flags households reporting frequent meat or dairy consumption while also reporting high rCSI. This may be inconsistent since high animal-source food consumption usually reflects better food access, while high rCSI reflects stress in accessing food.</td>
+</tr>
+<tr class="even">
+<td>Acceptable FCS with high rCSI or severe hunger</td>
+<td>Flags households with acceptable food consumption but high coping or severe hunger. This may show a contradiction between consumption, coping, and hunger indicators and should be reviewed.</td>
+</tr>
+<tr class="odd">
+<td>High rCSI with very high FCS</td>
+<td>Flags households reporting very high food consumption together with high rCSI. This pattern needs validation because high consumption and high coping may not always align.</td>
+</tr>
+<tr class="even">
+<td>Poor or borderline FCS with all rCSI coping strategies reported as zero</td>
+<td>Flags households with poor or borderline food consumption but no reported coping strategies. This may indicate under-reporting of coping strategies or weak probing during the interview.</td>
+</tr>
+<tr class="odd">
+<td>All rCSI coping strategies are reported as 7 days</td>
+<td>Flags households where all reduced coping strategies are reported as used every day. This may indicate straight-line responses or poor-quality data entry and should be verified.</td>
+</tr>
+<tr class="even">
+<td>Adult meal reduction is high, but no reduction in meal size or number of meals is reported</td>
+<td>Flags households reporting high adult meal reduction while reporting no reduction in meal size or number of meals. This may indicate inconsistency within the coping strategy responses.</td>
+</tr>
+<tr class="odd">
+<td>Severe hunger scale with acceptable FCS and low rCSI</td>
+<td>Flags households reporting severe hunger while also reporting acceptable FCS and low rCSI. This is a possible contradiction between hunger, consumption, and coping indicators and should be reviewed.</td>
+</tr>
+<tr class="even">
+<td>Repeated response patterns across food groups or coping strategies</td>
+<td>Detects repeated or structured response patterns, such as all values reported as 7, or alternating values such as 2,1,2,1. These patterns may indicate enumerator shortcuts, weak probing, or incorrect data entry.</td>
+</tr>
+<tr class="odd">
+<td>Same response pattern repeated across many households by one enumerator</td>
+<td>Flags cases where many households interviewed by the same enumerator have identical or very similar food consumption or coping patterns. This may indicate enumerator bias, repeated entry, or field-level data quality issues.</td>
 </tr>
 </tbody>
 </table>
@@ -662,7 +688,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>https://moda.wfp.org/<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>https://www.surveydesigner.vam.wfp.org/<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>https://moda.wfp.org/<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>https://vamresources.manuals.wfp.org/docs/food-security<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

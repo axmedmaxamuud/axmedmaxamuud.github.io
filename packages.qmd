@@ -27,7 +27,7 @@ listing:
       categories: [R Programming, Markdown, Reporting]
       
     - path: https://github.com/axmedmaxamuud/geosom
-      image: assets/geosom.png
+      # image: assets/geosom.png
       title: "geosom"
       author: Ahmed Mohamoud
       description: "Somalia geospatial database for retriving administrative boundaries and sector datasets"
