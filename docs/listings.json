@@ -2,13 +2,13 @@
   {
     "listing": "/tutorials.html",
     "items": [
+      "/posts/30_day_map_challange.html",
       "/posts/ArcGISPro_Guide.html",
       "/posts/fsl_cleaning.html",
       "/posts/data_cleaning_process.html",
       "/posts/hash_phonenumbers.html",
       "/posts/R_Visualizations.html",
-      "/posts/spatial_verification.html",
-      "/posts/tablue_calculations.html"
+      "/posts/spatial_verification.html"
     ]
   },
   {

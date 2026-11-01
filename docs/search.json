@@ -4,28 +4,126 @@
     "href": "tutorials.html",
     "title": "Tutorials",
     "section": "",
-    "text": "This page includes practical tutorials, examples, and reusable workflows on data cleaning, R programming, spatial analysis, food security indicators, and humanitarian data visualization.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nArcGIS Pro Guide\n\n\n\nGIS\n\nEsri ArcGIS\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCleaning Food Security Indicators\n\n\n\nR programming\n\nData Cleaning\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nData Cleaning Process\n\n\n\nR programming\n\nData Cleaning\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHash PhoneNumbers\n\n\n\nR programming\n\nData Processing\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nR Visualizations\n\n\n\nR programming\n\nVisualizations\n\nggplot2\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSurvey Spatial Verification\n\n\n\nSpatial Verification\n\nGIS\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTableua Calculation Refrence\n\n\n\nTableau\n\nFood Security\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "This page includes practical tutorials, examples, and reusable workflows on data cleaning, R programming, spatial analysis, food security indicators, and humanitarian data visualization.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n30 Day Map Challange\n\n\n\nggplot2\n\nGIS\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nArcGIS Pro Guide\n\n\n\nGIS\n\nEsri ArcGIS\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCleaning Food Security Indicators\n\n\n\nR programming\n\nData Cleaning\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nData Cleaning Process\n\n\n\nR programming\n\nData Cleaning\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHash PhoneNumbers\n\n\n\nR programming\n\nData Processing\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nR Visualizations\n\n\n\nR programming\n\nVisualizations\n\nggplot2\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSurvey Spatial Verification\n\n\n\nSpatial Verification\n\nGIS\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "posts/R_Visualizations.html",
-    "href": "posts/R_Visualizations.html",
-    "title": "R Visualizations",
+    "objectID": "posts/spatial_verification.html",
+    "href": "posts/spatial_verification.html",
+    "title": "Survey Spatial Verification",
     "section": "",
-    "text": "This are some learning stuff for data visualization.\n# required packages\nlibrary(tidyverse)\nlibrary(RColorBrewer)\nlibrary(cleanR)\n\n# load raw data\nbasic_data &lt;- cleanR::survey_data %&gt;% # converting HDDS variables to numeric\n  mutate(across(starts_with(\"HDDS\"), as.numeric))"
+    "text": "Using the leaflet package, we enabled field teams to access survey geospatial data, monitor progress, and address flagged points. The dashboard allows easy navigation and helps identify enumerators working outside the sampled locations.\nDownload PDF file."
   },
   {
-    "objectID": "posts/R_Visualizations.html#create-your-own-custom-theme",
-    "href": "posts/R_Visualizations.html#create-your-own-custom-theme",
-    "title": "R Visualizations",
-    "section": "Create your own custom theme",
-    "text": "Create your own custom theme"
+    "objectID": "posts/hash_phonenumbers.html",
+    "href": "posts/hash_phonenumbers.html",
+    "title": "Hash PhoneNumbers",
+    "section": "",
+    "text": "In this example, we’ll encrypt or hash phone numbers to avoid exposing personal identifiable data during remote data collection. Often in WFP operations, it’s common to use beneficiary contact information for monitoring or verification purposes. During this time, it is good practice to hash phone numbers in advance and prepare an itemset file that you can upload with your MoDa tool. We’ll use the hash_phonenumbers() function to achieve this.\n\nStep 1: Prepare dumpy data\n\n# required packages\nlibrary(tidyverse)\nlibrary(digest)\nlibrary(cleanR)\nlibrary(DT)\n\n# Function to generate random phone numbers\ngenerate_phone_number &lt;- function(n) {\n  phone_numbers &lt;- replicate(n, paste0(\"0\", sample(0:5, 5, replace = TRUE), collapse = \"\"))\n  return(as.vector(phone_numbers))\n}\n\n# # Sample data\nn &lt;- 10  # number of rows in the data frame\nlist_name &lt;- paste(\"List\", 1:n)\nperson &lt;- paste(\"Person_\", sample(LETTERS, n, replace = TRUE))\nPhoneNumber &lt;- generate_phone_number(n)\nuuid &lt;- stringi::stri_rand_strings(n, 10)\nname &lt;- paste(\"List\", 1:n)\n\n# Create the data frame\ndata &lt;- data.frame(list_name, person, PhoneNumber, uuid, name)\n\nNow lets see how the orginal data looks like, and phone numbers will appear as their original form, which is not recomended to share it widely during remote data collection that we can’t gurentee if the information will be discarded after the data collection\n\ndatatable(data, list(dom = 't'))\n\n\n\n\n\n\n\nStep 2: Generate Hashcode\nokay, lets now encrepth the phone numbers and generate the hashcode.\n\nhashed_data &lt;- hash_phonenumbers(data, 'PhoneNumber', 'name', debug = FALSE)\n\ndatatable(hashed_data, list(dom = 't'))\n\n\n\n\n\n\n\nStep 3: Include output in your XLSForm\nNow you can export the encryped dataframe and include it in your XLSForm choices sheet. personally I don’t prefer to include such data as external itemset. so that is why its better to include it in the choices sheet."
   },
   {
-    "objectID": "posts/R_Visualizations.html#chart-1-circular-barplot",
-    "href": "posts/R_Visualizations.html#chart-1-circular-barplot",
-    "title": "R Visualizations",
-    "section": "Chart 1: Circular Barplot",
-    "text": "Chart 1: Circular Barplot\n\n# Compute the average days\naverage_days &lt;- basic_data |&gt;\n  summarise(across(\n    .cols = c(FCSStap, FCSPulse, FCSPr, FCSVeg, FCSFruit, FCSDairy, FCSFat, FCSSugar),\n    .fns = mean,\n    na.rm = TRUE\n  )) |&gt;\n  pivot_longer(cols = everything(), names_to = \"food_group\", values_to = \"average_days\")\n\n# Create a nicer display name for each food group\naverage_days &lt;- average_days |&gt;\n  mutate(\n    food_group_clean = recode(food_group,\n                              FCSStap = \"Staples\",\n                              FCSPulse = \"Pulses\",\n                              FCSPr = \"Protein\",\n                              FCSVeg = \"Vegetables\",\n                              FCSFruit = \"Fruits\",\n                              FCSDairy = \"Dairy\",\n                              FCSFat = \"Fats\",\n                              FCSSugar = \"Sugar\"\n    ),\n    food_group_clean = factor(food_group_clean, levels = food_group_clean)\n  )\n\n# Create the circular barplot\nggplot(average_days, aes(x = food_group_clean, y = average_days, fill = food_group_clean)) +\n  geom_bar(stat = \"identity\", width = 1, color = \"white\") +\n  geom_text(\n    aes(label = round(average_days, 1), y = average_days - 0.5),\n    color = \"white\",\n    size = 4,\n    fontface = \"bold\"\n  ) +\n  coord_polar(start = 0) +\n  scale_fill_brewer(palette = \"Set2\") +\n  labs(\n    title = \"Average of Food Groups Consumed in the last 7 Days\",\n    subtitle = \"\",\n    caption = \"Source: © WFP Household Food Consumption Survey\",\n    x = NULL,\n    y = NULL\n  ) +\n  theme_minimal() +\n  theme(\n    axis.text.y = element_blank(),\n    axis.text.x = element_text(size = 10, face = \"bold\"),\n    panel.grid = element_blank(),\n    legend.position = \"none\",\n    plot.title = element_text(size = 16, face = \"bold\", hjust = 0.5),\n    plot.subtitle = element_text(size = 12, hjust = 0.5),\n    plot.caption = element_text(size = 8, face = \"italic\", hjust = 1)\n  )"
+    "objectID": "posts/data_cleaning_process.html",
+    "href": "posts/data_cleaning_process.html",
+    "title": "Data Cleaning Process",
+    "section": "",
+    "text": "Data cleaning is the process of identifying and correcting errors and inconsistencies in raw data to improve data quality 1. in the humanitarian context identifying data errors will be categorized into two steps. standard checks and specific checks. depending on the scope of data collection points, all data should pass under the standard checks. while specific checks will depend on the availability of indicators and data collection points.\n\n\n\n\n\n\n\n\n\nThe data cleaning process is not one time task, it should start from from the planning stage by including constrains and validation measures in the data collection tools to mitigate some of the potential data errors. also during data collection we’ll need to run high-frequency-checks to identify data errors and communicate with the team for making corrective actions and at the end of data collection we’ll run in-depth checks and amend the changes to generate clean data."
+  },
+  {
+    "objectID": "posts/data_cleaning_process.html#introduction",
+    "href": "posts/data_cleaning_process.html#introduction",
+    "title": "Data Cleaning Process",
+    "section": "",
+    "text": "Data cleaning is the process of identifying and correcting errors and inconsistencies in raw data to improve data quality 1. in the humanitarian context identifying data errors will be categorized into two steps. standard checks and specific checks. depending on the scope of data collection points, all data should pass under the standard checks. while specific checks will depend on the availability of indicators and data collection points.\n\n\n\n\n\n\n\n\n\nThe data cleaning process is not one time task, it should start from from the planning stage by including constrains and validation measures in the data collection tools to mitigate some of the potential data errors. also during data collection we’ll need to run high-frequency-checks to identify data errors and communicate with the team for making corrective actions and at the end of data collection we’ll run in-depth checks and amend the changes to generate clean data."
+  },
+  {
+    "objectID": "posts/data_cleaning_process.html#somalia-case-study",
+    "href": "posts/data_cleaning_process.html#somalia-case-study",
+    "title": "Data Cleaning Process",
+    "section": "Somalia Case Study",
+    "text": "Somalia Case Study\nThe Planning, Monitoring, Learning, and Evaluation (PMLE) unit has implemented a standardized data cleaning procedure to maintain data quality and consistency. This process ensures that all data from process monitoring and assessments meet the World Food Programme’s quality standards. Similar to accounting practices, every modification or adjustment made to the data is meticulously recorded. This methodical tracking helps in identifying and addressing any discrepancies or errors in the data effectively.\nDownload PDF file."
+  },
+  {
+    "objectID": "posts/data_cleaning_process.html#footnotes",
+    "href": "posts/data_cleaning_process.html#footnotes",
+    "title": "Data Cleaning Process",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nIMB definition of Data Cleaning↩︎"
+  },
+  {
+    "objectID": "posts/30_day_map_challange.html",
+    "href": "posts/30_day_map_challange.html",
+    "title": "30 Day Map Challange",
+    "section": "",
+    "text": "Public health facilities per 100,000 people in Somalia. Using the WHO health facilities data for Somalia. only about 4 public health facilities are available for every 100,000 people.\n\n\nShow the code\n# Facilities per 100,000 people\ncoverage &lt;- population_admin2_2026 %&gt;%\n  summarise(population = sum(population_total), .by = admin1_name) %&gt;%\n  rename(admin1name = admin1_name) %&gt;%\n  left_join(count(st_drop_geometry(facilities), admin1name, name = \"facilities\"),\n            by = \"admin1name\") %&gt;%\n  mutate(\n    facilities = replace_na(facilities, 0),\n    per_100k   = facilities / population * 1e5\n  )\n\nnational_rate &lt;- sum(coverage$facilities) / sum(coverage$population) * 1e5\n\n# Map\nmap &lt;- ggplot() +\n  geom_sf(data = admin0, fill = pal$land, colour = NA) +\n  geom_sf(data = admin2, fill = NA, colour = pal$adm2, linewidth = 0.2, linetype = \"22\") +\n  geom_sf(data = admin1, fill = NA, colour = pal$adm1, linewidth = 0.3) +\n  geom_sf(data = admin0, fill = NA, colour = pal$adm0, linewidth = 0.4) +\n  geom_sf(data = arrange(facilities, desc(type)),\n          aes(colour = type, size = type), shape = 16) +\n  scale_colour_manual(values = deframe(select(facility_types, type, colour))) +\n  scale_size_manual(values = deframe(select(facility_types, type, size)), guide = \"none\") +\n  guides(colour = guide_legend(nrow = 1, override.aes = list(size = 2.6))) +\n  coord_sf(xlim = c(40.8, 54.2), ylim = c(-1.9, 12.2), expand = FALSE) +\n  labs(\n    title    = \"Health Facility Coverage in Somalia\",\n    subtitle = sprintf(\"%s public health facilities across Somalia with %.1f health facilities for every 100,000 people.\",\n                       format(nrow(facilities), big.mark = \",\"), national_rate),\n    caption  = paste(\n      \"#30DayMapChallenge 2026 | Day 1: Points\",\n      \"Data: ©WHO Somalia health facilities (HDX, 2023)\",\n      \"github.com/axmedmaxamuud/geosom\",\n      sep = \"\\n\"\n    )\n  ) +\n  theme_day01\n\n# Chart: facilities per 100,000 people by region\nchart &lt;- ggplot(coverage, aes(per_100k, fct_reorder(admin1name, per_100k))) +\n  geom_col(fill = pal$bar, width = 0.55) +\n  geom_text(aes(label = sprintf(\"%.1f\", per_100k)),\n            hjust = -0.2, size = 3, family = font, colour = pal$muted) +\n  scale_x_continuous(expand = expansion(mult = c(0, 0.25))) +\n  labs(title = \"Public health facilities\\nper 100,000 people\") +\n  theme_void(base_family = font) +\n  theme(\n    plot.title.position = \"plot\",\n    plot.title  = element_text(size = 11.5, colour = pal$ink, margin = margin(b = 6)),\n    axis.text.y = element_text(size = 9.5, colour = pal$ink, hjust = 1, margin = margin(r = 4))\n  )\n\n# produce final map\nday01 &lt;- map +\n  inset_element(chart, left = 0.665, bottom = 0.02, right = 0.99, top = 0.47, align_to = \"panel\")\n\nday01"
+  },
+  {
+    "objectID": "posts/30_day_map_challange.html#day-1-health-facilities-in-somalia",
+    "href": "posts/30_day_map_challange.html#day-1-health-facilities-in-somalia",
+    "title": "30 Day Map Challange",
+    "section": "",
+    "text": "Public health facilities per 100,000 people in Somalia. Using the WHO health facilities data for Somalia. only about 4 public health facilities are available for every 100,000 people.\n\n\nShow the code\n# Facilities per 100,000 people\ncoverage &lt;- population_admin2_2026 %&gt;%\n  summarise(population = sum(population_total), .by = admin1_name) %&gt;%\n  rename(admin1name = admin1_name) %&gt;%\n  left_join(count(st_drop_geometry(facilities), admin1name, name = \"facilities\"),\n            by = \"admin1name\") %&gt;%\n  mutate(\n    facilities = replace_na(facilities, 0),\n    per_100k   = facilities / population * 1e5\n  )\n\nnational_rate &lt;- sum(coverage$facilities) / sum(coverage$population) * 1e5\n\n# Map\nmap &lt;- ggplot() +\n  geom_sf(data = admin0, fill = pal$land, colour = NA) +\n  geom_sf(data = admin2, fill = NA, colour = pal$adm2, linewidth = 0.2, linetype = \"22\") +\n  geom_sf(data = admin1, fill = NA, colour = pal$adm1, linewidth = 0.3) +\n  geom_sf(data = admin0, fill = NA, colour = pal$adm0, linewidth = 0.4) +\n  geom_sf(data = arrange(facilities, desc(type)),\n          aes(colour = type, size = type), shape = 16) +\n  scale_colour_manual(values = deframe(select(facility_types, type, colour))) +\n  scale_size_manual(values = deframe(select(facility_types, type, size)), guide = \"none\") +\n  guides(colour = guide_legend(nrow = 1, override.aes = list(size = 2.6))) +\n  coord_sf(xlim = c(40.8, 54.2), ylim = c(-1.9, 12.2), expand = FALSE) +\n  labs(\n    title    = \"Health Facility Coverage in Somalia\",\n    subtitle = sprintf(\"%s public health facilities across Somalia with %.1f health facilities for every 100,000 people.\",\n                       format(nrow(facilities), big.mark = \",\"), national_rate),\n    caption  = paste(\n      \"#30DayMapChallenge 2026 | Day 1: Points\",\n      \"Data: ©WHO Somalia health facilities (HDX, 2023)\",\n      \"github.com/axmedmaxamuud/geosom\",\n      sep = \"\\n\"\n    )\n  ) +\n  theme_day01\n\n# Chart: facilities per 100,000 people by region\nchart &lt;- ggplot(coverage, aes(per_100k, fct_reorder(admin1name, per_100k))) +\n  geom_col(fill = pal$bar, width = 0.55) +\n  geom_text(aes(label = sprintf(\"%.1f\", per_100k)),\n            hjust = -0.2, size = 3, family = font, colour = pal$muted) +\n  scale_x_continuous(expand = expansion(mult = c(0, 0.25))) +\n  labs(title = \"Public health facilities\\nper 100,000 people\") +\n  theme_void(base_family = font) +\n  theme(\n    plot.title.position = \"plot\",\n    plot.title  = element_text(size = 11.5, colour = pal$ink, margin = margin(b = 6)),\n    axis.text.y = element_text(size = 9.5, colour = pal$ink, hjust = 1, margin = margin(r = 4))\n  )\n\n# produce final map\nday01 &lt;- map +\n  inset_element(chart, left = 0.665, bottom = 0.02, right = 0.99, top = 0.47, align_to = \"panel\")\n\nday01"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Ahmed Mohamoud",
+    "section": "",
+    "text": "Experienced GIS and data analyst with diverse background in the humanitarian sector. My work sits at the intersection of food security, markets and geospatial analysis. I design assessments, build reproducible analysis workflows and generate actionable insights from complex datasets using machine learning and remote sensing. Also I develop open-source packages that support humanitarian analysis and reporting."
+  },
+  {
+    "objectID": "index.html#about-me",
+    "href": "index.html#about-me",
+    "title": "Ahmed Mohamoud",
+    "section": "",
+    "text": "Experienced GIS and data analyst with diverse background in the humanitarian sector. My work sits at the intersection of food security, markets and geospatial analysis. I design assessments, build reproducible analysis workflows and generate actionable insights from complex datasets using machine learning and remote sensing. Also I develop open-source packages that support humanitarian analysis and reporting."
+  },
+  {
+    "objectID": "index.html#education",
+    "href": "index.html#education",
+    "title": "Ahmed Mohamoud",
+    "section": "Education",
+    "text": "Education\nMSc in Research, Statistics & Data Analytics\n2019 – 2022\nAmoud University | Hargeisa, Somaliland\nMBA in Project Planning & Management\n2018 – 2019\nAdmas University | Hargeisa, Somaliland\nBA. Development Studies\n2013 – 2016\nAdmas University | Hargeisa, Somaliland"
+  },
+  {
+    "objectID": "index.html#experience",
+    "href": "index.html#experience",
+    "title": "Ahmed Mohamoud",
+    "section": "Experience",
+    "text": "Experience\n\nWFP | Vulnerability Analysis & Mapping (VAM) Officer\nMay 2024 - Present\n\n\nWFP | Programme Associate (Data Management)\nNov 2022 - Apr 2024\n\n\nREACH Initiative | GIS & Data Specialist\nMar 2022 - Oct 2022\n\n\nREACH Initiative | Senior Database Officer\nJan 2019 - Feb 2022\n\n\nSOLNARDO | Monitoring & Evaluation Officer\nJan 2014 - Dec 2018"
+  },
+  {
+    "objectID": "index.html#skills",
+    "href": "index.html#skills",
+    "title": "Ahmed Mohamoud",
+    "section": "Skills",
+    "text": "Skills\n\n R  Python  ArcGIS Pro  QGIS  SQL  Excel  Power BI  Tableau"
+  },
+  {
+    "objectID": "index.html#certifications",
+    "href": "index.html#certifications",
+    "title": "Ahmed Mohamoud",
+    "section": "Certifications",
+    "text": "Certifications\nIPC Acute Food Insecurity Level 1 Analyst\nCadre Harmonisé (CH)"
+  },
+  {
+    "objectID": "packages.html",
+    "href": "packages.html",
+    "title": "R Packages",
+    "section": "",
+    "text": "Here you’ll find packages I built or contributed to support humanitarian IM and reproducible analysis.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncleanR\n\n\n\nData Cleaning\n\nWrangling\n\nR Programming\n\n\n\nHarmonized Approach of Cleaning Data in R.\n\n\n\n\n\nOct 1, 2023\n\n\nAhmed Mohamoud\n\n\n\n\n\n\n\n\n\n\n\n\nWFPindicators\n\n\n\nR Programming\n\nIndicator Coding\n\nSurvey Coding\n\n\n\nWFP CRF Indicators Compendium\n\n\n\n\n\nApr 1, 2025\n\n\nAhmed Mohamoud\n\n\n\n\n\n\n\n\n\n\n\n\nwfpdown\n\n\n\nR Programming\n\nMarkdown\n\nReporting\n\n\n\nWFP branded templates for R Markdown documents\n\n\n\n\n\nSep 1, 2025\n\n\nAhmed Mohamoud\n\n\n\n\n\n\n\n\n\n\ngeosom\n\n\n\nGIS\n\nDatabase\n\n\n\nSomalia geospatial database for retriving administrative boundaries and sector datasets\n\n\n\n\n\nNov 1, 2025\n\n\nAhmed Mohamoud\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/ArcGISPro_Guide.html",
+    "href": "posts/ArcGISPro_Guide.html",
+    "title": "ArcGIS Pro Guide",
+    "section": "",
+    "text": "ArcGIS Pro is designed to have an intuitive, easy-to-use interface and a file structure that allows you to access all the data associated with your project. The ArcGIS Pro application is web-connected to take advantage of some of the functionality available on ArcGIS Online (or Portal for ArcGIS). ArcGIS Pro has a user-based license model that allows you to use the software on any computer if you sign in using an ArcGIS Online organizational account that has been provisioned with an ArcGIS Pro license. Single and Concurrent Use licenses are also available.\n\n\nThe native structure for ArcGIS Pro is called a project. A project consists of a main file with an APRX file name extension and an entire folder structure designed to contain the project data. These folders contain maps, layouts, tasks, toolboxes, styles, and connections to databases and folders.\n\n\n\n\n\n\n\n\n\nWhen you start ArcGIS Pro, you are prompted to create a project or open an existing project. When you create a project, you are immediately prompted to name the project. The project is created in a folder with the name that you provided."
+  },
+  {
+    "objectID": "posts/ArcGISPro_Guide.html#project-structure",
+    "href": "posts/ArcGISPro_Guide.html#project-structure",
+    "title": "ArcGIS Pro Guide",
+    "section": "",
+    "text": "The native structure for ArcGIS Pro is called a project. A project consists of a main file with an APRX file name extension and an entire folder structure designed to contain the project data. These folders contain maps, layouts, tasks, toolboxes, styles, and connections to databases and folders.\n\n\n\n\n\n\n\n\n\nWhen you start ArcGIS Pro, you are prompted to create a project or open an existing project. When you create a project, you are immediately prompted to name the project. The project is created in a folder with the name that you provided."
   },
   {
     "objectID": "posts/fsl_cleaning.html",
@@ -77,102 +175,25 @@
     "text": "Footnotes\n\n\nhttps://www.surveydesigner.vam.wfp.org/↩︎\nhttps://moda.wfp.org/↩︎\nhttps://vamresources.manuals.wfp.org/docs/food-security↩︎"
   },
   {
-    "objectID": "posts/ArcGISPro_Guide.html",
-    "href": "posts/ArcGISPro_Guide.html",
-    "title": "ArcGIS Pro Guide",
+    "objectID": "posts/R_Visualizations.html",
+    "href": "posts/R_Visualizations.html",
+    "title": "R Visualizations",
     "section": "",
-    "text": "ArcGIS Pro is designed to have an intuitive, easy-to-use interface and a file structure that allows you to access all the data associated with your project. The ArcGIS Pro application is web-connected to take advantage of some of the functionality available on ArcGIS Online (or Portal for ArcGIS). ArcGIS Pro has a user-based license model that allows you to use the software on any computer if you sign in using an ArcGIS Online organizational account that has been provisioned with an ArcGIS Pro license. Single and Concurrent Use licenses are also available.\n\n\nThe native structure for ArcGIS Pro is called a project. A project consists of a main file with an APRX file name extension and an entire folder structure designed to contain the project data. These folders contain maps, layouts, tasks, toolboxes, styles, and connections to databases and folders.\n\n\n\n\n\n\n\n\n\nWhen you start ArcGIS Pro, you are prompted to create a project or open an existing project. When you create a project, you are immediately prompted to name the project. The project is created in a folder with the name that you provided."
+    "text": "This are some learning stuff for data visualization.\n# required packages\nlibrary(tidyverse)\nlibrary(RColorBrewer)\nlibrary(cleanR)\n\n# load raw data\nbasic_data &lt;- cleanR::survey_data %&gt;% # converting HDDS variables to numeric\n  mutate(across(starts_with(\"HDDS\"), as.numeric))"
   },
   {
-    "objectID": "posts/ArcGISPro_Guide.html#project-structure",
-    "href": "posts/ArcGISPro_Guide.html#project-structure",
-    "title": "ArcGIS Pro Guide",
-    "section": "",
-    "text": "The native structure for ArcGIS Pro is called a project. A project consists of a main file with an APRX file name extension and an entire folder structure designed to contain the project data. These folders contain maps, layouts, tasks, toolboxes, styles, and connections to databases and folders.\n\n\n\n\n\n\n\n\n\nWhen you start ArcGIS Pro, you are prompted to create a project or open an existing project. When you create a project, you are immediately prompted to name the project. The project is created in a folder with the name that you provided."
+    "objectID": "posts/R_Visualizations.html#create-your-own-custom-theme",
+    "href": "posts/R_Visualizations.html#create-your-own-custom-theme",
+    "title": "R Visualizations",
+    "section": "Create your own custom theme",
+    "text": "Create your own custom theme"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Ahmed Mohamoud",
-    "section": "",
-    "text": "As an experienced GIS/Data professional with a diverse background in the humanitarian sector, I excel in ArcGIS Pro, QGIS, R, Python, PowerBI, Tableau, MS Excel, SPSS, Adobe Suite, and ODK. My specialization lies in research design, data collection, interpretation, and visualization and applying machine learning techniques to generate actionable insights from complex datasets."
-  },
-  {
-    "objectID": "index.html#about-me",
-    "href": "index.html#about-me",
-    "title": "Ahmed Mohamoud",
-    "section": "",
-    "text": "As an experienced GIS/Data professional with a diverse background in the humanitarian sector, I excel in ArcGIS Pro, QGIS, R, Python, PowerBI, Tableau, MS Excel, SPSS, Adobe Suite, and ODK. My specialization lies in research design, data collection, interpretation, and visualization and applying machine learning techniques to generate actionable insights from complex datasets."
-  },
-  {
-    "objectID": "index.html#education",
-    "href": "index.html#education",
-    "title": "Ahmed Mohamoud",
-    "section": "Education",
-    "text": "Education\nMSc in Research, Statistics & Data Analytics\n2019 – 2022\nAmoud University | Hargeisa, Somaliland\nMBA in Project Planning & Management\n2018 – 2019\nAdmas University | Hargeisa, Somaliland\nBA. Development Studies\n2013 – 2016\nAdmas University | Hargeisa, Somaliland"
-  },
-  {
-    "objectID": "index.html#experience",
-    "href": "index.html#experience",
-    "title": "Ahmed Mohamoud",
-    "section": "Experience",
-    "text": "Experience\n\nWFP | Vulnerability Analysis & Mapping (VAM) Officer\nMay 2024 - Present\n\n\nWFP | Programme Associate (Data Management)\nNov 2022 - Apr 2024\n\n\nREACH Initiative | GIS & Data Specialist\nMar 2022 - Oct 2022\n\n\nREACH Initiative | Senior Database Officer\nJan 2019 - Feb 2022\n\n\nSOLNARDO | Monitoring & Evaluation Officer\nJan 2014 - Dec 2018"
-  },
-  {
-    "objectID": "index.html#certifications",
-    "href": "index.html#certifications",
-    "title": "Ahmed Mohamoud",
-    "section": "Certifications",
-    "text": "Certifications\nIPC Acute Food Insecurity Level 1 Analyst | November 2024 Cadre Harmonisé (CH) | December 2024"
-  },
-  {
-    "objectID": "packages.html",
-    "href": "packages.html",
-    "title": "R Packages",
-    "section": "",
-    "text": "Here you’ll find packages I built or contributed to support humanitarian IM and reproducible analysis.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncleanR\n\n\n\nData Cleaning\n\nWrangling\n\nR Programming\n\n\n\nHarmonized Approach of Cleaning Data in R.\n\n\n\n\n\nOct 1, 2023\n\n\nAhmed Mohamoud\n\n\n\n\n\n\n\n\n\n\n\n\nWFPindicators\n\n\n\nR Programming\n\nIndicator Coding\n\nSurvey Coding\n\n\n\nWFP CRF Indicators Compendium\n\n\n\n\n\nApr 1, 2025\n\n\nAhmed Mohamoud\n\n\n\n\n\n\n\n\n\n\n\n\nwfpdown\n\n\n\nR Programming\n\nMarkdown\n\nReporting\n\n\n\nWFP branded templates for R Markdown documents\n\n\n\n\n\nSep 1, 2025\n\n\nAhmed Mohamoud\n\n\n\n\n\n\n\n\n\n\ngeosom\n\n\n\nGIS\n\nDatabase\n\n\n\nSomalia geospatial database for retriving administrative boundaries and sector datasets\n\n\n\n\n\nNov 1, 2025\n\n\nAhmed Mohamoud\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "posts/data_cleaning_process.html",
-    "href": "posts/data_cleaning_process.html",
-    "title": "Data Cleaning Process",
-    "section": "",
-    "text": "Data cleaning is the process of identifying and correcting errors and inconsistencies in raw data to improve data quality 1. in the humanitarian context identifying data errors will be categorized into two steps. standard checks and specific checks. depending on the scope of data collection points, all data should pass under the standard checks. while specific checks will depend on the availability of indicators and data collection points.\n\n\n\n\n\n\n\n\n\nThe data cleaning process is not one time task, it should start from from the planning stage by including constrains and validation measures in the data collection tools to mitigate some of the potential data errors. also during data collection we’ll need to run high-frequency-checks to identify data errors and communicate with the team for making corrective actions and at the end of data collection we’ll run in-depth checks and amend the changes to generate clean data."
-  },
-  {
-    "objectID": "posts/data_cleaning_process.html#introduction",
-    "href": "posts/data_cleaning_process.html#introduction",
-    "title": "Data Cleaning Process",
-    "section": "",
-    "text": "Data cleaning is the process of identifying and correcting errors and inconsistencies in raw data to improve data quality 1. in the humanitarian context identifying data errors will be categorized into two steps. standard checks and specific checks. depending on the scope of data collection points, all data should pass under the standard checks. while specific checks will depend on the availability of indicators and data collection points.\n\n\n\n\n\n\n\n\n\nThe data cleaning process is not one time task, it should start from from the planning stage by including constrains and validation measures in the data collection tools to mitigate some of the potential data errors. also during data collection we’ll need to run high-frequency-checks to identify data errors and communicate with the team for making corrective actions and at the end of data collection we’ll run in-depth checks and amend the changes to generate clean data."
-  },
-  {
-    "objectID": "posts/data_cleaning_process.html#somalia-case-study",
-    "href": "posts/data_cleaning_process.html#somalia-case-study",
-    "title": "Data Cleaning Process",
-    "section": "Somalia Case Study",
-    "text": "Somalia Case Study\nThe Planning, Monitoring, Learning, and Evaluation (PMLE) unit has implemented a standardized data cleaning procedure to maintain data quality and consistency. This process ensures that all data from process monitoring and assessments meet the World Food Programme’s quality standards. Similar to accounting practices, every modification or adjustment made to the data is meticulously recorded. This methodical tracking helps in identifying and addressing any discrepancies or errors in the data effectively.\nDownload PDF file."
-  },
-  {
-    "objectID": "posts/data_cleaning_process.html#footnotes",
-    "href": "posts/data_cleaning_process.html#footnotes",
-    "title": "Data Cleaning Process",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nIMB definition of Data Cleaning↩︎"
-  },
-  {
-    "objectID": "posts/hash_phonenumbers.html",
-    "href": "posts/hash_phonenumbers.html",
-    "title": "Hash PhoneNumbers",
-    "section": "",
-    "text": "In this example, we’ll encrypt or hash phone numbers to avoid exposing personal identifiable data during remote data collection. Often in WFP operations, it’s common to use beneficiary contact information for monitoring or verification purposes. During this time, it is good practice to hash phone numbers in advance and prepare an itemset file that you can upload with your MoDa tool. We’ll use the hash_phonenumbers() function to achieve this.\n\nStep 1: Prepare dumpy data\n\n# required packages\nlibrary(tidyverse)\nlibrary(digest)\nlibrary(cleanR)\nlibrary(DT)\n\n# Function to generate random phone numbers\ngenerate_phone_number &lt;- function(n) {\n  phone_numbers &lt;- replicate(n, paste0(\"0\", sample(0:5, 5, replace = TRUE), collapse = \"\"))\n  return(as.vector(phone_numbers))\n}\n\n# # Sample data\nn &lt;- 10  # number of rows in the data frame\nlist_name &lt;- paste(\"List\", 1:n)\nperson &lt;- paste(\"Person_\", sample(LETTERS, n, replace = TRUE))\nPhoneNumber &lt;- generate_phone_number(n)\nuuid &lt;- stringi::stri_rand_strings(n, 10)\nname &lt;- paste(\"List\", 1:n)\n\n# Create the data frame\ndata &lt;- data.frame(list_name, person, PhoneNumber, uuid, name)\n\nNow lets see how the orginal data looks like, and phone numbers will appear as their original form, which is not recomended to share it widely during remote data collection that we can’t gurentee if the information will be discarded after the data collection\n\ndatatable(data, list(dom = 't'))\n\n\n\n\n\n\n\nStep 2: Generate Hashcode\nokay, lets now encrepth the phone numbers and generate the hashcode.\n\nhashed_data &lt;- hash_phonenumbers(data, 'PhoneNumber', 'name', debug = FALSE)\n\ndatatable(hashed_data, list(dom = 't'))\n\n\n\n\n\n\n\nStep 3: Include output in your XLSForm\nNow you can export the encryped dataframe and include it in your XLSForm choices sheet. personally I don’t prefer to include such data as external itemset. so that is why its better to include it in the choices sheet."
-  },
-  {
-    "objectID": "posts/spatial_verification.html",
-    "href": "posts/spatial_verification.html",
-    "title": "Survey Spatial Verification",
-    "section": "",
-    "text": "Using the leaflet package, we enabled field teams to access survey geospatial data, monitor progress, and address flagged points. The dashboard allows easy navigation and helps identify enumerators working outside the sampled locations.\nDownload PDF file."
+    "objectID": "posts/R_Visualizations.html#chart-1-circular-barplot",
+    "href": "posts/R_Visualizations.html#chart-1-circular-barplot",
+    "title": "R Visualizations",
+    "section": "Chart 1: Circular Barplot",
+    "text": "Chart 1: Circular Barplot\n\n# Compute the average days\naverage_days &lt;- basic_data |&gt;\n  summarise(across(\n    .cols = c(FCSStap, FCSPulse, FCSPr, FCSVeg, FCSFruit, FCSDairy, FCSFat, FCSSugar),\n    .fns = mean,\n    na.rm = TRUE\n  )) |&gt;\n  pivot_longer(cols = everything(), names_to = \"food_group\", values_to = \"average_days\")\n\n# Create a nicer display name for each food group\naverage_days &lt;- average_days |&gt;\n  mutate(\n    food_group_clean = recode(food_group,\n                              FCSStap = \"Staples\",\n                              FCSPulse = \"Pulses\",\n                              FCSPr = \"Protein\",\n                              FCSVeg = \"Vegetables\",\n                              FCSFruit = \"Fruits\",\n                              FCSDairy = \"Dairy\",\n                              FCSFat = \"Fats\",\n                              FCSSugar = \"Sugar\"\n    ),\n    food_group_clean = factor(food_group_clean, levels = food_group_clean)\n  )\n\n# Create the circular barplot\nggplot(average_days, aes(x = food_group_clean, y = average_days, fill = food_group_clean)) +\n  geom_bar(stat = \"identity\", width = 1, color = \"white\") +\n  geom_text(\n    aes(label = round(average_days, 1), y = average_days - 0.5),\n    color = \"white\",\n    size = 4,\n    fontface = \"bold\"\n  ) +\n  coord_polar(start = 0) +\n  scale_fill_brewer(palette = \"Set2\") +\n  labs(\n    title = \"Average of Food Groups Consumed in the last 7 Days\",\n    subtitle = \"\",\n    caption = \"Source: © WFP Household Food Consumption Survey\",\n    x = NULL,\n    y = NULL\n  ) +\n  theme_minimal() +\n  theme(\n    axis.text.y = element_blank(),\n    axis.text.x = element_text(size = 10, face = \"bold\"),\n    panel.grid = element_blank(),\n    legend.position = \"none\",\n    plot.title = element_text(size = 16, face = \"bold\", hjust = 0.5),\n    plot.subtitle = element_text(size = 12, hjust = 0.5),\n    plot.caption = element_text(size = 8, face = \"italic\", hjust = 1)\n  )"
   },
   {
     "objectID": "publications.html",

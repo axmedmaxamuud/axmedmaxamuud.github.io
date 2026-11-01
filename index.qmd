@@ -23,7 +23,7 @@ about:
 
 ## About Me
 
-As an experienced GIS/Data professional with a diverse background in the humanitarian sector, I excel in ArcGIS Pro, QGIS, R, Python, PowerBI, Tableau, MS Excel, SPSS, Adobe Suite, and ODK. My specialization lies in research design, data collection, interpretation, and visualization and applying machine learning techniques to generate actionable insights from complex datasets.
+Experienced GIS and data analyst with diverse background in the humanitarian sector. My work sits at the intersection of food security, markets and geospatial analysis. I design assessments, build reproducible analysis workflows and generate actionable insights from complex datasets using machine learning and remote sensing. Also I develop open-source packages that support humanitarian analysis and reporting.
 
 ## Education
 
@@ -66,7 +66,21 @@ Admas University | Hargeisa, Somaliland
 <span class="date">Jan 2014 - Dec 2018</span>
 :::
 
+## Skills
+
+::: {.skills-grid}
+[[]{.bi .bi-file-earmark-code} R]{.skill}
+[[]{.bi .bi-filetype-py} Python]{.skill}
+[[]{.bi .bi-globe-americas} ArcGIS Pro]{.skill}
+[[]{.bi .bi-layers} QGIS]{.skill}
+[[]{.bi .bi-database} SQL]{.skill}
+[[]{.bi .bi-file-earmark-excel} Excel]{.skill}
+[[]{.bi .bi-bar-chart-fill} Power BI]{.skill}
+[[]{.bi .bi-grid-3x3-gap} Tableau]{.skill}
+:::
+
 ## Certifications
 
-IPC Acute Food Insecurity Level 1 Analyst | November 2024 
-Cadre Harmonisé (CH) | December 2024
+IPC Acute Food Insecurity Level 1 Analyst
+
+Cadre Harmonisé (CH)
