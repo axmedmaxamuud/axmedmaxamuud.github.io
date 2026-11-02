@@ -342,6 +342,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#day-1-health-facilities-in-somalia" id="toc-day-1-health-facilities-in-somalia" class="nav-link active" data-scroll-target="#day-1-health-facilities-in-somalia">Day 1: Health Facilities in Somalia</a></li>
+  <li><a href="#day-2-streets-of-mogadishu" id="toc-day-2-streets-of-mogadishu" class="nav-link" data-scroll-target="#day-2-streets-of-mogadishu">Day 2: Streets of Mogadishu</a></li>
   </ul>
 </nav>
     </div>
@@ -440,6 +441,65 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div>
 <figure class="figure">
 <p><img src="30_day_map_challange_files/figure-html/day01-map-1.png" class="img-fluid figure-img" alt="Map of public health facilities in Somalia by type, with a bar chart of facilities per 100,000 people by region." width="1125"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="day-2-streets-of-mogadishu" class="level2">
+<h2 class="anchored" data-anchor-id="day-2-streets-of-mogadishu">Day 2: Streets of Mogadishu</h2>
+<p>This map shows the street network of Mogadishu using OpenStreetMap data. some of the well know junctions of KM4, Ex control Afgooye and Balcad are marked.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>day02 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> sea,  <span class="at">fill =</span> pal<span class="sc">$</span>sea,  <span class="at">colour =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> land, <span class="at">fill =</span> pal<span class="sc">$</span>land, <span class="at">colour =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> streets, <span class="fu">aes</span>(<span class="at">colour =</span> class, <span class="at">linewidth =</span> class, <span class="at">alpha =</span> class), <span class="at">lineend =</span> <span class="st">"round"</span>) <span class="sc">+</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">deframe</span>(<span class="fu">select</span>(road_classes, class, colour)), <span class="at">guide =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_linewidth_manual</span>(<span class="at">values =</span> <span class="fu">deframe</span>(<span class="fu">select</span>(road_classes, class, width)), <span class="at">guide =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_alpha_manual</span>(<span class="at">values =</span> <span class="fu">deframe</span>(<span class="fu">select</span>(road_classes, class, alpha)), <span class="at">guide =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># key junctions: white dot with a navy ring, name on a navy tab</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> junctions, <span class="fu">aes</span>(x, y), <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="fl">3.6</span>,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">colour =</span> pal<span class="sc">$</span>land, <span class="at">stroke =</span> <span class="fl">1.4</span>) <span class="sc">+</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_label</span>(<span class="at">data =</span> junctions, <span class="fu">aes</span>(x <span class="sc">+</span> nx, y <span class="sc">+</span> ny, <span class="at">label =</span> name, <span class="at">hjust =</span> hjust),</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>             <span class="at">family =</span> font, <span class="at">size =</span> <span class="fl">4.1</span>, <span class="at">colour =</span> <span class="st">"white"</span>, <span class="at">fill =</span> pal<span class="sc">$</span>land,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>             <span class="at">label.size =</span> <span class="dv">0</span>, <span class="at">label.r =</span> <span class="fu">unit</span>(<span class="dv">0</span>, <span class="st">"lines"</span>), <span class="at">label.padding =</span> <span class="fu">unit</span>(<span class="fl">0.22</span>, <span class="st">"lines"</span>)) <span class="sc">+</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># title across the top, on a solid navy band</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"rect"</span>, <span class="at">xmin =</span> xlim[<span class="dv">1</span>], <span class="at">xmax =</span> xlim[<span class="dv">2</span>], <span class="at">ymin =</span> ylim[<span class="dv">2</span>] <span class="sc">-</span> H <span class="sc">*</span> <span class="fl">0.115</span>, <span class="at">ymax =</span> ylim[<span class="dv">2</span>],</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> pal<span class="sc">$</span>land) <span class="sc">+</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> cx, <span class="at">y =</span> ylim[<span class="dv">2</span>] <span class="sc">-</span> H <span class="sc">*</span> <span class="fl">0.058</span>, <span class="at">label =</span> <span class="fu">spaced</span>(<span class="st">"MOGADISHU"</span>),</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>           <span class="at">family =</span> font, <span class="at">fontface =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">17</span>, <span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># legend, bottom right over the sea: a road sample and its name</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"segment"</span>, <span class="at">x =</span> legend_items<span class="sc">$</span>x0, <span class="at">xend =</span> legend_items<span class="sc">$</span>x1,</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> legend_items<span class="sc">$</span>y, <span class="at">yend =</span> legend_items<span class="sc">$</span>y,</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>           <span class="at">colour =</span> legend_items<span class="sc">$</span>colour, <span class="at">linewidth =</span> legend_items<span class="sc">$</span>width <span class="sc">*</span> <span class="fl">1.5</span>,</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>           <span class="at">alpha =</span> <span class="fu">pmax</span>(legend_items<span class="sc">$</span>alpha, <span class="fl">0.75</span>), <span class="at">lineend =</span> <span class="st">"round"</span>) <span class="sc">+</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> legend_items<span class="sc">$</span>x1 <span class="sc">+</span> W <span class="sc">*</span> <span class="fl">0.025</span>, <span class="at">y =</span> legend_items<span class="sc">$</span>y, <span class="at">label =</span> legend_items<span class="sc">$</span>class,</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>           <span class="at">family =</span> font, <span class="at">size =</span> <span class="fl">4.2</span>, <span class="at">colour =</span> <span class="st">"white"</span>, <span class="at">hjust =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># footnote, bottom left over the sea</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> xlim[<span class="dv">1</span>] <span class="sc">+</span> W <span class="sc">*</span> <span class="fl">0.04</span>, <span class="at">y =</span> ylim[<span class="dv">1</span>] <span class="sc">+</span> H <span class="sc">*</span> <span class="fl">0.035</span>,</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> <span class="fu">paste0</span>(<span class="st">"#30DayMapChallenge 2026  |  Day 2: Lines</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>                          <span class="st">"Streets © OpenStreetMap contributors (ODbL)</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>                          <span class="st">"github.com/axmedmaxamuud/geosom"</span>),</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>           <span class="at">family =</span> font, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">colour =</span> <span class="fu">shade</span>(pal<span class="sc">$</span>sea, <span class="fl">0.55</span>), <span class="at">lineheight =</span> <span class="fl">1.15</span>,</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>           <span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">vjust =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">crs =</span> crs_utm, <span class="at">datum =</span> <span class="cn">NA</span>, <span class="at">xlim =</span> xlim, <span class="at">ylim =</span> ylim, <span class="at">expand =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> pal<span class="sc">$</span>sea, <span class="at">colour =</span> <span class="cn">NA</span>),</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>day02</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="30_day_map_challange_files/figure-html/day02-map-1.png" class="img-fluid figure-img" alt="Map of Mogadishu's street network. Main roads are bold yellow, secondary roads pale yellow, tertiary roads white and local streets fine white lines. KM4, Ex Control Afgooye and Ex Control Balcad junctions are marked." width="1125"></p>
 </figure>
 </div>
 </div>

@@ -76,8 +76,9 @@ admin0 <- get_admin_shape("admin0")
 admin1 <- get_admin_shape("admin1")
 admin2 <- get_admin_shape("admin2")
 
-facilities <- read_csv("data/who_health_facilities_somalia.csv",
-                       show_col_types = FALSE) |>
+facilities_url <- "https://raw.githubusercontent.com/axmedmaxamuud/test_datasets/main/data/who_health_facilities_somalia.csv"
+
+facilities <- read_csv(facilities_url, show_col_types = FALSE) |>
   mutate(
     type = case_match(
       facility_type,
@@ -163,4 +164,169 @@ day01
 ```
 
 
+## Day 2: Streets of Mogadishu
+
+This map shows the street network of Mogadishu using OpenStreetMap data. some of the well know junctions of KM4, Ex control Afgooye and Balcad are marked.
+
+
+```{r}
+#| label: day02-setup
+#| include: false
+
+## Packages ----
+library(tidyverse)
+library(sf)
+library(geosom)
+library(ragg)
+
+sf_use_s2(FALSE)
+
+## Palette ----
+# WFP colours (WFP UI guide v1.0.0); lighter hues of them are allowed
+wfp <- c(blue = "#0A6EB4", navy = "#19486A", aqua = "#26BDE2", yellow = "#F7B825",
+         ochre = "#DDA63A", orange = "#FD6925")
+shade <- \(col, amount, to = "white") colorRampPalette(c(col, to))(101)[round(amount * 100) + 1]
+
+pal <- list(
+  paper = shade(wfp[["navy"]], 0.94),   # page background, near white
+  land  = wfp[["navy"]],                # the city
+  sea   = wfp[["blue"]],                # Indian Ocean
+  ring  = wfp[["navy"]],
+  ink   = wfp[["navy"]],
+  muted = shade(wfp[["navy"]], 0.45)
+)
+
+font <- "Arial Narrow"
+
+## Road classes: colour and width by size ----
+road_classes <- tribble(
+  ~class,          ~osm,                                                        ~colour,                     ~width, ~alpha,
+  "Main roads",    c("motorway", "trunk", "primary", "trunk_link", "primary_link"), wfp[["yellow"]],          1.5,    1,
+  "Secondary",     c("secondary", "secondary_link"),                            shade(wfp[["yellow"]], 0.45), 0.9,    1,
+  "Tertiary",      c("tertiary", "tertiary_link"),                              "white",                     0.55,   0.9,
+  "Local streets", c("residential", "unclassified", "living_street", "service", "pedestrian"),
+                                                                                "white",                     0.18,   0.45
+)
+lookup <- road_classes |> select(class, osm) |> unnest(osm)
+
+## Data ----
+# Mogadishu streets from OpenStreetMap, stored on GitHub.
+# The file is downloaded once to a temporary file, then read with sf.
+streets_url  <- "https://raw.githubusercontent.com/axmedmaxamuud/test_datasets/main/data/mogadishu_streets.gpkg"
+streets_file <- tempfile(fileext = ".gpkg")
+download.file(streets_url, streets_file, mode = "wb", quiet = TRUE)
+
+## Geometry: a full-bleed 4:5 frame around central Mogadishu ----
+crs_utm <- 32638                                   # UTM 38N, metres
+centre  <- st_sfc(st_point(c(45.318, 2.046)), crs = 4326) |> st_transform(crs_utm)
+cx <- st_coordinates(centre)[1]
+cy <- st_coordinates(centre)[2]
+
+# 18 km wide x 22.5 km tall (4:5), set a little north so the city fills the frame
+xlim  <- cx + c(-9000, 9000)
+ylim  <- cy + c(-12500, 10000)
+frame <- st_bbox(c(xmin = xlim[1], ymin = ylim[1], xmax = xlim[2], ymax = ylim[2]), crs = crs_utm) |>
+  st_as_sfc()
+
+streets <- st_read(streets_file, quiet = TRUE) |>
+  inner_join(lookup, by = c("highway" = "osm")) |>
+  mutate(class = factor(class, levels = road_classes$class)) |>
+  st_transform(crs_utm) |>
+  st_intersection(frame) |>
+  arrange(desc(class))                             # main roads drawn last, on top
+
+# geosom's coastline is drawn at country scale, so here it sits ~1 km out to sea.
+# Refine it locally: land near the coast with no street nearby becomes sea.
+somalia    <- get_admin_shape("admin0") |> st_transform(crs_utm) |> st_geometry() |> st_union()
+land_raw   <- st_intersection(somalia, frame)
+coastline  <- st_boundary(somalia) |> st_intersection(st_buffer(frame, 2000))    # the real coast only
+coast_band <- st_buffer(coastline, 1500) |> st_intersection(land_raw)
+
+# City footprint: 100 m grid cells that contain a street, smoothed (light on memory)
+grid <- st_make_grid(st_buffer(frame, 500), cellsize = 100)
+city <- grid[lengths(st_intersects(grid, streets)) > 0] |> st_union() |>
+  st_buffer(250) |> st_buffer(-180) |> st_simplify(dTolerance = 40)
+
+land <- st_difference(land_raw, st_difference(coast_band, city))
+sea  <- st_difference(frame, land)
+
+## Key junctions (coordinates provided by the author) ----
+# nx / ny: label offset in metres; hjust: 0 = label to the right, 1 = to the left
+junctions <- tribble(
+  ~name,                 ~lat,         ~lon,          ~nx,   ~ny,   ~hjust,
+  "KM4",                 2.031641448,  45.31066228,    350,  -450,  0,
+  "Ex Control Afgooye",  2.045068388,  45.28266736,   -350,   450,  1,
+  "Ex Control Balcad",   2.086576909,  45.36394565,    350,   350,  0
+) |>
+  st_as_sf(coords = c("lon", "lat"), crs = 4326) |>
+  st_transform(crs_utm) |>
+  mutate(x = st_coordinates(geometry)[, 1], y = st_coordinates(geometry)[, 2])
+
+## Title, legend and footnote positions (map units, metres) ----
+spaced <- \(x) paste(strsplit(x, "")[[1]], collapse = " ")   # thin spaces between letters
+W <- diff(xlim); H <- diff(ylim)
+
+legend_items <- road_classes |>
+  mutate(
+    y  = ylim[1] + H * (0.20 - (row_number() - 1) * 0.032),
+    x0 = xlim[1] + W * 0.70,
+    x1 = xlim[1] + W * 0.76
+  )
+```
+
+
+```{r}
+#| label: day02-map
+#| code-fold: true
+#| code-summary: "Show the code"
+#| fig-width: 7.5
+#| fig-height: 9.375
+#| fig-dpi: 150
+#| dev: "ragg_png"
+#| fig-alt: "Map of Mogadishu's street network. Main roads are bold yellow, secondary roads pale yellow, tertiary roads white and local streets fine white lines. KM4, Ex Control Afgooye and Ex Control Balcad junctions are marked."
+
+day02 <- ggplot() +
+  geom_sf(data = sea,  fill = pal$sea,  colour = NA) +
+  geom_sf(data = land, fill = pal$land, colour = NA) +
+  geom_sf(data = streets, aes(colour = class, linewidth = class, alpha = class), lineend = "round") +
+  scale_colour_manual(values = deframe(select(road_classes, class, colour)), guide = "none") +
+  scale_linewidth_manual(values = deframe(select(road_classes, class, width)), guide = "none") +
+  scale_alpha_manual(values = deframe(select(road_classes, class, alpha)), guide = "none") +
+
+  # key junctions: white dot with a navy ring, name on a navy tab
+  geom_point(data = junctions, aes(x, y), shape = 21, size = 3.6,
+             fill = "white", colour = pal$land, stroke = 1.4) +
+  geom_label(data = junctions, aes(x + nx, y + ny, label = name, hjust = hjust),
+             family = font, size = 4.1, colour = "white", fill = pal$land,
+             label.size = 0, label.r = unit(0, "lines"), label.padding = unit(0.22, "lines")) +
+
+  # title across the top, on a solid navy band
+  annotate("rect", xmin = xlim[1], xmax = xlim[2], ymin = ylim[2] - H * 0.115, ymax = ylim[2],
+           fill = pal$land) +
+  annotate("text", x = cx, y = ylim[2] - H * 0.058, label = spaced("MOGADISHU"),
+           family = font, fontface = "bold", size = 17, colour = "white") +
+
+  # legend, bottom right over the sea: a road sample and its name
+  annotate("segment", x = legend_items$x0, xend = legend_items$x1,
+           y = legend_items$y, yend = legend_items$y,
+           colour = legend_items$colour, linewidth = legend_items$width * 1.5,
+           alpha = pmax(legend_items$alpha, 0.75), lineend = "round") +
+  annotate("text", x = legend_items$x1 + W * 0.025, y = legend_items$y, label = legend_items$class,
+           family = font, size = 4.2, colour = "white", hjust = 0) +
+
+  # footnote, bottom left over the sea
+  annotate("text", x = xlim[1] + W * 0.04, y = ylim[1] + H * 0.035,
+           label = paste0("#30DayMapChallenge 2026  |  Day 2: Lines\n",
+                          "Streets © OpenStreetMap contributors (ODbL)\n",
+                          "github.com/axmedmaxamuud/geosom"),
+           family = font, size = 3, colour = shade(pal$sea, 0.55), lineheight = 1.15,
+           hjust = 0, vjust = 0) +
+
+  coord_sf(crs = crs_utm, datum = NA, xlim = xlim, ylim = ylim, expand = FALSE) +
+  theme_void() +
+  theme(plot.background = element_rect(fill = pal$sea, colour = NA),
+        plot.margin = margin(0, 0, 0, 0))
+
+day02
+```
 
