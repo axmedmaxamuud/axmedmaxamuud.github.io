@@ -330,3 +330,297 @@ day02 <- ggplot() +
 day02
 ```
 
+
+## Day 3: Landcover of Riverine Areas in Somalia
+
+The land cover of riverine areas in Somalia. only 3% of the 9.8 million hectors of land is farmed with river water while the bigest share of farms are rainfed. 
+
+```{r}
+#| label: day03b-setup
+#| include: false
+
+## Packages ----
+library(tidyverse)
+library(sf)
+library(geosom)
+library(ragg)
+
+sf_use_s2(FALSE)
+options(timeout = 600)
+
+## Palette ----
+# WFP colours (WFP UI guide v1.0.0)
+wfp <- c(blue = "#0A6EB4", navy = "#19486A", aqua = "#26BDE2", dark_green = "#3F7E44",
+         lime = "#8AD220", yellow = "#F7B825", ochre = "#DDA63A", orange = "#FD6925",
+         red = "#C5192D", dark_red = "#A21942", magenta = "#DD1367")
+shade <- \(col, amount, to = "white") colorRampPalette(c(col, to))(101)[round(amount * 100) + 1]
+
+pal <- list(
+  land  = "white",                      
+  sea   = shade(wfp[["blue"]], 0.86),
+  line  = shade(wfp[["navy"]], 0.72),
+  ink   = wfp[["navy"]],
+  muted = shade(wfp[["navy"]], 0.40)
+)
+font <- "Arial Narrow"
+
+## Land use classes, 
+classes <- tribble(
+  ~vocation,            ~class,                  ~colour,                          ~farmed,
+  "IRRIGATED",          "Irrigated farms",       wfp[["blue"]],       TRUE,
+  "MIXED WATER SUPPLY", "Irrigated and rainfed", wfp[["aqua"]],       TRUE,
+  "POST FLOODING",      "Flood-recession farms", wfp[["orange"]],     TRUE,
+  "RAINFED",            "Rainfed farms",         wfp[["yellow"]],     TRUE,
+  "RANGELAND",          "Rangeland",             wfp[["lime"]],       FALSE,
+  "WOODED VEGETATION",  "Bush and woodland",     wfp[["dark_green"]], FALSE,
+  "OTHER",              "Bare soil, sand, towns and water", wfp[["ochre"]], FALSE
+) |>
+  mutate(class = fct_inorder(class))
+
+## Data ----
+crs_utm <- 32638                                    
+
+# FAO SWALIM land cover and river lines, stored on GitHub.
+# Each file is downloaded once to a temporary file, then read with sf.
+github <- "https://raw.githubusercontent.com/axmedmaxamuud/test_datasets/main/data/"
+get_gpkg <- function(name) {
+  file <- tempfile(fileext = ".gpkg")
+  download.file(paste0(github, name, ".gpkg"), file, mode = "wb", quiet = TRUE)
+  file
+}
+landcover_file <- get_gpkg("landcover_riverine_2007")    # about 36 MB
+rivers_file    <- get_gpkg("rivers_juba_shabelle")
+
+landcover <- st_read(landcover_file, quiet = TRUE) |>
+  st_collection_extract("POLYGON") |>               # one stray non-polygon feature dropped
+  left_join(classes, by = "vocation") |>
+  st_transform(crs_utm) |>
+  st_simplify(dTolerance = 60, preserveTopology = TRUE)   # 1.9 million vertices is more than a map needs
+
+# The rivers: FAO SWALIM's Juba and Shabelle lines (the land cover only maps the
+# wider Juba channel, so the Shabelle would otherwise be missing)
+rivers <- st_read(rivers_file, quiet = TRUE) |>
+  st_transform(crs_utm) |>
+  st_simplify(dTolerance = 60)
+
+admin0 <- get_admin_shape("admin0") |> st_transform(crs_utm)
+admin1 <- get_admin_shape("admin1") |> st_transform(crs_utm)
+rivers <- st_intersection(rivers, st_union(admin0))       
+
+## Frame: the two valleys, from Belet Weyne down to Kismayo
+bb   <- st_bbox(landcover)
+cx   <- mean(bb[c("xmin", "xmax")]) + 15000
+cy   <- mean(bb[c("ymin", "ymax")]) + 5000
+H    <- 660000                                  
+W    <- H * 0.8
+xlim <- cx + c(-W, W) / 2
+ylim <- cy + c(-H, H) / 2
+frame <- st_bbox(c(xmin = xlim[1], ymin = ylim[1], xmax = xlim[2], ymax = ylim[2]), crs = crs_utm) |>
+  st_as_sfc()
+
+in_ocean <- st_sfc(st_point(c(45, 0.3)), crs = 4326) |> st_transform(crs_utm)
+ocean <- st_difference(frame, st_union(admin0)) |>
+  st_cast("POLYGON") |>
+  (\(x) x[lengths(st_intersects(x, in_ocean)) > 0])()
+
+## Region labels: small spaced capitals, set in the white part of each region ----
+# For each region, find its largest open area (not covered by the land cover, not
+# under the title) and put the name in the middle of it
+spaced <- \(x) map_chr(x, \(s) paste(strsplit(s, "")[[1]], collapse = "\u2009"))
+
+footprint  <- landcover |> st_simplify(dTolerance = 300) |> st_buffer(500) |> st_union() |> st_buffer(-500)
+title_zone <- st_bbox(c(xmin = xlim[1], xmax = xlim[1] + W * 0.65, ymin = ylim[2] - H * 0.19, ymax = ylim[2]),
+                      crs = crs_utm) |> st_as_sfc()
+
+# Region boundaries as lines, cleared from the title area so the text sits on plain white.
+# Somalia's own border is drawn in full, so it is never cut.
+# The subtitle area: the border pauses there so it doesn't cross the words
+subtitle_zone  <- st_bbox(c(xmin = xlim[1] + W * 0.03, xmax = xlim[1] + W * 0.51,
+                            ymin = ylim[2] - H * 0.152, ymax = ylim[2] - H * 0.085), crs = crs_utm) |> st_as_sfc()
+somalia_border <- admin0 |> st_union() |> st_boundary() |> st_difference(subtitle_zone)
+admin_lines    <- admin1 |> st_boundary() |> st_union() |> st_difference(title_zone)
+
+regions <- admin1 |>
+  select(region = admin1name) |>
+  filter(!region %in% c("Banadir", "Galgaduud")) |> 
+  st_intersection(st_buffer(frame, -W * 0.08)) |> 
+  st_difference(st_union(footprint, title_zone)) |>
+  st_cast("MULTIPOLYGON") |> st_cast("POLYGON") |>
+  mutate(area = as.numeric(st_area(geometry))) |>
+  slice_max(area, n = 1, by = region) |>
+  mutate(geometry = map(geometry, \(g) {                  
+    inner <- st_buffer(st_sfc(g, crs = crs_utm), -12000)
+    if (st_is_empty(inner)) inner <- st_buffer(st_sfc(g, crs = crs_utm), -3000)
+    if (st_is_empty(inner)) inner <- st_sfc(g, crs = crs_utm)
+    st_point_on_surface(inner)[[1]]
+  }) |> st_sfc(crs = crs_utm)) |>
+  mutate(x = st_coordinates(geometry)[, 1], y = st_coordinates(geometry)[, 2])
+
+# Two names placed by hand: Middle Shabelle has no open ground in the frame (its
+# name sits on the farmland), and Middle Juba's open strip is too narrow
+by_hand <- tribble(
+  ~region,            ~lon,   ~lat,
+  "Middle Shabelle",  45.70,  2.55,
+  "Middle Juba",      42.96,  1.29
+) |>
+  st_as_sf(coords = c("lon", "lat"), crs = 4326) |>
+  st_transform(crs_utm) |>
+  mutate(x = st_coordinates(geometry)[, 1], y = st_coordinates(geometry)[, 2]) |>
+  st_drop_geometry()
+
+regions <- regions |>
+  st_drop_geometry() |>
+  select(region, x, y) |>
+  filter(!region %in% by_hand$region) |>
+  bind_rows(by_hand) |>
+  mutate(label = spaced(toupper(region)))
+
+## River names, set letter by letter along each river's course
+# Letters follow a smooth line drawn beside the river; widths come from the font
+text_on_path <- function(label, lon, lat, size = 4.2, family = font, fontface = "bold.italic") {
+  pts  <- st_sfc(map2(lon, lat, \(a, b) st_point(c(a, b))), crs = 4326) |> st_transform(crs_utm) |> st_coordinates()
+  sm   <- spline(seq_along(pts[, 1]), pts[, 1], n = 400)$y |> cbind(spline(seq_along(pts[, 2]), pts[, 2], n = 400)$y)
+  dist <- c(0, cumsum(sqrt(rowSums(diff(sm)^2))))
+  pt   <- size * .pt                                         
+  m_pt <- W / (7.5 * 72)                                     
+  chars <- strsplit(label, "")[[1]]
+  adv   <- systemfonts::shape_string(chars, family = family, size = pt,
+                                     italic = grepl("italic", fontface), bold = grepl("bold", fontface))$metrics$width * m_pt
+  adv   <- adv * 1.12                                        
+  mid   <- (max(dist) - sum(adv)) / 2 + cumsum(adv) - adv / 2 
+  at    <- \(v, d) approx(dist, v, d)$y
+  tibble(
+    label = chars,
+    x     = at(sm[, 1], mid),
+    y     = at(sm[, 2], mid),
+    angle = atan2(at(sm[, 2], mid + 1000) - at(sm[, 2], mid - 1000),
+                  at(sm[, 1], mid + 1000) - at(sm[, 1], mid - 1000)) * 180 / pi
+  )
+}
+
+# Lines are drawn so the words read upwards, from the lower end of each stretch
+juba_label     <- text_on_path("Juba River",     lon = c(42.73, 42.69, 42.68, 42.71), lat = c(2.75, 3.03, 3.31, 3.58))
+shabelle_label <- text_on_path("Shabelle River", lon = c(45.93, 45.88, 45.84, 45.79), lat = c(2.98, 3.24, 3.50, 3.76))
+
+## Numbers for the story ----
+area <- landcover |>
+  st_drop_geometry() |>
+  summarise(hectares = sum(hectares), .by = c(class, colour, farmed)) |>
+  arrange(class) |>
+  mutate(share = hectares / sum(hectares))
+
+total_ha  <- sum(area$hectares)
+water_ha  <- sum(filter(area, class %in% c("Irrigated farms", "Irrigated and rainfed", "Flood-recession farms"))$hectares)
+rainfed_s <- filter(area, class == "Rainfed farms")$share
+wood_s    <- filter(area, class == "Bush and woodland")$share
+
+## Legend: one bar split by area, laid over the sea (bottom right) ----
+lx0 <- xlim[1] + W * 0.55
+lx1 <- xlim[2] - W * 0.05
+ly  <- ylim[1] + H * 0.285
+legend_bar <- area |>
+  mutate(x1 = lx0 + cumsum(share) * (lx1 - lx0), x0 = lag(x1, default = lx0))
+
+legend_rows <- area |>
+  mutate(
+    y     = ly - H * 0.028 - (row_number() - 1) * H * 0.0215,
+    label = sprintf("%s  %s%%", class, if_else(share < 0.01, "<1", as.character(round(share * 100))))
+  )
+
+## Places ----
+towns <- tribble(
+  ~town,          ~lon,   ~lat,   ~hjust,
+  "Belet Weyne",  45.20,   4.74,  0,
+  "Jowhar",       45.50,   2.78,  0,
+  "Afgooye",      45.12,   2.14,  1,
+  "Mogadishu",    45.34,   2.04,  0,
+  "Marka",        44.77,   1.71,  0,
+  "Luuq",         42.55,   3.80,  0,
+  "Baardheere",   42.28,   2.34,  1,
+  "Bu'aale",      42.58,   1.08,  0,
+  "Jilib",        42.78,   0.49,  0,
+  "Jamaame",      42.75,   0.07,  0,
+  "Kismayo",      42.54,  -0.36,  1
+) |>
+  st_as_sf(coords = c("lon", "lat"), crs = 4326) |>
+  st_transform(crs_utm) |>
+  mutate(x = st_coordinates(geometry)[, 1], y = st_coordinates(geometry)[, 2],
+         nx = if_else(hjust == 0, 7000, -7000))
+```
+
+
+```{r}
+#| label: day03b-map
+#| code-fold: true
+#| code-summary: "Show the code"
+#| fig-width: 7.5
+#| fig-height: 9.375
+#| fig-dpi: 150
+#| dev: "ragg_png"
+#| fig-alt: "Land cover map of the Juba and Shabelle river valleys in southern Somalia, 2007. Bush and woodland in dark green covers most of the valleys, with rainfed farms in yellow, rangeland in lime, and thin strips of irrigated and flood-recession farms in blue and orange along the two rivers. Region names, main towns and a legend of each land use's share of the area are shown."
+
+day03b <- ggplot() +
+  geom_sf(data = ocean, fill = pal$sea, colour = NA) +
+  geom_sf(data = admin_lines, colour = pal$line, linewidth = 0.6) +
+  geom_sf(data = somalia_border, colour = shade(wfp[["navy"]], 0.55), linewidth = 0.7) +
+  # land cover, no outlines so the patchwork of fields shows
+  geom_sf(data = landcover, aes(fill = class), colour = NA) +
+  # the rivers: a navy line inside a white casing, visible on every colour
+  geom_sf(data = rivers, colour = "white", linewidth = 1.6, lineend = "round") +
+  geom_sf(data = rivers, colour = wfp[["blue"]], linewidth = 0.7, lineend = "round") +
+  scale_fill_manual(values = deframe(select(classes, class, colour)), guide = "none") +
+
+  # towns
+  geom_point(data = towns, aes(x, y), shape = 21, size = 1.9, fill = "white", colour = pal$ink, stroke = 0.6) +
+  geom_label(data = towns, aes(x + nx, y, label = town, hjust = hjust),
+             family = font, size = 3.4, colour = pal$ink, fill = alpha("white", 0.75),
+             label.size = 0, label.r = unit(0.1, "lines"), label.padding = unit(0.12, "lines")) +
+  # region names: small, spaced navy capitals
+  geom_text(data = regions, aes(x, y, label = label),
+            family = font, size = 2.6, fontface = "bold", colour = shade(wfp[["navy"]], 0.35)) +
+  # river names, curved along the rivers
+  geom_text(data = bind_rows(juba_label, shabelle_label), aes(x, y, label = label, angle = angle),
+            family = font, fontface = "bold.italic", size = 4.2, colour = "white") +
+
+  # title block, top left over empty land
+  annotate("text", x = xlim[1] + W * 0.04, y = ylim[2] - H * 0.035, hjust = 0, vjust = 1,
+           label = "Riverine Landcover", family = font, fontface = "bold", size = 8.5, colour = pal$ink) +
+  annotate("text", x = xlim[1] + W * 0.04, y = ylim[2] - H * 0.09, hjust = 0, vjust = 1, lineheight = 1.2,
+           label = sprintf(paste0(
+             "Land cover in Somalia's Juba and Shabelle River, 2007\n",
+             "%.1f million hectares: %d%% bush and woodland, %d%% rainfed farms.\n",
+             "Only %d%% is farmed with river water."),
+             total_ha / 1e6, round(wood_s * 100), round(rainfed_s * 100), round(water_ha / total_ha * 100)),
+           family = font, size = 3.6, colour = pal$ink) +
+
+  # legend: area bar, then the classes
+  annotate("text", x = lx0, y = ly + H * 0.022, hjust = 0, label = "Share of the mapped area",
+           family = font, size = 3.6, colour = pal$ink, fontface = "bold") +
+  annotate("rect", xmin = legend_bar$x0, xmax = legend_bar$x1, ymin = ly - H * 0.006, ymax = ly + H * 0.008,
+           fill = legend_bar$colour, colour = NA) +
+  annotate("rect", xmin = lx0, xmax = lx0 + W * 0.022, ymin = legend_rows$y - H * 0.0065,
+           ymax = legend_rows$y + H * 0.0065, fill = legend_rows$colour) +
+  annotate("text", x = lx0 + W * 0.035, y = legend_rows$y, hjust = 0, label = legend_rows$label,
+           family = font, size = 3.4, colour = pal$ink) +
+
+  # footnote, at the bottom right over the sea, with space below the legend
+  annotate("text", x = lx0, y = ylim[1] + H * 0.018, hjust = 0, vjust = 0, lineheight = 1.15,
+           label = paste0("#30DayMapChallenge 2026  |  Day 3: Polygons\n",
+                          "Data: FAO SWALIM, Landcover of Riverine Areas (2007)\n\n"),
+           family = font, size = 2.9, colour = pal$muted) +
+
+  coord_sf(crs = crs_utm, datum = NA, xlim = xlim, ylim = ylim, expand = FALSE) +
+  theme_void() +
+  theme(plot.background = element_rect(fill = "white", colour = NA),
+        plot.margin = margin(0, 0, 0, 0))
+
+day03b
+```
+
+
+
+
+
+
+
+
